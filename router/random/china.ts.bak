@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 export default async function waifuHandler(req: Request, res: Response) {
     try {
-        const apiResponse = await fetch("https://api.waifu.pics/sfw/waifu");
+        const apiResponse = await fetch("https://raw.githubusercontent.com/siputzx/Databasee/refs/heads/main/cecan/china.json");
         if (!apiResponse.ok) throw new Error("Gagal mengambil data");
         
         const json: any = await apiResponse.json();
