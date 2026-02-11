@@ -127,7 +127,7 @@
                             <div class="w-2 h-2 rounded-full bg-green-500 animate-ping absolute"></div>
                             <div class="w-2 h-2 rounded-full bg-green-500 relative"></div>
                         </div>
-                        <span id="dash-ver" class="font-mono font-bold">v1.0</span>
+                        <span id="dash-ver" class="font-mono font-bold">v0.0.1</span>
                     </div>
                     <span class="font-display italic flex items-center gap-2">
                         <i class="fa-solid fa-heart text-red-400 animate-pulse-fast"></i>

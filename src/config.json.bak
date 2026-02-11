@@ -49,8 +49,15 @@
     "random": [
       {
         "name": "Random cecan china",
-        "endpoint": "/api/random/china",
+        "endpoint": "/api/random/cecanchina",
         "filename": "china",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Random cecan jepang",
+        "endpoint": "/api/random/cecanjepang",
+        "filename": "japan",
         "method": "GET",
         "params": []
       },
