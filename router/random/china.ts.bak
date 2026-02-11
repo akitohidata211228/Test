@@ -1,72 +1,98 @@
-import { Request, Response } from "express"
 import axios from "axios"
 import { Buffer } from "buffer"
 
-async function getRandomCecanChinaImage(): Promise<Buffer> {
-  const GIST_URL =
-    "https://raw.githubusercontent.com/siputzx/Databasee/refs/heads/main/cecan/china.json"
-
-  const { data: imageUrls } = await axios.get(GIST_URL, {
-    timeout: 30000,
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-    },
-  })
-
-  if (!Array.isArray(imageUrls) || imageUrls.length === 0) {
-    throw new Error("No image URLs found")
+const createImageResponse = (buffer: Buffer, filename: string | null = null) => {
+  const headers: { [key: string]: string } = {
+    "Content-Type": "image/jpeg",
+    "Content-Length": buffer.length.toString(),
+    "Cache-Control": "public, max-age=3600",
   }
 
-  // 🔥 RANDOM BENARAN
-  const randomUrl =
-    imageUrls[Math.floor(Math.random() * imageUrls.length)] +
-    "?rand=" +
-    Date.now() +
-    Math.random()
+  if (filename) {
+    headers["Content-Disposition"] = `inline; filename="${filename}"`
+  }
 
-  const imageResponse = await axios.get(randomUrl, {
-    responseType: "arraybuffer",
-    timeout: 30000,
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-    },
-  })
-
-  return Buffer.from(imageResponse.data)
+  return new Response(buffer, { headers })
 }
 
-export default async function cecanChinaHandler(
-  req: Request,
-  res: Response
-) {
+async function getRandomCecanChinaImage() {
   try {
-    const buffer = await getRandomCecanChinaImage()
-
-    // 🚫 ANTI CACHE LEVEL DEWA
-    res.set({
-      "Content-Type": "image/jpeg",
-      "Cache-Control":
-        "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
-      Pragma: "no-cache",
-      Expires: "0",
-      "Surrogate-Control": "no-store",
-      "CDN-Cache-Control": "no-store",
-      "Cloudflare-CDN-Cache-Control": "no-store",
-      "X-Random": Date.now().toString(),
+    const GIST_URL = "https://raw.githubusercontent.com/siputzx/Databasee/refs/heads/main/cecan/china.json"
+    const { data: imageUrls } = await axios.get(GIST_URL, {
+      timeout: 30000,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
     })
 
-    res.send(buffer)
+    if (!Array.isArray(imageUrls) || imageUrls.length === 0) {
+      throw new Error("No image URLs found in the GIST.")
+    }
+
+    const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]
+    const imageResponse = await axios.get(randomImageUrl, {
+      responseType: "arraybuffer",
+      timeout: 30000,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
+    })
+    return Buffer.from(imageResponse.data, "binary")
   } catch (error: any) {
-    console.error("Error cecan china:", error)
-    res.status(500).json({
-      status: false,
-      message: "Internal Server Error",
-    })
+    console.error("API Error:", error.message)
+    throw new Error("Failed to get random Chinese cecan image from API")
   }
 }
+
+export default [
+  {
+    metode: "GET",
+    endpoint: "/api/r/cecan/china",
+    name: "random cecan china",
+    category: "Random",
+    description: "This API endpoint provides a random image of Chinese 'cecan' (beautiful women). It fetches image URLs from a curated GitHub Gist and returns a binary image response. This can be used for various applications requiring random image content, such as chatbots, entertainment websites, or personal projects. The endpoint ensures a direct image delivery for seamless integration.",
+    tags: ["Random", "Image", "China"],
+    example: "",
+    parameters: [],
+    isPremium: false,
+    isMaintenance: false,
+    isPublic: true,
+    async run({ req }) {
+      try {
+        const imageData = await getRandomCecanChinaImage()
+        return createImageResponse(imageData)
+      } catch (error: any) {
+        return {
+          status: false,
+          error: error.message || "Internal Server Error",
+          code: 500,
+        }
+      }
+    },
+  },
+  {
+    metode: "POST",
+    endpoint: "/api/r/cecan/china",
+    name: "random cecan china",
+    category: "Random",
+    description: "This API endpoint provides a random image of Chinese 'cecan' (beautiful women) via a POST request. It fetches image URLs from a curated GitHub Gist and returns a binary image response. This can be used for applications that prefer POST requests for fetching content, such as dynamic content loading or internal system calls. The endpoint ensures a direct image delivery for seamless integration.",
+    tags: ["Random", "Image", "China"],
+    example: "",
+    requestBody: {},
+    isPremium: false,
+    isMaintenance: false,
+    isPublic: true,
+    async run({ req }) {
+      try {
+        const imageData = await getRandomCecanChinaImage()
+        return createImageResponse(imageData)
+      } catch (error: any) {
+        return {
+          status: false,
+          error: error.message || "Internal Server Error",
+          code: 500,
+        }
+      }
+    },
+  },
+]
