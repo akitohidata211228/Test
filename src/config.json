@@ -141,6 +141,24 @@
         ]
       },
       {
+       "name": "YouTube Downloader",
+       "endpoint": "/api/download/youtube",
+       "filename": "youtube",
+       "method": "GET",
+       "params": [
+     {
+       "name": "url",
+       "required": true,
+       "description": "YouTube URL"
+    },
+    {
+      "name": "format",
+      "required": false,
+      "description": "mp3 / mp4 (default mp4)"
+    }
+  ]
+}
+      {
         "name": "TikTok Downloader",
         "endpoint": "/api/download/tiktok",
         "filename": "tiktok",

@@ -10,7 +10,9 @@ async function getRandomCecanChinaImage(): Promise<Buffer> {
     timeout: 30000,
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+      "Cache-Control": "no-cache",
+      Pragma: "no-cache",
     },
   })
 
@@ -18,15 +20,21 @@ async function getRandomCecanChinaImage(): Promise<Buffer> {
     throw new Error("No image URLs found")
   }
 
+  // 🔥 RANDOM BENARAN
   const randomUrl =
-    imageUrls[Math.floor(Math.random() * imageUrls.length)]
+    imageUrls[Math.floor(Math.random() * imageUrls.length)] +
+    "?rand=" +
+    Date.now() +
+    Math.random()
 
   const imageResponse = await axios.get(randomUrl, {
     responseType: "arraybuffer",
     timeout: 30000,
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+      "Cache-Control": "no-cache",
+      Pragma: "no-cache",
     },
   })
 
@@ -40,10 +48,20 @@ export default async function cecanChinaHandler(
   try {
     const buffer = await getRandomCecanChinaImage()
 
-    res.set("Content-Type", "image/jpeg")
-    res.set("Cache-Control", "public, max-age=3600")
-    res.send(buffer)
+    // 🚫 ANTI CACHE LEVEL DEWA
+    res.set({
+      "Content-Type": "image/jpeg",
+      "Cache-Control":
+        "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+      Pragma: "no-cache",
+      Expires: "0",
+      "Surrogate-Control": "no-store",
+      "CDN-Cache-Control": "no-store",
+      "Cloudflare-CDN-Cache-Control": "no-store",
+      "X-Random": Date.now().toString(),
+    })
 
+    res.send(buffer)
   } catch (error: any) {
     console.error("Error cecan china:", error)
     res.status(500).json({
