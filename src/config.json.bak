@@ -204,6 +204,17 @@
     ],
     "Primbon" : [
       {
+  "name": "Arti Nama",
+  "endpoint": "/api/primbon/artinama",
+  "method": "GET",
+  "params": [
+    {
+      "name": "nama",
+      "required": true,
+      "description": "Nama yang ingin dicari artinya"
+    }
+  ]
+}
     ],
     "search": [
       {
