@@ -53,7 +53,7 @@
         "filename": "china",
         "method": "GET",
         "params": []
-      }
+      },
       {
         "name": "Random Waifu",
         "endpoint": "/api/random/waifu",
