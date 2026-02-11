@@ -32,9 +32,9 @@
       }
     ],
           {
-        "name": "CICI Chat",
+        "name": "kimi Chat",
         "endpoint": "/api/ai/cici",
-        "filename": "ciciai",
+        "filename": "kimi",
         "method": "GET",
         "params": [
           {
