@@ -157,7 +157,7 @@
       "description": "mp3 / mp4 (default mp4)"
     }
   ]
-}
+},
       {
         "name": "TikTok Downloader",
         "endpoint": "/api/download/tiktok",

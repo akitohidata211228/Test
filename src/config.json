@@ -150,11 +150,6 @@
        "name": "url",
        "required": true,
        "description": "YouTube URL"
-    },
-    {
-      "name": "format",
-      "required": false,
-      "description": "mp3 / mp4 (default mp4)"
     }
   ]
 },

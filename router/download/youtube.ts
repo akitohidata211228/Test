@@ -1,55 +1,150 @@
-import axios from "axios";
+import type { VercelRequest, VercelResponse } from "@vercel/node"
+import axios from "axios"
 
-type Format = "mp3" | "mp4";
+const qualityvideo = ["144", "240", "360", "720", "1080"]
 
-export async function youtubeDownloader(
-  url: string,
-  format: Format = "mp4"
-) {
-  // contoh endpoint scrape (sesuaikan dengan source lu)
-  const scrape = await axios.get("https://SCRAPER_API_URL", {
-    params: { url }
-  });
+const headers = {
+  "User-Agent":
+    "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36",
+  Accept: "*/*",
+  "Accept-Language": "id-ID,id;q=0.9",
+  "Content-Type": "application/x-www-form-urlencoded",
+  Origin: "https://iframe.y2meta-uk.com",
+  Referer: "https://iframe.y2meta-uk.com/"
+}
 
-  const data = scrape.data;
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
-  // struktur contoh hasil scrape
-  const videoUrl = data?.video?.mp4 || data?.video;
-  const audioUrl = data?.audio?.mp3 || data?.audio;
+function extractId(url: string): string {
+  const patterns = [
+    /youtu\.be\/([a-zA-Z0-9_-]{11})/,
+    /watch\?v=([a-zA-Z0-9_-]{11})/,
+    /shorts\/([a-zA-Z0-9_-]{11})/,
+    /live\/([a-zA-Z0-9_-]{11})/,
+    /embed\/([a-zA-Z0-9_-]{11})/
+  ]
 
-  // === LOGIC UTAMA ===
-  if (format === "mp3") {
-    if (audioUrl) {
+  for (const r of patterns) {
+    const m = url.match(r)
+    if (m) return m[1]
+  }
+
+  throw new Error("Invalid YouTube URL")
+}
+
+async function metadata(id: string) {
+  const r = await axios.get(
+    `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`
+  )
+
+  return {
+    title: r.data.title,
+    author: r.data.author_name,
+    thumbnail: `https://i.ytimg.com/vi/${id}/0.jpg`
+  }
+}
+
+async function getKey(): Promise<string> {
+  const r = await axios.get("https://cnv.cx/v2/sanity/key", { headers })
+  return r.data.key
+}
+
+async function createJob(id: string) {
+  const key = await getKey()
+  const quality = "720"
+
+  const r = await axios.post(
+    "https://cnv.cx/v2/converter",
+    new URLSearchParams({
+      link: `https://youtu.be/${id}`,
+      format: "mp4",
+      audioBitrate: "128",
+      videoQuality: qualityvideo.includes(quality) ? quality : "720",
+      filenameStyle: "pretty",
+      vCodec: "h264"
+    }).toString(),
+    { headers: { ...headers, key } }
+  )
+
+  return r.data
+}
+
+async function getJob(jobId: string) {
+  const r = await axios.get(`https://cnv.cx/v2/status/${jobId}`, { headers })
+  return r.data
+}
+
+async function poll(jobId: string, id: string, meta: any) {
+  for (let i = 0; i < 30; i++) {
+    await sleep(2000)
+    const s = await getJob(jobId)
+
+    if (s.status === "completed" && s.url) {
       return {
-        status: true,
-        type: "audio",
-        format: "mp3",
-        title: data.title,
-        url: audioUrl
-      };
+        id,
+        ...meta,
+        format: "mp4",
+        quality: "720",
+        download: s.url,
+        filename: s.filename
+      }
     }
 
-    // fallback kalau user minta mp3 tapi gak ada
-    return {
-      status: true,
-      type: "video",
-      format: "mp4",
-      title: data.title,
-      url: videoUrl,
-      note: "Audio tidak tersedia, fallback ke MP4"
-    };
+    if (s.status === "error") {
+      throw new Error(s.message)
+    }
   }
 
-  // default MP4
-  if (videoUrl) {
-    return {
-      status: true,
-      type: "video",
-      format: "mp4",
-      title: data.title,
-      url: videoUrl
-    };
-  }
+  throw new Error("Timeout processing video")
+}
 
-  throw new Error("Media tidak ditemukan");
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  try {
+    if (req.method !== "GET") {
+      return res.status(405).json({ message: "Method Not Allowed" })
+    }
+
+    const { url } = req.query
+
+    if (!url) {
+      return res.status(400).json({
+        status: false,
+        message: "Parameter url wajib"
+      })
+    }
+
+    const id = extractId(url as string)
+    const meta = await metadata(id)
+    const job = await createJob(id)
+
+    let result
+    if (job.status === "tunnel" && job.url) {
+      result = {
+        id,
+        ...meta,
+        format: "mp4",
+        quality: "720",
+        download: job.url,
+        filename: job.filename
+      }
+    } else if (job.status === "processing") {
+      result = await poll(job.jobId, id, meta)
+    } else {
+      throw new Error("Gagal memproses video")
+    }
+
+    res.status(200).json({
+      status: true,
+      platform: "youtube",
+      ...result
+    })
+  } catch (e: any) {
+    res.status(500).json({
+      status: false,
+      message: e.message
+    })
+  }
 }
