@@ -49,42 +49,42 @@
     "random": [
       {
         "name": "Random cecan korea",
-        "endpoint": "/api/random/cecan korea",
+        "endpoint": "/api/random/cecan_korea",
         "filename": "korea",
         "method": "GET",
         "params": []
       },
       {
         "name": "Random cecan Indonesia",
-        "endpoint": "/api/random/cecan indo",
+        "endpoint": "/api/random/cecan_indo",
         "filename": "Indonesia",
         "method": "GET",
         "params": []
       },
        {
         "name": "Random cecan thailand",
-        "endpoint": "/api/random/cecan thailand",
+        "endpoint": "/api/random/cecan_thailand",
         "filename": "thailand",
         "method": "GET",
         "params": []
       },
        {
         "name": "Random cecan Indonesia",
-        "endpoint": "/api/random/cecan vietnam",
+        "endpoint": "/api/random/cecan_vietnam",
         "filename": "vietnam",
         "method": "GET",
         "params": []
       },
       {
         "name": "Random cecan china",
-        "endpoint": "/api/random/cecan china",
+        "endpoint": "/api/random/cecan_china",
         "filename": "china",
         "method": "GET",
         "params": []
       },
       {
         "name": "Random cecan jepang",
-        "endpoint": "/api/random/cecan jepang",
+        "endpoint": "/api/random/cecan_jepang",
         "filename": "japan",
         "method": "GET",
         "params": []
@@ -201,6 +201,9 @@
           }
         ]
       }
+    ],
+    "Primbon" : [
+      {
     ],
     "search": [
       {
