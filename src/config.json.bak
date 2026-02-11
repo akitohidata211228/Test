@@ -206,6 +206,7 @@
       {
   "name": "Arti Nama",
   "endpoint": "/api/primbon/artinama",
+  "filename" : "artinama",
   "method": "GET",
   "params": [
     {

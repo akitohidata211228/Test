@@ -31,6 +31,25 @@
         ]
       }
     ],
+          {
+        "name": "CICI Chat",
+        "endpoint": "/api/ai/cici",
+        "filename": "ciciai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Question"
+          },
+          {
+            "name": "session",
+            "required": false,
+            "description": "Session ID"
+          }
+        ]
+      }
+    ],
     "maker": [
       {
         "name": "Brat Generator",
