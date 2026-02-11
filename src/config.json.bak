@@ -13,18 +13,18 @@
   "tags": {
     "ai": [
        {
-        "name": "Flux AI Image",
-        "endpoint": "/api/ai/flux",
-        "filename": "flux",
-        "method": "GET",
-       "params": [
+         "name": "Flux AI Image",
+         "endpoint": "/api/ai/flux",
+         "filename": "flux",
+         "method": "GET",
+          "params": [
          {
-          "name": "prompt",
-          "required": true,
-          "description": "Text prompt for             image generation"
-          }
-        ]
-      },
+            "name": "q",
+            "required": true,
+            "description": "prompt"
+    }
+  ]
+},
       {
         "name": "Zhuanxin Chat",
         "endpoint": "/api/ai/zhuanxin",

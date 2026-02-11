@@ -13,15 +13,21 @@
   "tags": {
     "ai": [
        {
-         "name": "Flux AI Image",
-         "endpoint": "/api/ai/flux",
-         "filename": "flux",
-         "method": "GET",
-          "params": [
-         {
-            "name": "q",
-            "required": true,
-            "description": "prompt"
+  "name": "unrestricted ai",
+  "endpoint": "/api/ai/unrestricted",
+  "filename": "unrestricted",
+  "method": "GET",
+  "params": [
+    {
+      "name": "prompt",
+      "required": true,
+      "description": "Teks prompt untuk gambar AI"
+    },
+    {
+      "name": "style",
+      "required": false,
+      "description": "Gaya gambar, default: photorealistic",
+      "example": "photorealistic"
     }
   ]
 },
