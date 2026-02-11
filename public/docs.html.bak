@@ -95,7 +95,7 @@
                 <div id="running-text" class="text-white text-xs font-mono font-bold uppercase tracking-widest skew-x-12 px-4 whitespace-nowrap animate-marquee inline-block min-w-full"></div>
             </div>
 
-            <a href="https://github.com/akitohidata211228" target="_blank" class="w-10 h-10 border-2 border-primary bg-white hover:bg-primary hover:text-white flex items-center justify-center shadow-hard transition-all">
+            <a href="https://github.com/DanzzAraAra" target="_blank" class="w-10 h-10 border-2 border-primary bg-white hover:bg-primary hover:text-white flex items-center justify-center shadow-hard transition-all">
                 <i class="fa-brands fa-github text-xl"></i>
             </a>
         </div>
