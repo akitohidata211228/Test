@@ -49,28 +49,42 @@
     "random": [
       {
         "name": "Random cecan korea",
-        "endpoint": "/api/random/cecankorea",
+        "endpoint": "/api/random/cecan korea",
         "filename": "korea",
         "method": "GET",
         "params": []
       },
       {
-        "name": "Random cecan jepang",
-        "endpoint": "/api/random/cecanjepang",
-        "filename": "japan",
+        "name": "Random cecan Indonesia",
+        "endpoint": "/api/random/cecan indo",
+        "filename": "Indonesia",
+        "method": "GET",
+        "params": []
+      },
+       {
+        "name": "Random cecan thailand",
+        "endpoint": "/api/random/cecan thailand",
+        "filename": "thailand",
+        "method": "GET",
+        "params": []
+      },
+       {
+        "name": "Random cecan Indonesia",
+        "endpoint": "/api/random/cecan vietnam",
+        "filename": "vietnam",
         "method": "GET",
         "params": []
       },
       {
         "name": "Random cecan china",
-        "endpoint": "/api/random/cecanchina",
+        "endpoint": "/api/random/cecan china",
         "filename": "china",
         "method": "GET",
         "params": []
       },
       {
         "name": "Random cecan jepang",
-        "endpoint": "/api/random/cecanjepang",
+        "endpoint": "/api/random/cecan jepang",
         "filename": "japan",
         "method": "GET",
         "params": []
