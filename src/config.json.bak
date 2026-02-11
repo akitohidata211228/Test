@@ -15,7 +15,7 @@
       {
         "name": "Zhuanxin Chat",
         "endpoint": "/api/ai/zhuanxin",
-        "filename": "zhuanxin",
+        "filename": "Zhuanxin",
         "method": "GET",
         "params": [
           {
