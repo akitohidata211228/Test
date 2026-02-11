@@ -13,6 +13,19 @@
   "tags": {
     "ai": [
       {
+        "name": "flux ait",
+        "endpoint": "/api/ai/flux",
+        "filename": "flux",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "prompt"
+          }
+          ]
+          },
+      {
         "name": "Zhuanxin Chat",
         "endpoint": "/api/ai/zhuanxin",
         "filename": "zhuanxin",
@@ -31,25 +44,7 @@
         ]
       }
     ],
-          {
-        "name": "kimi Chat",
-        "endpoint": "/api/ai/cici",
-        "filename": "kimi",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "Question"
-          },
-          {
-            "name": "session",
-            "required": false,
-            "description": "Session ID"
-          }
-        ]
-      }
-    ],
+
     "maker": [
       {
         "name": "Brat Generator",
