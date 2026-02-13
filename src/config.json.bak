@@ -12,17 +12,7 @@
   },
   "tags": {
     "ai": [
-       {
-  "name": "unrestricted ai",
-  "endpoint": "/api/ai/unrestricted",
-  "filename": "unrestricted",
-  "method": "GET",
-  "params": [
-    {
-      "name": "prompt",
-      "required": true,
-      "description": "Teks prompt untuk gambar AI"
-    },
+     
     {
       "name": "style",
       "required": false,
@@ -221,21 +211,6 @@
           }
         ]
       }
-    ],
-    "Primbon" : [
-      {
-  "name": "Arti Nama",
-  "endpoint": "/api/primbon/artinama",
-  "filename" : "artinama",
-  "method": "GET",
-  "params": [
-    {
-      "name": "nama",
-      "required": true,
-      "description": "Nama yang ingin dicari artinya"
-    }
-  ]
-}
     ],
     "search": [
       {
