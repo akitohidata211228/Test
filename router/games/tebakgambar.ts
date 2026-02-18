@@ -16,21 +16,28 @@ export default async function tebakGambarHandler(
       throw new Error("Data kosong")
     }
 
+    // random soal
     const random =
       data[Math.floor(Math.random() * data.length)]
 
-    // mapping field
+    // sesuaikan field dengan github
     const result = {
+      index: random.index,
       gambar: random.img,
-      jawaban: random.jawaban
+      jawaban: random.jawaban,
+      deskripsi: random.deskripsi
     }
+
+    res.setHeader("Cache-Control", "no-store")
 
     res.json({
       status: true,
       data: result,
       timestamp: new Date().toISOString(),
     })
+
   } catch (error: any) {
+    console.error("Error tebak gambar:", error)
     res.status(500).json({
       status: false,
       message: "Internal Server Error",
