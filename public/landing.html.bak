@@ -182,7 +182,7 @@
                 if(thumb) {
                     thumbEl.src = thumb;
                 } else {
-                    thumbEl.src = 'https://c.termai.cc/i122/GvftB.jpg'; 
+                    thumbEl.src = 'https://files.catbox.moe/v92zo8.jpeg'; 
                 }
 
                 const fav = config.settings.favicon;
