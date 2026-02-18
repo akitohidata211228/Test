@@ -5,30 +5,50 @@ async function scrape() {
     const response = await axios.get("https://flagcdn.com/en/codes.json", {
       timeout: 30000,
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
       },
     })
+
     const data = response.data
-    const randomKey = Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]
-    return {
-      name: data[randomKey],
-      img: `https://flagpedia.net/data/flags/ultra/${randomKey}.png`,
+    const keys = Object.keys(data)
+
+    if (!keys.length) {
+      throw new Error("Data kosong")
     }
+
+    const randomKey =
+      keys[Math.floor(Math.random() * keys.length)]
+
+    return {
+      index: keys.indexOf(randomKey) + 1,
+      gambar: `https://flagpedia.net/data/flags/ultra/${randomKey}.png`,
+      jawaban: data[randomKey].toUpperCase(),
+    }
+
   } catch (error: any) {
     try {
       const srcResponse = await axios.get(
         "https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakbendera2.json",
-        {
-          timeout: 30000,
-          headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-          },
-        },
+        { timeout: 30000 }
       )
+
       const src = srcResponse.data
-      return src[Math.floor(Math.random() * src.length)]
+
+      if (!Array.isArray(src) || !src.length) {
+        throw new Error("Fallback data kosong")
+      }
+
+      const random =
+        src[Math.floor(Math.random() * src.length)]
+
+      return {
+        index: random.index,
+        gambar: random.img,
+        jawaban: random.jawaban?.toUpperCase(),
+      }
+
     } catch (innerError: any) {
-      console.error("API Error:", innerError.message)
       throw new Error("Failed to get response from API")
     }
   }
@@ -40,14 +60,15 @@ export default [
     endpoint: "/api/games/tebakbendera",
     name: "tebak bendera",
     category: "Games",
-    description: "This API endpoint provides a random country flag quiz. Each request delivers a new challenge featuring a country's flag and its name, prompting users to identify the correct country based on its flag. This endpoint is ideal for geography quizzes, educational applications, or any platform focused on testing knowledge of world flags. The response will be a JSON object containing the flag image URL and the correct country name.",
-    tags: ["Games", "Flag Quiz", "Geography", "Education", "World"],
+    description: "",
+    tags: ["Games"],
     example: "",
     parameters: [],
     isPremium: false,
     isMaintenance: false,
     isPublic: true,
-    async run({ req }) {
+
+    async run() {
       try {
         const data = await scrape()
 
@@ -64,6 +85,7 @@ export default [
           data: data,
           timestamp: new Date().toISOString(),
         }
+
       } catch (error: any) {
         return {
           status: false,
@@ -78,14 +100,15 @@ export default [
     endpoint: "/api/games/tebakbendera",
     name: "tebak bendera",
     category: "Games",
-    description: "This API endpoint provides a random country flag quiz. Each request delivers a new challenge featuring a country's flag and its name, prompting users to identify the correct country based on its flag. This endpoint is ideal for geography quizzes, educational applications, or any platform focused on testing knowledge of world flags. The response will be a JSON object containing the flag image URL and the correct country name.",
-    tags: ["Games", "Flag Quiz", "Geography", "Education", "World"],
+    description: "",
+    tags: ["Games"],
     example: "",
     requestBody: {},
     isPremium: false,
     isMaintenance: false,
     isPublic: true,
-    async run({ req }) {
+
+    async run() {
       try {
         const data = await scrape()
 
@@ -102,6 +125,7 @@ export default [
           data: data,
           timestamp: new Date().toISOString(),
         }
+
       } catch (error: any) {
         return {
           status: false,

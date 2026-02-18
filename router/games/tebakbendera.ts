@@ -2,16 +2,13 @@ import axios from "axios"
 
 async function scrape() {
   try {
-    const response = await axios.get(
-      "https://flagcdn.com/en/codes.json",
-      {
-        timeout: 30000,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        },
-      }
-    )
+    const response = await axios.get("https://flagcdn.com/en/codes.json", {
+      timeout: 30000,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
+    })
 
     const data = response.data
     const keys = Object.keys(data)
@@ -25,7 +22,7 @@ async function scrape() {
 
     return {
       index: keys.indexOf(randomKey) + 1,
-      img: `https://flagpedia.net/data/flags/ultra/${randomKey}.png`,
+      gambar: `https://flagpedia.net/data/flags/ultra/${randomKey}.png`,
       jawaban: data[randomKey].toUpperCase(),
     }
 
@@ -33,13 +30,7 @@ async function scrape() {
     try {
       const srcResponse = await axios.get(
         "https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakbendera2.json",
-        {
-          timeout: 30000,
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-          },
-        }
+        { timeout: 30000 }
       )
 
       const src = srcResponse.data
@@ -52,13 +43,12 @@ async function scrape() {
         src[Math.floor(Math.random() * src.length)]
 
       return {
-        index: random.index || 0,
-        img: random.img,
+        index: random.index,
+        gambar: random.img,
         jawaban: random.jawaban?.toUpperCase(),
       }
 
     } catch (innerError: any) {
-      console.error("API Error:", innerError.message)
       throw new Error("Failed to get response from API")
     }
   }
@@ -77,13 +67,22 @@ export default [
     isPremium: false,
     isMaintenance: false,
     isPublic: true,
+
     async run() {
       try {
         const data = await scrape()
 
+        if (!data) {
+          return {
+            status: false,
+            error: "No result returned from API",
+            code: 500,
+          }
+        }
+
         return {
           status: true,
-          data,
+          data: data,
           timestamp: new Date().toISOString(),
         }
 
@@ -108,13 +107,22 @@ export default [
     isPremium: false,
     isMaintenance: false,
     isPublic: true,
+
     async run() {
       try {
         const data = await scrape()
 
+        if (!data) {
+          return {
+            status: false,
+            error: "No result returned from API",
+            code: 500,
+          }
+        }
+
         return {
           status: true,
-          data,
+          data: data,
           timestamp: new Date().toISOString(),
         }
 
