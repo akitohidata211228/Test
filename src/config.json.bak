@@ -12,15 +12,6 @@
   },
   "tags": {
     "ai": [
-     
-    {
-      "name": "style",
-      "required": false,
-      "description": "Gaya gambar, default: photorealistic",
-      "example": "photorealistic"
-    }
-  ]
-},
       {
         "name": "Zhuanxin Chat",
         "endpoint": "/api/ai/zhuanxin",
