@@ -128,11 +128,6 @@
             "required": true,
             "description": "Original URL"
           },
-          {
-            "name": "alias",
-            "required": false,
-            "description": "Custom Alias"
-          }
         ]
       }
     ],
