@@ -53,9 +53,7 @@
         "endpoint": "/api/games/tebakgambar",
         "filename": "tebakgambar",
         "method": "GET",
-        "params": [],
-        "description": "Get random tebak gambar question",
-        "isPremium": false
+        "params": []
       }
     ],
 
