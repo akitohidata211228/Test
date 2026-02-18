@@ -117,7 +117,7 @@
                     </a>
                     <a id="btn-source" href="#" target="_blank" class="flex items-center justify-center gap-3 border-2 border-primary bg-white py-3 text-sm font-bold shadow-hard-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-gradient-to-r hover:from-gray-50 hover:to-primary/5 transition-all rounded-lg group/gh">
                         <i class="fa-brands fa-github text-lg text-primary group-hover/gh:scale-110 transition-transform"></i>
-                        <span class="font-mono text-xs">SOURCE</span>
+                        <span class="font-mono text-xs">Github</span>
                     </a>
                 </div>
                 
