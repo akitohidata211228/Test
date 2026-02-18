@@ -181,7 +181,7 @@
                 const thumbEl = document.getElementById('dash-thumb');
                 if(thumb) {
                     thumbEl.src = thumb;
-                } else {
+                } false {
                     thumbEl.src = 'https://files.catbox.moe/v92zo8.jpeg'; 
                 }
 
