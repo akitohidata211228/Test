@@ -252,7 +252,9 @@
             "name": "q",
             "required": true,
             "description": "Query"
+            
           }
+          ]
           },
       {
         "name": "Pinterest Search",

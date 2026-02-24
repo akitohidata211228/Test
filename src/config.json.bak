@@ -253,7 +253,7 @@
             "required": true,
             "description": "Query"
           }
-          }
+          },
       {
         "name": "Pinterest Search",
         "endpoint": "/api/search/pinterest",
