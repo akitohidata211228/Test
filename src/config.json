@@ -242,6 +242,19 @@
           }
         ]
       },
+      {
+  "name": "CNN News",
+  "endpoint": "/api/search/cnn",
+  "filename": "cnn",
+  "method": "GET",
+  "params": [
+    {
+      "name": "limit",
+      "required": false,
+      "description": "Jumlah berita yang ingin diambil (default 3)"
+    }
+  ]
+}
       
       {
         "name": "Pinterest Search",
