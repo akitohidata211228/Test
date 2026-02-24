@@ -7,12 +7,14 @@ const baseURL = "https://klikxxi.me"
 const client = axios.create({
   headers: {
     "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    Accept:
-      "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language":
-      "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept":
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://google.com",
+    "Connection": "keep-alive"
   },
+  timeout: 30000,
 })
 
 function extractYear(title: string) {
@@ -34,17 +36,20 @@ export default async function klikxxiSearchHandler(
   }
 
   try {
-    const params = new URLSearchParams()
-    params.append("s", query)
-    params.append("post_type[]", "post")
-    params.append("post_type[]", "tv")
+    const url = `${baseURL}/?s=${encodeURIComponent(query)}&post_type[]=post&post_type[]=tv`
 
-    const response = await client.get(`${baseURL}/?${params.toString()}`)
+    const response = await client.get(url)
+
+    // 🔥 DEBUG HTML
+    console.log("===== HTML PREVIEW =====")
+    console.log(response.data.slice(0, 800))
+    console.log("===== END PREVIEW =====")
 
     const $ = load(response.data)
     const results: any[] = []
 
-    $("#gmr-main-load .item-infinite").each((_, el) => {
+    // coba selector alternatif juga
+    $(".item-infinite, .gmr-box-content").each((_, el) => {
       const item = $(el)
 
       const title = item.find(".entry-title a").text().trim()
@@ -77,6 +82,7 @@ export default async function klikxxiSearchHandler(
 
     return res.json({
       status: true,
+      total: results.length,
       data: results,
       timestamp: new Date().toISOString(),
     })
