@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
 import axios from "axios"
-import { load } from "cheerio"
+import cheerio from "cheerio"
 
 const baseURL = "https://klikxxi.me"
 
 const client = axios.create({
   headers: {
     "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "Mozilla/5.0 (Linux; Android 6.0; Nexus 5)",
     Accept:
       "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language":
@@ -39,32 +39,49 @@ export default async function klikxxiSearchHandler(
     params.append("post_type[]", "post")
     params.append("post_type[]", "tv")
 
-    const response = await client.get(`${baseURL}/?${params.toString()}`)
+    const response = await client.get(`${baseURL}/`, {
+      params,
+    })
 
-    const $ = load(response.data)
+    const $ = cheerio.load(response.data)
     const results: any[] = []
 
-    $("#gmr-main-load .item-infinite").each((_, el) => {
-      const item = $(el)
+    $("#gmr-main-load .item-infinite").each(
+      (_, el) => {
+        const item = $(el)
 
-      const title = item.find(".entry-title a").text().trim()
-      const url = item.find(".entry-title a").attr("href")
+        const title = item
+          .find(".entry-title a")
+          .text()
+          .trim()
 
-      const thumbnail =
-        item.find("img").attr("data-lazy-src") ||
-        item.find("img").attr("src")
+        const url = item
+          .find(".entry-title a")
+          .attr("href")
 
-      const rating = item.find(".gmr-rating-item").text().trim()
-      const duration = item.find(".gmr-duration-item").text().trim()
-      const quality = item.find(".gmr-quality-item").text().trim()
+        const thumbnail =
+          item.find("img").attr("data-lazy-src") ||
+          item.find("img").attr("src")
 
-      if (title && url) {
+        const rating = item
+          .find(".gmr-rating-item")
+          .text()
+          .trim()
+
+        const duration = item
+          .find(".gmr-duration-item")
+          .text()
+          .trim()
+
+        const quality = item
+          .find(".gmr-quality-item")
+          .text()
+          .trim()
+
         results.push({
           title,
           url,
-          thumbnail: thumbnail?.startsWith("http")
-            ? thumbnail
-            : thumbnail
+          thumbnail: thumbnail
             ? baseURL + thumbnail
             : null,
           rating,
@@ -73,7 +90,7 @@ export default async function klikxxiSearchHandler(
           year: extractYear(title),
         })
       }
-    })
+    )
 
     return res.json({
       status: true,
@@ -82,7 +99,6 @@ export default async function klikxxiSearchHandler(
     })
 
   } catch (error: any) {
-    console.error("Search Error:", error.message)
     return res.status(500).json({
       status: false,
       message: error.message,
