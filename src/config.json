@@ -149,19 +149,7 @@
       }
     ],
     "download": [
-      {
-        "name": "rednote Downloader",
-        "endpoint": "/api/download/rednote",
-        "filename": "rednote",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "rednote URL"
-          }
-        ]
-      },
+      
       {
         "name": "Facebook Downloader",
         "endpoint": "/api/download/facebook",
@@ -242,20 +230,7 @@
           }
         ]
       },
-      {
-  "name": "CNN News",
-  "endpoint": "/api/search/cnn",
-  "filename": "cnn",
-  "method": "GET",
-  "params": [
-    {
-      "name": "limit",
-      "required": false,
-      "description": "Jumlah berita yang ingin diambil (default 3)"
-    }
-  ]
-},
-      
+  
       {
         "name": "Pinterest Search",
         "endpoint": "/api/search/pinterest",
