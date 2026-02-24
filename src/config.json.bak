@@ -54,6 +54,13 @@
         "filename": "tebakgambar",
         "method": "GET",
         "params": []
+      },
+      {
+        "name": "Tebak Bendera",
+        "endpoint": "/api/games/tebakbendera",
+        "filename": "tebakbendera",
+        "method": "GET",
+        "params": []
       }
     ],
 

@@ -1,0 +1,107 @@
+import { Request, Response } from "express"
+import axios from "axios"
+import cheerio from "cheerio"
+
+const baseURL = "https://klikxxi.me"
+
+const client = axios.create({
+  headers: {
+    "User-Agent":
+      "Mozilla/5.0 (Linux; Android 6.0; Nexus 5)",
+    Accept:
+      "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language":
+      "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+  },
+})
+
+function extractYear(title: string) {
+  const match = title.match(/\b(19|20)\d{2}\b/)
+  return match ? match[0] : null
+}
+
+export default async function klikxxiSearchHandler(
+  req: Request,
+  res: Response
+) {
+  const query = req.query.q as string
+
+  if (!query) {
+    return res.status(400).json({
+      status: false,
+      message: "Parameter 'q' diperlukan",
+    })
+  }
+
+  try {
+    const params = new URLSearchParams()
+    params.append("s", query)
+    params.append("post_type[]", "post")
+    params.append("post_type[]", "tv")
+
+    const response = await client.get(`${baseURL}/`, {
+      params,
+    })
+
+    const $ = cheerio.load(response.data)
+    const results: any[] = []
+
+    $("#gmr-main-load .item-infinite").each(
+      (_, el) => {
+        const item = $(el)
+
+        const title = item
+          .find(".entry-title a")
+          .text()
+          .trim()
+
+        const url = item
+          .find(".entry-title a")
+          .attr("href")
+
+        const thumbnail =
+          item.find("img").attr("data-lazy-src") ||
+          item.find("img").attr("src")
+
+        const rating = item
+          .find(".gmr-rating-item")
+          .text()
+          .trim()
+
+        const duration = item
+          .find(".gmr-duration-item")
+          .text()
+          .trim()
+
+        const quality = item
+          .find(".gmr-quality-item")
+          .text()
+          .trim()
+
+        results.push({
+          title,
+          url,
+          thumbnail: thumbnail
+            ? baseURL + thumbnail
+            : null,
+          rating,
+          duration,
+          quality,
+          year: extractYear(title),
+        })
+      }
+    )
+
+    return res.json({
+      status: true,
+      data: results,
+      timestamp: new Date().toISOString(),
+    })
+
+  } catch (error: any) {
+    return res.status(500).json({
+      status: false,
+      message: error.message,
+    })
+  }
+}

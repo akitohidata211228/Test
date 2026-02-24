@@ -243,6 +243,17 @@
         ]
       },
       {
+        "name": "loklok Search",
+        "endpoint": "/api/search/loklok",
+        "filename": "loklok",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Query"
+          },
+      {
         "name": "Pinterest Search",
         "endpoint": "/api/search/pinterest",
         "filename": "pinterest",
