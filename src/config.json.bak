@@ -244,7 +244,7 @@
       },
       {
         "name": "loklok Search",
-        "endpoint": "/api/download/loklok",
+        "endpoint": "/api/search/loklok",
         "filename": "loklok",
         "method": "GET",
         "params": [
