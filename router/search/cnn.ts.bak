@@ -1,74 +1,30 @@
-// cnnHandler.ts
 import { Request, Response } from "express";
 import axios from "axios";
 import cheerio from "cheerio";
 
-class CNNNews {
-  baseUrl: string;
+const baseUrl = "https://www.cnnindonesia.com";
 
-  constructor() {
-    this.baseUrl = "https://www.cnnindonesia.com";
-  }
-
-  async scrape() {
-    const homeResponse = await axios.get(this.baseUrl);
-    const $ = cheerio.load(homeResponse.data);
-
-    const newsList: any[] = [];
-
-    $(".nhl-list article").each((i, el) => {
-      const article = $(el);
-      const link = article.find("a").first();
-      const url = link.attr("href");
-
-      if (url && url !== "#") {
-        newsList.push({
-          url: url,
-          title: link.find("h2").text().trim(),
-          image: article.find("img").attr("src") || "",
-          category: article.find(".text-cnn_red").first().text().trim() || "",
-        });
-      }
+async function fetchHTML(url: string) {
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+      },
+      timeout: 15000,
     });
-
-    const results: any[] = [];
-
-    for (const item of newsList.slice(0, 5)) { // ambil 5 berita teratas
-      try {
-        const articleResponse = await axios.get(item.url);
-        const $$ = cheerio.load(articleResponse.data);
-
-        const content: string[] = [];
-        $$(".detail-text p").each((i, el) => {
-          const text = $$(el).text().trim();
-          if (text && !text.includes("BACA JUGA:")) content.push(text);
-        });
-
-        results.push({
-          news: {
-            title: item.title,
-            url: item.url,
-            image: item.image,
-            category: item.category,
-          },
-          detail: {
-            title: $$("h1").text().trim() || item.title,
-            date: $$(".text-cnn_grey.text-sm").first().text().trim() || "",
-            author: $$(".text-cnn_red").first().text().trim() || "",
-            content: content.slice(0, 3), // ambil 3 paragraf pertama
-            tags: $$(".flex.flex-wrap.gap-3 a")
-              .map((i, el) => $$(el).text().trim())
-              .get()
-              .slice(0, 3), // ambil 3 tag
-          },
-        });
-      } catch (err) {
-        continue;
-      }
-    }
-
-    return results;
+    return response.data || "";
+  } catch (err) {
+    return "";
   }
+}
+
+function extractYear(title: string) {
+  const match = title.match(/\b(19|20)\d{2}\b/);
+  return match ? match[0] : null;
 }
 
 export default async function cnnHandler(
@@ -76,19 +32,51 @@ export default async function cnnHandler(
   res: Response
 ) {
   try {
-    const scraper = new CNNNews();
-    const result = await scraper.scrape();
+    const html = await fetchHTML(baseUrl);
+    if (!html) {
+      return res.status(500).json({
+        creator: "Lǐ Rén Xīn",
+        status: false,
+        message: "Gagal mengambil halaman CNN",
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    const $ = cheerio.load(html);
+    const results: any[] = [];
+
+    $(".nhl-list article").each((i, el) => {
+      const article = $(el);
+      const link = article.find("a").first();
+      const url = link.attr("href") || "";
+      const title = link.find("h2").text().trim() || "";
+      const image = article.find("img").attr("src") || "";
+      const category =
+        article.find(".text-cnn_red").first().text().trim() || "";
+
+      if (url && title) {
+        results.push({
+          title,
+          url,
+          image,
+          category,
+          year: extractYear(title),
+        });
+      }
+    });
 
     return res.json({
+      creator: "Lǐ Rén Xīn",
       status: true,
-      total: result.length,
-      data: result,
+      total: results.length,
+      data: results,
       timestamp: new Date().toISOString(),
     });
-  } catch (error: any) {
+  } catch (err: any) {
     return res.status(500).json({
+      creator: "Lǐ Rén Xīn",
       status: false,
-      message: error.message || "Internal Server Error",
+      message: err.message,
       timestamp: new Date().toISOString(),
     });
   }
