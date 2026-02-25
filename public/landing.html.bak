@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>赵露思</title>
-    <link id="favicon" rel="icon" href="">
+    
+    <title>Akito Hidata (Lirenxin) | Taufik Hidayat Official</title>
+    
+    <meta name="description" content="Official website of Akito Hidata (Lirenxin), also known as Taufik Hidayat. Developer API and creator. Explore my projects and documentation.">
+    <meta name="keywords" content="Akito Hidata, Lirenxin, Taufik Hidayat, Lirenxin API, Portfolio Taufik Hidayat">
+    <meta name="author" content="Taufik Hidayat (Akito Hidata)">
+    <meta name="google-site-verification" content="googlecd1c0a59ae0970d6" />
+
+    <meta property="og:title" content="Akito Hidata / Taufik Hidayat - Lirenxin API">
+    <meta property="og:description" content="Personal Portfolio & API Documentation.">
+    <meta property="og:url" content="https://lirenxin-api.my.id">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Taufik Hidayat",
+      "alternateName": ["Akito Hidata", "Lirenxin"],
+      "url": "https://lirenxin-api.my.id",
+      "jobTitle": "Developer",
+      "sameAs": [
+        "https://github.com/TaufikHidayat",
+        "https://www.instagram.com/taufikhidayat_real",
+        "https://www.tiktok.com/@lirenxin_akito"
+      ]
+    }
+    </script>
+
+    <link id="favicon" rel="icon" href="https://telegra.ph/file/5a54625b186b245c47949.jpg"> 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+  
     <script>
         tailwind.config = {
             theme: {
