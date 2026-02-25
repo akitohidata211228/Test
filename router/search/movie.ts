@@ -7,19 +7,21 @@ async function fetchHTML(url: string) {
     const res = await axios.get(url, {
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7"
       },
       timeout: 15000
     });
     return res.data || "";
-  } catch {
-    return "";
+  } catch (err) {
+    console.error("Fetch error:", err.message);
+    return ""; // return empty string biar cheerio.load tidak error
   }
 }
 
 export default async function moviekuHandler(req: Request, res: Response) {
   const query = (req.query.q || req.query.query) as string;
-
   if (!query) {
     return res.status(400).json({
       creator: "Lǐ Rén Xīn",
@@ -30,101 +32,58 @@ export default async function moviekuHandler(req: Request, res: Response) {
   }
 
   try {
-    // 1. SEARCH
-    const searchUrl = `https://movieku.fit/?s=${encodeURIComponent(query)}`;
-    const searchHTML = await fetchHTML(searchUrl);
-    const $search = cheerio.load(searchHTML);
+    // SEARCH
+    const searchURL = `https://movieku.fit/?s=${encodeURIComponent(query)}`;
+    const searchHTML = await fetchHTML(searchURL);
 
-    const searchResults: any = {
-      query,
-      total: 0,
-      results: []
-    };
+    if (!searchHTML) {
+      return res.status(500).json({
+        creator: "Lǐ Rén Xīn",
+        status: false,
+        message: "Gagal fetch MovieKu atau website berubah",
+        timestamp: new Date().toISOString()
+      });
+    }
 
-    $search(".los article.box").each((_, el) => {
-      const article = $search(el);
-      const link = article.find("a.tip");
+    const $ = cheerio.load(searchHTML);
+    const results: any[] = [];
+
+    $(".los article.box").each((_, el) => {
+      const item = $(el);
+      const link = item.find("a.tip");
       const title = link.attr("title") || link.find("h2.entry-title").text();
       const url = link.attr("href");
-      const img = article.find("img").attr("src");
-      const quality = article.find(".quality").text();
-      const year = title.match(/\((\d{4})\)/)?.[1] || "";
+      const img = item.find("img").attr("src");
+      const quality = item.find(".quality").text();
+      const year = title?.match(/\((\d{4})\)/)?.[1] || "";
 
       if (url) {
-        searchResults.results.push({
-          title,
-          url,
-          image: img,
-          quality,
-          year,
-          type: "Movie"
-        });
+        results.push({ title, url, image: img, quality, year });
       }
     });
 
-    searchResults.total = searchResults.results.length;
-
-    // 2. DETAIL dari hasil pertama
+    // Ambil detail film pertama
     let detail: any = {};
-    const firstResult = searchResults.results[0];
-
-    if (firstResult) {
-      const detailHTML = await fetchHTML(firstResult.url);
-      const $detail = cheerio.load(detailHTML);
-
-      detail = {
-        title: firstResult.title,
-        url: firstResult.url,
-        image: firstResult.image,
-        synopsis: $detail(".synops .entry-content p").first().text().trim(),
-        genres: $detail(".data li")
-          .filter((_, el) => $detail(el).text().includes("Genre:"))
-          .find("a")
-          .map((_, a) => $detail(a).text().trim())
-          .get(),
-        release: $detail(".data li")
-          .filter((_, el) => $detail(el).text().includes("Release:"))
-          .text()
-          .replace("Release:", "")
-          .trim(),
-        duration: $detail(".data li")
-          .filter((_, el) => $detail(el).text().includes("Duration:"))
-          .text()
-          .replace("Duration:", "")
-          .trim(),
-        country: $detail(".data li")
-          .filter((_, el) => $detail(el).text().includes("Country:"))
-          .text()
-          .replace("Country:", "")
-          .trim(),
-        rating: $detail(".data li")
-          .filter((_, el) => $detail(el).text().includes("Rating:"))
-          .text()
-          .replace("Rating:", "")
-          .trim(),
-        quality: firstResult.quality,
-        downloads: []
-      };
-
-      $detail("#smokeddl .smokeurl p").each((_, el) => {
-        const q = $detail(el).find("strong").text().replace(":", "").trim();
-        const links = $detail(el)
-          .find("a")
-          .map((_, a) => ({
-            provider: $detail(a).text().trim(),
-            url: $detail(a).attr("href")
-          }))
-          .get();
-        if (q) detail.downloads.push({ quality: q, links });
-      });
+    if (results.length > 0) {
+      const firstURL = results[0].url;
+      const detailHTML = await fetchHTML(firstURL);
+      if (detailHTML) {
+        const $$ = cheerio.load(detailHTML);
+        detail = {
+          title: results[0].title,
+          url: firstURL,
+          image: results[0].image,
+          synopsis: $$(".synops .entry-content p").first().text().trim(),
+        };
+      }
     }
 
     return res.json({
       creator: "Lǐ Rén Xīn",
       status: true,
-      total: searchResults.total,
-      search: searchResults.results,
-      detail: detail,
+      total: results.length,
+      search: results,
+      detail,
       timestamp: new Date().toISOString()
     });
 
