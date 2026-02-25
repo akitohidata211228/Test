@@ -201,6 +201,19 @@
             "description": "TikTok URL"
           }
         ]
+      },
+      {
+        "name": "TikTok Downloade V2r",
+        "endpoint": "/api/download/tiktok2",
+        "filename": "tiktok2",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "TikTok URL"
+          }
+        ]
       }
     ],
     "search": [

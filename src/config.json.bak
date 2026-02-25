@@ -217,19 +217,19 @@
           }
         ]
       },
-      {
-        "name": "movie Search",
-        "endpoint": "/api/search/movie",
-        "filename": "movie",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "Query"
-          }
-        ]
-      },
+{
+  "name": "MovieKu Search",
+  "endpoint": "/api/search/movie",
+  "filename": "movie",
+  "method": "GET",
+  "params": [
+    {
+      "name": "q",
+      "required": true,
+      "description": "Judul film yang ingin dicari"
+    }
+  ]
+},
       {
         "name": "TikTok Search",
         "endpoint": "/api/search/tiktok",
