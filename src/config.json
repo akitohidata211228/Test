@@ -203,9 +203,9 @@
         ]
       },
       {
-        "name": "TikTok Downloade V2r",
-        "endpoint": "/api/download/tiktok2",
-        "filename": "tiktok2",
+        "name": "TikTok Downloade V2",
+        "endpoint": "/api/download/tiktokv2",
+        "filename": "tiktokv2",
         "method": "GET",
         "params": [
           {
