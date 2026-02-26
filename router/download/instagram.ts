@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import axios from "axios";
+import * as cheerio from "cheerio";
 
 async function getDownloadgramMedia(url: string) {
     const headers = {
         "content-type": "application/x-www-form-urlencoded",
         "user-agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         referer: "https://downloadgram.org/",
         origin: "https://downloadgram.org/",
     };
@@ -23,24 +24,28 @@ async function getDownloadgramMedia(url: string) {
             { headers }
         );
 
-        const rawData = response.data;
+        const html = response.data;
+        const $ = cheerio.load(html);
 
-        const linkMatch = rawData.match(
-            /<a download=\\"\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\"([^"]+)\\">/
-        );
+        let downloadUrl: string | null = null;
 
-        if (linkMatch && linkMatch[1]) {
-            const downloadUrl = linkMatch[1].replace(/\\/g, "");
+        $("a").each((_, el) => {
+            const href = $(el).attr("href");
+            if (href && href.includes("cdn.downloadgram.org")) {
+                downloadUrl = href;
+            }
+        });
 
+        if (!downloadUrl) {
             return {
-                status: true,
-                url: downloadUrl,
+                status: false,
+                message: "Download link not found (structure changed or blocked)",
             };
         }
 
         return {
-            status: false,
-            message: "Download link not found",
+            status: true,
+            url: downloadUrl,
         };
     } catch (error: any) {
         return {
@@ -73,13 +78,13 @@ export default async function instagramDownloader(
     try {
         const result = await getDownloadgramMedia(url);
 
-        if (!result?.status) {
+        if (!result.status) {
             return res.status(500).json(result);
         }
 
         return res.json({
+            creator: "Lǐ Rén Xīn",
             status: true,
-            creator: "LǐRénXīn",
             data: {
                 download: result.url,
             },
