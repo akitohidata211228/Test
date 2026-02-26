@@ -83,12 +83,12 @@ class SaveTTClient {
 
         const slides = $(".carousel-item[data-data]");
 
-        /* ================= PHOTO ================= */
+        /* ================= PHOTO FIX ================= */
 
         if (slides.length) {
             result.type = "photo";
 
-            const uniqueSlides = new Set<string>();
+            const uniqueSlides = new Map<string, string>();
 
             slides.each((_, el) => {
                 try {
@@ -96,16 +96,25 @@ class SaveTTClient {
                     if (!raw) return;
 
                     const json = JSON.parse(raw.replace(/&quot;/g, '"'));
+                    if (!Array.isArray(json.URL)) return;
 
-                    if (Array.isArray(json.URL)) {
-                        json.URL.forEach((url: string) => {
-                            if (url) uniqueSlides.add(url.trim());
-                        });
-                    }
+                    json.URL.forEach((url: string) => {
+                        if (!url) return;
+
+                        const clean = url.split("?")[0];
+                        const fileId = clean.split("/").pop();
+
+                        if (!fileId) return;
+
+                        if (!uniqueSlides.has(fileId)) {
+                            uniqueSlides.set(fileId, clean);
+                        }
+                    });
+
                 } catch {}
             });
 
-            result.slides = Array.from(uniqueSlides).map((url, i) => ({
+            result.slides = Array.from(uniqueSlides.values()).map((url, i) => ({
                 index: i + 1,
                 url,
             }));
@@ -113,13 +122,13 @@ class SaveTTClient {
             return result;
         }
 
-        /* ================= VIDEO ================= */
+        /* ================= VIDEO FIX ================= */
 
         result.type = "video";
 
-        const nowmSet = new Set<string>();
-        const wmSet = new Set<string>();
-        const mp3Set = new Set<string>();
+        const nowmSet = new Map<string, string>();
+        const wmSet = new Map<string, string>();
+        const mp3Set = new Map<string, string>();
 
         $("#formatselect option").each((_, el) => {
             const label = $(el).text().toLowerCase();
@@ -128,31 +137,34 @@ class SaveTTClient {
 
             try {
                 const json = JSON.parse(raw.replace(/&quot;/g, '"'));
-                if (!json.URL) return;
+                if (!Array.isArray(json.URL)) return;
 
-                if (label.includes("mp4") && !label.includes("watermark")) {
-                    json.URL.forEach((url: string) => {
-                        if (url) nowmSet.add(url.trim());
-                    });
-                }
+                json.URL.forEach((url: string) => {
+                    if (!url) return;
 
-                if (label.includes("watermark")) {
-                    json.URL.forEach((url: string) => {
-                        if (url) wmSet.add(url.trim());
-                    });
-                }
+                    const clean = url.split("?")[0];
+                    const fileId = clean.split("/").pop();
+                    if (!fileId) return;
 
-                if (label.includes("mp3")) {
-                    json.URL.forEach((url: string) => {
-                        if (url) mp3Set.add(url.trim());
-                    });
-                }
+                    if (label.includes("mp4") && !label.includes("watermark")) {
+                        if (!nowmSet.has(fileId)) nowmSet.set(fileId, clean);
+                    }
+
+                    if (label.includes("watermark")) {
+                        if (!wmSet.has(fileId)) wmSet.set(fileId, clean);
+                    }
+
+                    if (label.includes("mp3")) {
+                        if (!mp3Set.has(fileId)) mp3Set.set(fileId, clean);
+                    }
+                });
+
             } catch {}
         });
 
-        result.downloads.nowm = Array.from(nowmSet);
-        result.downloads.wm = Array.from(wmSet);
-        result.mp3 = Array.from(mp3Set);
+        result.downloads.nowm = Array.from(nowmSet.values());
+        result.downloads.wm = Array.from(wmSet.values());
+        result.mp3 = Array.from(mp3Set.values());
 
         return result;
     }
