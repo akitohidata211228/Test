@@ -83,8 +83,12 @@ class SaveTTClient {
 
         const slides = $(".carousel-item[data-data]");
 
+        /* ================= PHOTO ================= */
+
         if (slides.length) {
             result.type = "photo";
+
+            const uniqueSlides = new Set<string>();
 
             slides.each((_, el) => {
                 try {
@@ -95,19 +99,27 @@ class SaveTTClient {
 
                     if (Array.isArray(json.URL)) {
                         json.URL.forEach((url: string) => {
-                            result.slides.push({
-                                index: result.slides.length + 1,
-                                url,
-                            });
+                            if (url) uniqueSlides.add(url.trim());
                         });
                     }
                 } catch {}
             });
 
+            result.slides = Array.from(uniqueSlides).map((url, i) => ({
+                index: i + 1,
+                url,
+            }));
+
             return result;
         }
 
+        /* ================= VIDEO ================= */
+
         result.type = "video";
+
+        const nowmSet = new Set<string>();
+        const wmSet = new Set<string>();
+        const mp3Set = new Set<string>();
 
         $("#formatselect option").each((_, el) => {
             const label = $(el).text().toLowerCase();
@@ -119,18 +131,28 @@ class SaveTTClient {
                 if (!json.URL) return;
 
                 if (label.includes("mp4") && !label.includes("watermark")) {
-                    result.downloads.nowm.push(...json.URL);
+                    json.URL.forEach((url: string) => {
+                        if (url) nowmSet.add(url.trim());
+                    });
                 }
 
                 if (label.includes("watermark")) {
-                    result.downloads.wm.push(...json.URL);
+                    json.URL.forEach((url: string) => {
+                        if (url) wmSet.add(url.trim());
+                    });
                 }
 
                 if (label.includes("mp3")) {
-                    result.mp3.push(...json.URL);
+                    json.URL.forEach((url: string) => {
+                        if (url) mp3Set.add(url.trim());
+                    });
                 }
             } catch {}
         });
+
+        result.downloads.nowm = Array.from(nowmSet);
+        result.downloads.wm = Array.from(wmSet);
+        result.mp3 = Array.from(mp3Set);
 
         return result;
     }
@@ -148,11 +170,12 @@ class SaveTTClient {
 export default async function tiktokdownloaderv2(req: Request, res: Response) {
     const url = (req.query.url || req.body.url) as string;
 
-    if (!url)
+    if (!url) {
         return res.status(400).json({
             status: false,
             message: "URL required",
         });
+    }
 
     try {
         const client = new SaveTTClient();
