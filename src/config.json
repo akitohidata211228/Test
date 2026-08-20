@@ -30,7 +30,6 @@
         ]
       }
     ],
-
     "maker": [
       {
         "name": "Brat Generator",
@@ -254,7 +253,6 @@
         "params": []
       }
     ],
-
     "info": [
       {
         "name": "Cuaca",
@@ -297,7 +295,6 @@
         ]
       }
     ],
-
     "random": [
       {
         "name": "Random cecan korea",
@@ -313,14 +310,14 @@
         "method": "GET",
         "params": []
       },
-       {
+      {
         "name": "Random cecan thailand",
         "endpoint": "/api/random/cecan_thailand",
         "filename": "thailand",
         "method": "GET",
         "params": []
       },
-       {
+      {
         "name": "Random cecan Vietnam",
         "endpoint": "/api/random/cecan_vietnam",
         "filename": "vietnam",
@@ -350,7 +347,7 @@
       }
     ],
     "tools": [
-       {
+      {
         "name": "Screenshot Web",
         "endpoint": "/api/tools/ssweb",
         "filename": "ssweb",
@@ -368,7 +365,7 @@
           }
         ]
       },
-       {
+      {
         "name": "Short URL",
         "endpoint": "/api/tools/shorturl",
         "filename": "shorturl",
@@ -388,7 +385,6 @@
       }
     ],
     "download": [
-
       {
         "name": "Facebook Downloader",
         "endpoint": "/api/download/facebook",
@@ -416,18 +412,18 @@
         ]
       },
       {
-       "name": "YouTube Downloader",
-       "endpoint": "/api/download/youtube",
-       "filename": "youtube",
-       "method": "GET",
-       "params": [
-     {
-       "name": "url",
-       "required": true,
-       "description": "YouTube URL"
-    }
-  ]
-},
+        "name": "YouTube Downloader",
+        "endpoint": "/api/download/youtube",
+        "filename": "youtube",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "YouTube URL"
+          }
+        ]
+      },
       {
         "name": "TikTok Downloader",
         "endpoint": "/api/download/tiktok",
@@ -466,6 +462,24 @@
             "description": "RedNote / Xiaohongshu URL"
           }
         ]
+      },
+      {
+        "name": "YouTube To MP3 / MP4",
+        "endpoint": "/api/download/ytmp3",
+        "filename": "ytmp3",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "YouTube URL atau video ID"
+          },
+          {
+            "name": "format",
+            "required": false,
+            "description": "mp3 (default) atau mp4"
+          }
+        ]
       }
     ],
     "search": [
@@ -482,19 +496,19 @@
           }
         ]
       },
-{
-  "name": "MovieKu Search",
-  "endpoint": "/api/search/movie",
-  "filename": "movie",
-  "method": "GET",
-  "params": [
-    {
-      "name": "q",
-      "required": true,
-      "description": "Judul film yang ingin dicari"
-    }
-  ]
-},
+      {
+        "name": "MovieKu Search",
+        "endpoint": "/api/search/movie",
+        "filename": "movie",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Judul film yang ingin dicari"
+          }
+        ]
+      },
       {
         "name": "TikTok Search",
         "endpoint": "/api/search/tiktok",
@@ -508,7 +522,6 @@
           }
         ]
       },
-
       {
         "name": "Pinterest Search",
         "endpoint": "/api/search/pinterest",

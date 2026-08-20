@@ -1,6 +1,6 @@
 # LǐRénXīn API
 
-REST API gratis berisi downloader, games, info, search, dan tools. **52 endpoint** dalam 8 kategori, dokumentasi interaktif langsung di browser.
+REST API gratis berisi downloader, games, info, search, dan tools. **53 endpoint** dalam 8 kategori, dokumentasi interaktif langsung di browser.
 
 🔗 **[lirenxin-api.my.id](https://lirenxin-api.my.id)** · [Dokumentasi](https://lirenxin-api.my.id/docs)
 
@@ -12,7 +12,7 @@ REST API gratis berisi downloader, games, info, search, dan tools. **52 endpoint
 |------------|--------|------------------------------------------------------------|
 | `games`    | 27     | Tebak-tebakan: bendera, kabupaten, JKT48, hero ML, dll     |
 | `random`   | 7      | Gambar random per negara (Indonesia, China, Japan, …)      |
-| `download` | 6      | TikTok, Instagram, Facebook, YouTube, Rednote              |
+| `download` | 7      | TikTok, Instagram, Facebook, YouTube, Rednote, YouTube→MP3/MP4 |
 | `info`     | 4      | Cuaca, gempa BMKG, hari libur nasional, jadwal TV          |
 | `search`   | 4      | Movie, CNN, Loklok, TikTok                                 |
 | `tools`    | 2      | Shorturl, screenshot web                                   |
@@ -139,10 +139,11 @@ public/
 
 Semua opsional:
 
-| Variable    | Fungsi                                      | Default |
-|-------------|---------------------------------------------|---------|
-| `PORT`      | Port server                                 | `3000`  |
-| `PROXY_URL` | Proxy untuk endpoint yang butuh (BMKG, dll) | kosong  |
+| Variable          | Fungsi                                          | Default |
+|-------------------|-------------------------------------------------|---------|
+| `PORT`            | Port server                                     | `3000`  |
+| `PROXY_URL`       | Proxy untuk endpoint yang butuh (BMKG, dll)     | kosong  |
+| `YTMP3_MAX_POLL`  | Batas polling `/api/download/ytmp3` (×1.5 detik) | `18`    |
 
 QRIS diatur lewat `STATIC_QRIS` di `src/qris.ts`. Kalau belum diisi, `/api/create-payment` balas `503` dan halaman donasi tetap aman dibuka.
 
