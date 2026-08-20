@@ -1,23 +1,26 @@
 {
-  "name": "LǐRénXīn",
-  "version": "1.0.0",
+  "name": "lirenxin-api",
+  "version": "1.1.0",
+  "description": "REST API gratis: downloader, games, info, search, dan tools.",
   "main": "dist/index.js",
+  "author": "Taufik Hidayat (Akito Hidata)",
+  "license": "MIT",
   "scripts": {
-  "clean": "rm -rf dist",
-  "prebuild": "npm run clean",
-  "build": "tsc && npm run copy-assets",
-  "copy-assets": "mkdir -p dist/src dist/router && cp -r src/*.json src/*.jpg dist/src/ 2>/dev/null || true && cp -r public dist/ 2>/dev/null || true",
-  "start": "node dist/index.js",
-  "dev": "ts-node index.ts",
-  "dev:watch": "nodemon --exec ts-node index.ts",
-  "pm2": "pm2 start index.ts --name kuroneko --interpreter node --node-args=\"-r ts-node/register\" && pm2 save"
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "mkdir -p dist/src dist/router && cp -r src/*.json src/*.jpg dist/src/ 2>/dev/null || true && cp -r public dist/ 2>/dev/null || true",
+    "start": "node dist/index.js",
+    "dev": "ts-node index.ts",
+    "dev:watch": "nodemon --exec ts-node index.ts",
+    "typecheck": "tsc --noEmit",
+    "pm2": "pm2 start index.ts --name lirenxin-api --interpreter node --node-args=\"-r ts-node/register\" && pm2 save"
   },
   "dependencies": {
     "axios": "^1.6.0",
     "axios-cookiejar-support": "^5.0.0",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
     "express": "^4.18.2",
     "file-type": "^16.5.4",
@@ -33,5 +36,8 @@
     "@types/node": "^20.10.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

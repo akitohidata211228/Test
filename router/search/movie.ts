@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 
 async function fetchHTML(url: string) {
   try {

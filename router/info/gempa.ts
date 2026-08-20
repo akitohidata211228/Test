@@ -1,6 +1,5 @@
 import axios from "axios"
-import * as cheerio from "cheerio"
-declare const proxy: () => string | null
+import { proxy } from "../../src/proxy"
 
 const urls = {
   auto: "https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json",

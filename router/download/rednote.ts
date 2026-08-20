@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node"
+import type { Request, Response } from "express"
 import axios from "axios"
 
 const BASE = "https://rednotedownloader.com"
@@ -52,8 +52,8 @@ function parseRSC(data: string) {
 }
 
 export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
+  req: Request,
+  res: Response
 ) {
   try {
     if (req.method !== "GET") {

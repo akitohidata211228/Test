@@ -2,31 +2,118 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>404 - Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 — Halaman Tidak Ditemukan | LǐRénXīn API</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#8b5cf6">
+
+    <link rel="icon" href="/src/danzz.jpg">
+    <script src="theme.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Space+Mono:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+        body {
             display: flex;
-            justify-content: center;
             align-items: center;
-            background-color: #ffffff;
-            overflow: hidden;
-            touch-action: none;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
         }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .code {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(4rem, 20vw, 6rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1;
+            letter-spacing: -.05em;
+            color: var(--brand);
+            margin: 0;
+        }
+
+        .title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--ink);
+            margin: .75rem 0 .5rem;
+        }
+
+        .desc {
+            font-size: .8rem;
+            line-height: 1.7;
+            color: var(--ink-soft);
+            margin: 0 0 1.75rem;
+        }
+
+        .path {
+            display: block;
+            margin: 0 0 1.75rem;
+            padding: .6rem .8rem;
+            font-size: .7rem;
+            word-break: break-all;
+            border: 2px dashed var(--line-soft);
+            border-radius: var(--radius-sm);
+            background: var(--brand-wash);
+            color: var(--brand);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: block;
+            padding: .8rem .5rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid var(--line);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary { background: var(--brand); color: #fff; }
+        .btn-ghost { background: var(--surface); color: var(--brand); }
     </style>
 </head>
-<body>
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
-    
-    <dotlottie-wc 
-        src="https://lottie.host/2c82a741-8bd3-48d9-bcce-bbc8670e3e3e/dSN8796UGe.lottie" 
-        style="width: 300px; height: 300px;" 
-        autoplay 
-        loop>
-    </dotlottie-wc>
+<body class="grid-bg">
+
+    <main class="panel card animate-rise">
+        <p class="code">404</p>
+        <h1 class="title">Route Not Found</h1>
+        <p class="desc">
+            Endpoint yang kamu tuju nggak ada di daftar. Mungkin salah ketik,
+            atau sudah dipindah ke path lain.
+        </p>
+
+        <code class="path" id="req-path">/</code>
+
+        <div class="actions">
+            <a href="/" class="btn btn-primary press">Beranda</a>
+            <a href="/docs" class="btn btn-ghost press">Lihat Docs</a>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('req-path').textContent =
+            location.pathname + location.search;
+    </script>
 </body>
 </html>

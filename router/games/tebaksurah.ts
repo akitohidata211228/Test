@@ -1,6 +1,5 @@
 import axios from "axios"
-
-declare const proxy: () => string | null
+import { proxy } from "../../src/proxy"
 
 async function scrape() {
   try {

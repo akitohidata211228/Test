@@ -1,21 +1,31 @@
 /*
   Danzz For You 💌
 */
-import { Application, Request, Response, NextFunction } from 'express';
+import { Application, Request, Response, NextFunction, Router } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import { logRouterRequest } from './logger';
 
 let regRouter = new Set<string>();
 let currentConfig: any = null;
-let appInstance: Application;
+let appInstance: any = null;
 
-export const initAutoLoad = (app: Application, config: any, configPath: string) => {
-    appInstance = app;
+/*
+  Route didaftarkan ke Router terpisah, bukan langsung ke app.
+  Ini penting: catch-all 404 di index.ts dipasang setelah router ini di-mount,
+  jadi route yang muncul belakangan (hasil hot reload) tetap kebaca,
+  bukan ketelan 404.
+*/
+export const createApiRouter = (): Router => Router();
+
+export const getRouteCount = (): number => regRouter.size;
+
+export const initAutoLoad = (app: Application, config: any, configPath: string, router?: any) => {
+    appInstance = router || app;
     currentConfig = config;
-    
+
     console.log('[✓] Auto Load Activated');
-    
+
     if (fs.existsSync(configPath)) {
         fs.watch(configPath, (eventType, filename) => {
             if (filename && eventType === 'change') {
@@ -38,13 +48,13 @@ export const initAutoLoad = (app: Application, config: any, configPath: string) 
         fs.watch(routerDir, { recursive: true }, (eventType, filename) => {
             if (filename && (filename.endsWith('.ts') || filename.endsWith('.js'))) {
                 console.log(`[✓] Route file changed: ${filename}`);
-                
+
                 const fullPath = path.join(routerDir, filename);
-                
+
                 if (require.cache[fullPath]) {
                     delete require.cache[fullPath];
                 }
-                
+
                 console.log(`Route cache cleared for: ${filename}`);
                 reloadSingleRoute(filename);
             }
@@ -57,18 +67,21 @@ export const initAutoLoad = (app: Application, config: any, configPath: string) 
 const reloadSingleRoute = (filename: string) => {
     const normalized = filename.split(path.sep).join('/');
     const parts = normalized.split('/');
-    
-    const category = parts.length > 1 ? parts[parts.length - 2] : null; 
+
+    const category = parts.length > 1 ? parts[parts.length - 2] : null;
     const fileNameWithExt = parts[parts.length - 1];
     const routeName = fileNameWithExt.replace(/\.(ts|js)$/, '');
 
     if (category && currentConfig?.tags?.[category]) {
-        const route = currentConfig.tags[category].find((r: any) => r.filename === routeName);
-        if (route) {
-            const routeKey = `${route.method}:${route.endpoint}`;
-            regRouter.delete(routeKey);
+        /*
+          Satu file bisa dipakai beberapa entry config (endpoint beda,
+          filename sama), jadi semuanya perlu diregister ulang.
+        */
+        const routes = currentConfig.tags[category].filter((r: any) => r.filename === routeName);
+        routes.forEach((route: any) => {
+            regRouter.delete(`${route.method}:${route.endpoint}`);
             registerRoute(route, category);
-        }
+        });
     }
 };
 
@@ -78,7 +91,7 @@ const reloadRouter = () => {
     loadRouter(appInstance, currentConfig);
 };
 
-export const loadRouter = (app: Application, config: any) => {
+export const loadRouter = (app: any, config: any) => {
     const tags = config.tags;
     const creatorName = config.settings.creator;
 
@@ -95,14 +108,97 @@ export const loadRouter = (app: Application, config: any) => {
     });
 };
 
-const registerRoute = (route: any, category: string, creatorName?: string, app?: Application) => {
+/*
+  Buang layer lama dengan path + method yang sama.
+  Express nggak punya API unregister, jadi stack-nya disunting langsung.
+  Tanpa ini, hot reload cuma numpuk handler dan yang lama tetap menang.
+*/
+const dropExistingLayer = (target: any, route: any) => {
+    const stack: any[] = target?.stack || target?._router?.stack;
+    if (!Array.isArray(stack)) return;
+
+    const method = route.method.toLowerCase();
+    for (let i = stack.length - 1; i >= 0; i--) {
+        const layer = stack[i];
+        if (layer?.route?.path === route.endpoint && layer.route.methods?.[method]) {
+            stack.splice(i, 1);
+        }
+    }
+};
+
+/*
+  Dua format handler hidup bareng di folder router/:
+
+  A. Express biasa  -> export default (req, res) => {}
+  B. Descriptor     -> export default [{ metode, endpoint, run({ req }) }]
+
+  Format B datang dari struktur project lain: dia balikin object hasil,
+  bukan nulis ke res. Adapter ini yang nerjemahin ke Express, biar
+  29 file router format B nggak perlu ditulis ulang satu-satu.
+*/
+const fromDescriptor = (descriptors: any[], route: any) => {
+    const wanted = String(route.method || 'GET').toUpperCase();
+    const picked =
+        descriptors.find((d: any) => String(d?.metode || d?.method || 'GET').toUpperCase() === wanted) ||
+        descriptors[0];
+
+    if (!picked || typeof picked.run !== 'function') return null;
+
+    return async (req: Request, res: Response) => {
+        if (picked.isMaintenance) {
+            return res.status(503).json({
+                status: false,
+                message: `Endpoint ${route.endpoint} sedang maintenance`
+            });
+        }
+
+        if (picked.isPublic === false) {
+            return res.status(403).json({
+                status: false,
+                message: `Endpoint ${route.endpoint} tidak terbuka untuk publik`
+            });
+        }
+
+        const result = await picked.run({ req, res });
+
+        // Sebagian handler nulis sendiri ke res (stream/buffer), jangan ditimpa.
+        if (res.headersSent) return;
+
+        if (result === undefined || result === null) {
+            return res.status(500).json({
+                status: false,
+                message: 'Handler tidak mengembalikan hasil apa pun'
+            });
+        }
+
+        if (Buffer.isBuffer(result)) return res.end(result);
+        if (typeof result !== 'object') return res.send(result);
+
+        // `code` dipakai sebagai HTTP status, jadi nggak perlu ikut di body.
+        const { code, ...body } = result as any;
+        const httpStatus = typeof code === 'number' ? code : body.status === false ? 500 : 200;
+        return res.status(httpStatus).json(body);
+    };
+};
+
+const resolveHandler = (mod: any, route: any) => {
+    const exported = mod?.default || mod;
+
+    if (typeof exported === 'function') return exported;
+    if (Array.isArray(exported)) return fromDescriptor(exported, route);
+    if (exported && typeof exported.run === 'function') return fromDescriptor([exported], route);
+
+    return null;
+};
+
+const registerRoute = (route: any, category: string, creatorName?: string, app?: any) => {
     const targetApp = app || appInstance;
     const targetCreator = creatorName || currentConfig?.settings?.creator;
-    
+
     if (!targetApp || !targetCreator) return;
-    
+
     const routeKey = `${route.method}:${route.endpoint}`;
-    
+
     if (regRouter.has(routeKey)) {
         return;
     }
@@ -126,7 +222,7 @@ const registerRoute = (route: any, category: string, creatorName?: string, app?:
             }
         }
     }
-    
+
     if (modulePath) {
         try {
             try {
@@ -134,7 +230,7 @@ const registerRoute = (route: any, category: string, creatorName?: string, app?:
             } catch (e) {}
 
             const handlerModule = require(modulePath);
-            const handler = handlerModule.default || handlerModule;
+            const handler = resolveHandler(handlerModule, route);
 
             if (typeof handler === 'function') {
                 const wrappedHandler = async (req: Request, res: Response, next: NextFunction) => {
@@ -156,17 +252,25 @@ const registerRoute = (route: any, category: string, creatorName?: string, app?:
                         await handler(req, res, next);
                     } catch (err) {
                         console.error(`Error in route ${route.endpoint}:`, err);
-                        res.status(500).json({ error: 'Internal Server Error', message: err instanceof Error ? err.message : String(err) });
+                        if (!res.headersSent) {
+                            res.status(500).json({ status: false, error: 'Internal Server Error', message: err instanceof Error ? err.message : String(err) });
+                        }
                     }
                 };
 
+                dropExistingLayer(targetApp, route);
+
                 if (route.method === 'GET') targetApp.get(route.endpoint, wrappedHandler);
                 else if (route.method === 'POST') targetApp.post(route.endpoint, wrappedHandler);
-                
+                else {
+                    console.error(`[ㄨ] Method ${route.method} belum didukung untuk ${route.endpoint}`);
+                    return;
+                }
+
                 regRouter.add(routeKey);
                 console.log(`[✓] LOADED: ${route.method} ${route.endpoint} -> ${path.basename(modulePath)}`);
             } else {
-                console.error(`[ㄨ] Invalid handler type in ${modulePath}. Expected function, got ${typeof handler}`);
+                console.error(`[ㄨ] Invalid handler in ${modulePath}. Butuh function, array descriptor, atau object ber-run().`);
             }
         } catch (error) {
             console.error(`[ㄨ] Failed to load route ${route.endpoint} from ${modulePath}:`, error);

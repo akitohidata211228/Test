@@ -6,10 +6,11 @@ import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
 import { generateQrisDynamic, isStaticQrisConfigured } from './src/qris';
-import { loadRouter, initAutoLoad } from './src/autoload';
+import { loadRouter, initAutoLoad, createApiRouter, getRouteCount } from './src/autoload';
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
+const BOOT_TIME = Date.now();
 
 const configNya = [
     path.join(__dirname, 'src', 'config.json'),
@@ -31,29 +32,24 @@ if (!configPath) {
 }
 
 let config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-const visitor_db = path.join('/tmp', 'visitors.json');
 
-const visit = (): number => {
-    try {
-        if (fs.existsSync(visitor_db)) {
-            const data = fs.readFileSync(visitor_db, 'utf-8');
-            return JSON.parse(data).count;
-        }
-        return parseInt(config.settings.visitors || "0");
-    } catch (error) { 
-        console.error('[✗] Error reading visitor count:', error);
-        return 0; 
-    }
-};
+/*
+  Statistik yang beneran bisa dihitung dari config + proses.
+  Counter visitor lama nulis ke /tmp: di Vercel itu ke-reset tiap cold start
+  dan tiap instance punya angka sendiri, jadi angkanya nggak pernah benar.
+*/
+const buildStats = () => {
+    const tags = config.tags || {};
+    const categories = Object.keys(tags);
+    const endpoints = categories.reduce((n, c) => n + (tags[c]?.length || 0), 0);
 
-const incrementVisitor = (): void => {
-    try {
-        let count = visit();
-        count++;
-        fs.writeFileSync(visitor_db, JSON.stringify({ count }));
-    } catch (error) {
-        console.error('[✗] Error incrementing visitor:', error);
-    }
+    return {
+        endpoints,
+        categories: categories.length,
+        routesLoaded: getRouteCount(),
+        uptimeSeconds: Math.floor((Date.now() - BOOT_TIME) / 1000),
+        serverTime: new Date().toISOString()
+    };
 };
 
 app.use(cors());
@@ -64,16 +60,16 @@ app.use('/src', express.static(path.join(process.cwd(), 'src')));
 
 app.post('/api/create-payment', async (req: Request, res: Response) => {
     const { amount, name } = req.body;
-    
+
     if (!isStaticQrisConfigured()) {
-        return res.status(503).json({ 
-            status: 'error', 
+        return res.status(503).json({
+            status: 'error',
             message: 'QRIS payment is temporarily unavailable',
             creator: config.settings.creator,
             note: 'Please configure STATIC_QRIS in src/qris.ts'
         });
     }
-    
+
     if (!amount || isNaN(parseInt(amount)) || parseInt(amount) < 1000) {
         res.status(400).json({ status: 'error', message: 'Minimum Rp 1.000' });
         return;
@@ -82,16 +78,16 @@ app.post('/api/create-payment', async (req: Request, res: Response) => {
     try {
         const nominal = parseInt(amount);
         const qrString = generateQrisDynamic(nominal);
-        
+
         if (!qrString || qrString === "") {
-            return res.status(500).json({ 
-                status: 'error', 
+            return res.status(500).json({
+                status: 'error',
                 message: 'Failed to generate QRIS',
-                creator: config.settings.creator 
+                creator: config.settings.creator
             });
         }
-        
-        const orderId = `Q-${Date.now()}-${Math.floor(Math.random() * 1000)}`; 
+
+        const orderId = `Q-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
         await new Promise(r => setTimeout(r, 500));
 
@@ -108,19 +104,30 @@ app.post('/api/create-payment', async (req: Request, res: Response) => {
     }
 });
 
-loadRouter(app, config);
+/*
+  Semua route API masuk ke Router sendiri yang di-mount sekarang.
+  Route yang ditambahkan belakangan (hot reload config) tetap kepakai,
+  karena catch-all 404 di bawah ada di luar router ini.
+*/
+const apiRouter = createApiRouter();
+loadRouter(apiRouter, config);
+initAutoLoad(app, config, configPath, apiRouter);
+app.use(apiRouter);
 
 app.get('/config', (req: Request, res: Response) => {
     try {
         const currentConfig = JSON.parse(JSON.stringify(config));
-        currentConfig.settings.visitors = visit().toString();
+        currentConfig.stats = buildStats();
         currentConfig.qris_configured = isStaticQrisConfigured();
         res.json({ creator: config.settings.creator, ...currentConfig });
     } catch (error) { res.status(500).json({ creator: config.settings.creator, error: "Internal Server Error" }); }
 });
 
+app.get('/health', (req: Request, res: Response) => {
+    res.json({ status: true, ...buildStats() });
+});
+
 app.get('/', (req: Request, res: Response) => {
-    incrementVisitor();
     res.sendFile(path.join(process.cwd(), 'public', 'landing.html'));
 });
 
@@ -135,10 +142,9 @@ app.use((req: Request, res: Response) => {
     res.status(404).json({ status: false, creator: config.settings.creator, message: "Route not found" });
 });
 
-initAutoLoad(app, config, configPath);
-
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Routes loaded: ${getRouteCount()}`);
     console.log(`QRIS Configured: ${isStaticQrisConfigured() ? 'Yes' : 'No'}`);
 });
 export default app;

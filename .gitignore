@@ -1,0 +1,27 @@
+node_modules/
+dist/
+
+# Log
+*.log
+npm-debug.log*
+
+# Env / rahasia
+.env
+.env.*
+!.env.example
+
+# Cache tooling
+.vercel
+.cache/
+*.tsbuildinfo
+
+# Sampah editor & OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Backup — jangan sampai kebawa commit lagi
+*.bak
+*.old
+*backup*

@@ -1,10 +1,9 @@
 {
   "settings": {
     "creator": "Lǐ Rén Xīn",
-    "apiName": "赵露思",
-    "description": "Hello everyone, I am a fan of Zhao Lusi. This time I want to help my friends by providing a free API. I hope my friends are satisfied with this API service.  ",
-    "apiVersion": "v1.0",
-    "visitors": "0",
+    "apiName": "LǐRénXīn API",
+    "description": "Hello everyone, I am a fan of Zhao Lusi. This time I want to help my friends by providing a free API. I hope my friends are satisfied with this API service.",
+    "apiVersion": "v1.1",
     "favicon": "/src/danzz.jpg",
     "thumbnail": "/src/thumbnail.jpg",
     "channelUrl": "https://wa.me/qr/EWV5AXNSMN2RK1",
@@ -61,6 +60,241 @@
         "filename": "tebakbendera",
         "method": "GET",
         "params": []
+      },
+      {
+        "name": "Asah Otak",
+        "endpoint": "/api/games/asahotak",
+        "filename": "asahotak",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Cak Lontong",
+        "endpoint": "/api/games/caklontong",
+        "filename": "caklontong",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Cerdas Cermat SD",
+        "endpoint": "/api/games/cc-sd",
+        "filename": "cc-sd",
+        "method": "GET",
+        "params": [
+          {
+            "name": "matapelajaran",
+            "required": true,
+            "description": "bindo | tik | pkn | bing | penjas | pai | matematika | jawa | ips | ipa"
+          },
+          {
+            "name": "jumlahsoal",
+            "required": false,
+            "description": "Jumlah soal, 5 sampai 10 (default 5)"
+          }
+        ]
+      },
+      {
+        "name": "Family 100",
+        "endpoint": "/api/games/family100",
+        "filename": "family100",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Lengkapi Kalimat",
+        "endpoint": "/api/games/lengkapikalimat",
+        "filename": "lengkapikalimat",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Math Quiz",
+        "endpoint": "/api/games/maths",
+        "filename": "math",
+        "method": "GET",
+        "params": [
+          {
+            "name": "level",
+            "required": false,
+            "description": "noob | easy | medium | hard | extreme | impossible (acak kalau kosong)"
+          }
+        ]
+      },
+      {
+        "name": "Susun Kata",
+        "endpoint": "/api/games/susunkata",
+        "filename": "susunkata",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Tebakan",
+        "endpoint": "/api/games/tebaktebakan",
+        "filename": "tebakan",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Game",
+        "endpoint": "/api/games/tebakgame",
+        "filename": "tebakgame",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Hero ML",
+        "endpoint": "/api/games/tebakheroml",
+        "filename": "tebakheroml",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Hewan",
+        "endpoint": "/api/games/tebakhewan",
+        "filename": "tebakhewan",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak JKT48",
+        "endpoint": "/api/games/tebakjkt",
+        "filename": "tebakjkt48",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Kabupaten",
+        "endpoint": "/api/games/kabupaten",
+        "filename": "tebakkabupaten",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Kalimat",
+        "endpoint": "/api/games/tebakkalimat",
+        "filename": "tebakkalimat",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Karakter Free Fire",
+        "endpoint": "/api/games/karakter-freefire",
+        "filename": "tebakkarakterff",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Kartun",
+        "endpoint": "/api/games/tebakkartun",
+        "filename": "tebakkartun",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Kata",
+        "endpoint": "/api/games/tebakkata",
+        "filename": "tebakkata",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Kimia",
+        "endpoint": "/api/games/tebakkimia",
+        "filename": "tebakkimia",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Lagu",
+        "endpoint": "/api/games/tebaklagu",
+        "filename": "tebaklagu",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Lirik",
+        "endpoint": "/api/games/tebaklirik",
+        "filename": "tebaklirik",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Logo",
+        "endpoint": "/api/games/tebaklogo",
+        "filename": "tebaklogo",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Siapakah Aku",
+        "endpoint": "/api/games/siapakahaku",
+        "filename": "tebaksiapa",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Surah",
+        "endpoint": "/api/games/surah",
+        "filename": "tebaksurah",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tebak Warna",
+        "endpoint": "/api/games/tebakwarna",
+        "filename": "tebakwarna",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Teka Teki",
+        "endpoint": "/api/games/tekateki",
+        "filename": "tekateki",
+        "method": "GET",
+        "params": []
+      }
+    ],
+
+    "info": [
+      {
+        "name": "Cuaca",
+        "endpoint": "/api/info/cuaca",
+        "filename": "cuaca",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Nama lokasi, contoh: jakarta"
+          }
+        ]
+      },
+      {
+        "name": "Gempa BMKG",
+        "endpoint": "/api/info/bmkg",
+        "filename": "gempa",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Hari Libur Indonesia",
+        "endpoint": "/api/info/event-Indonesia",
+        "filename": "hari-libur",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Jadwal TV",
+        "endpoint": "/api/info/jadwaltv",
+        "filename": "jadwaltv",
+        "method": "GET",
+        "params": [
+          {
+            "name": "channel",
+            "required": false,
+            "description": "Nama channel, contoh: sctv (kosong = semua channel nasional)"
+          }
+        ]
       }
     ],
 
@@ -144,12 +378,17 @@
             "name": "url",
             "required": true,
             "description": "Original URL"
+          },
+          {
+            "name": "alias",
+            "required": false,
+            "description": "Custom alias"
           }
         ]
       }
     ],
     "download": [
-      
+
       {
         "name": "Facebook Downloader",
         "endpoint": "/api/download/facebook",
@@ -203,7 +442,7 @@
         ]
       },
       {
-        "name": "TikTok Downloade V2",
+        "name": "TikTok Downloader V2",
         "endpoint": "/api/download/tiktokv2",
         "filename": "tiktokv2",
         "method": "GET",
@@ -212,6 +451,19 @@
             "name": "url",
             "required": true,
             "description": "TikTok URL"
+          }
+        ]
+      },
+      {
+        "name": "RedNote Downloader",
+        "endpoint": "/api/download/rednote",
+        "filename": "rednote",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "RedNote / Xiaohongshu URL"
           }
         ]
       }
@@ -256,7 +508,7 @@
           }
         ]
       },
-  
+
       {
         "name": "Pinterest Search",
         "endpoint": "/api/search/pinterest",
