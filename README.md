@@ -1,6 +1,6 @@
 # LǐRénXīn API
 
-REST API gratis berisi downloader, games, info, search, dan tools. **53 endpoint** dalam 8 kategori, dokumentasi interaktif langsung di browser.
+REST API gratis berisi downloader, games, info, search, dan tools. **54 endpoint** dalam 8 kategori, dokumentasi interaktif langsung di browser.
 
 🔗 **[lirenxin-api.my.id](https://lirenxin-api.my.id)** · [Dokumentasi](https://lirenxin-api.my.id/docs)
 
@@ -12,7 +12,7 @@ REST API gratis berisi downloader, games, info, search, dan tools. **53 endpoint
 |------------|--------|------------------------------------------------------------|
 | `games`    | 27     | Tebak-tebakan: bendera, kabupaten, JKT48, hero ML, dll     |
 | `random`   | 7      | Gambar random per negara (Indonesia, China, Japan, …)      |
-| `download` | 7      | TikTok, Instagram, Facebook, YouTube, Rednote, YouTube→MP3/MP4 |
+| `download` | 8      | AIO (semua platform), TikTok, Instagram, Facebook, YouTube, Rednote, YouTube→MP3/MP4 |
 | `info`     | 4      | Cuaca, gempa BMKG, hari libur nasional, jadwal TV          |
 | `search`   | 4      | Movie, CNN, Loklok, TikTok                                 |
 | `tools`    | 2      | Shorturl, screenshot web                                   |
@@ -41,6 +41,42 @@ npm start            # jalankan hasil build
 npm run dev:watch    # nodemon, restart otomatis
 npm run pm2          # deploy pakai pm2 (VPS)
 ```
+
+---
+
+## AIO Downloader
+
+`GET /api/download/aio?url=<link>` — satu endpoint, deteksi platform otomatis.
+
+| Platform            | Engine                                     | Hasil                                |
+|---------------------|--------------------------------------------|--------------------------------------|
+| TikTok, Douyin      | `snaptik.fi` (video, slideshow foto, story)| no watermark, watermark, mp3, photos |
+| Instagram           | delegasi ke `router/download/instagram.ts` | media utama                          |
+| Facebook            | delegasi ke `router/download/facebook.ts`  | hd, sd                               |
+| YouTube             | delegasi ke `router/download/youtube.ts`   | mp4 720p                             |
+| YouTube (`format=mp3`) | delegasi ke `router/download/ytmp3.ts`  | mp3                                  |
+| RedNote             | delegasi ke `router/download/rednote.ts`   | daftar media                         |
+
+Semua hasil dinormalisasi ke bentuk yang sama:
+
+```json
+{
+  "status": true,
+  "platform": "douyin",
+  "type": "video",
+  "title": "...",
+  "author": "...",
+  "duration": 13,
+  "cover": "https://...",
+  "medias": [
+    { "type": "video", "label": "no watermark", "url": "https://..." },
+    { "type": "audio", "label": "mp3", "url": "https://..." }
+  ],
+  "engine": "snaptik.fi (web)"
+}
+```
+
+Link di luar daftar dibalas `400` beserta field `supported`. Platform yang didelegasikan mewarisi error dari handler aslinya apa adanya.
 
 ---
 

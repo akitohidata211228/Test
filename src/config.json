@@ -386,6 +386,24 @@
     ],
     "download": [
       {
+        "name": "AIO Downloader",
+        "endpoint": "/api/download/aio",
+        "filename": "aio",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link TikTok, Douyin (video/foto/story), Instagram, Facebook, YouTube, atau RedNote"
+          },
+          {
+            "name": "format",
+            "required": false,
+            "description": "Khusus YouTube: mp3 (lewat converter) atau kosong = mp4"
+          }
+        ]
+      },
+      {
         "name": "Facebook Downloader",
         "endpoint": "/api/download/facebook",
         "filename": "facebook",
