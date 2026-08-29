@@ -172,6 +172,18 @@ const fromDescriptor = (descriptors: any[], route: any) => {
         }
 
         if (Buffer.isBuffer(result)) return res.end(result);
+
+        /*
+          Handler hasil port dari project lain (Bun/Elysia) balikin Response
+          Web API buat kirim gambar/audio. Kalau nggak dibongkar di sini,
+          JSON.stringify(Response) cuma jadi "{}" dan filenya hilang.
+        */
+        if (typeof Response !== 'undefined' && result instanceof Response) {
+            const buffer = Buffer.from(await result.arrayBuffer());
+            result.headers.forEach((value: string, key: string) => res.setHeader(key, value));
+            return res.status(result.status || 200).end(buffer);
+        }
+
         if (typeof result !== 'object') return res.send(result);
 
         // `code` dipakai sebagai HTTP status, jadi nggak perlu ikut di body.

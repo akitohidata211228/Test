@@ -28,6 +28,887 @@
             "description": "Session ID"
           }
         ]
+      },
+      {
+        "name": "Aimage Flux 1 Schnell",
+        "endpoint": "/api/ai/flux",
+        "filename": "aimage-flux-1-schnell",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt for the image generation"
+          }
+        ]
+      },
+      {
+        "name": "Aimage Magicstudio",
+        "endpoint": "/api/ai/magicstudio",
+        "filename": "aimage-magicstudio",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The text prompt for generating the AI art"
+          }
+        ]
+      },
+      {
+        "name": "Aimage Stabilityai",
+        "endpoint": "/api/ai/stabilityai",
+        "filename": "aimage-stabilityai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt for generating the image"
+          }
+        ]
+      },
+      {
+        "name": "Aimage Stable Diffusion XL Lightning",
+        "endpoint": "/api/ai/stable-diffusion",
+        "filename": "aimage-stable-diffusion-xl-lightning",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt to generate the image with stable diffusion"
+          }
+        ]
+      },
+      {
+        "name": "Bard",
+        "endpoint": "/api/ai/bard",
+        "filename": "bard",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to Google Bard"
+          }
+        ]
+      },
+      {
+        "name": "Bard 2",
+        "endpoint": "/api/ai/bard",
+        "filename": "bard",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to Google Bard"
+          }
+        ]
+      },
+      {
+        "name": "Bible AI",
+        "endpoint": "/api/ai/bibleai",
+        "filename": "bibleai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "question",
+            "required": true,
+            "description": "Question or topic to search in the Bible"
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "description": "Bible translation abbreviation"
+          }
+        ]
+      },
+      {
+        "name": "Bibleai",
+        "endpoint": "/api/ai/bibleai",
+        "filename": "bibleai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "question",
+            "required": true,
+            "description": "Question or topic to search in the Bible"
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "description": "Bible translation abbreviation (optional)"
+          }
+        ]
+      },
+      {
+        "name": "Blackboxai",
+        "endpoint": "/api/ai/blackboxai",
+        "filename": "blackboxai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with BlackboxAI"
+          }
+        ]
+      },
+      {
+        "name": "Blackboxai 2",
+        "endpoint": "/api/ai/blackboxai",
+        "filename": "blackboxai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with BlackboxAI"
+          }
+        ]
+      },
+      {
+        "name": "Cici",
+        "endpoint": "/api/ai/cici",
+        "filename": "ciciai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content or question for CICI AI to process"
+          }
+        ]
+      },
+      {
+        "name": "Ciciai",
+        "endpoint": "/api/ai/cici",
+        "filename": "ciciai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content or question for CICI AI to process"
+          }
+        ]
+      },
+      {
+        "name": "Dbrx Instruct",
+        "endpoint": "/api/ai/dbrx-instruct",
+        "filename": "dbrx-instruct",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with DBRX Instruct"
+          }
+        ]
+      },
+      {
+        "name": "DBRX Instruct",
+        "endpoint": "/api/ai/dbrx-instruct",
+        "filename": "dbrx-instruct",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with DBRX Instruct"
+          }
+        ]
+      },
+      {
+        "name": "Deepseek LLM 67B Chat",
+        "endpoint": "/api/ai/deepseek-llm-67b-chat",
+        "filename": "deepseek-llm-67b-chat",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with DeepSeek LLM 67B Chat"
+          }
+        ]
+      },
+      {
+        "name": "Deepseek LLM 67B Chat 2",
+        "endpoint": "/api/ai/deepseek-llm-67b-chat",
+        "filename": "deepseek-llm-67b-chat",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with DeepSeek LLM 67B Chat"
+          }
+        ]
+      },
+      {
+        "name": "Felo",
+        "endpoint": "/api/ai/felo",
+        "filename": "felo",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to process with Felo"
+          }
+        ]
+      },
+      {
+        "name": "Felo 2",
+        "endpoint": "/api/ai/felo",
+        "filename": "felo",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to process with Felo"
+          }
+        ]
+      },
+      {
+        "name": "Flux",
+        "endpoint": "/api/ai/flux",
+        "filename": "aimage-flux-1-schnell",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "Text prompt for image generation"
+          }
+        ]
+      },
+      {
+        "name": "G4F GPT OSS",
+        "endpoint": "/api/ai/gpt-oss",
+        "filename": "g4f-gpt-oss",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "G4F Gpt40",
+        "endpoint": "/api/ai/gpt-4o",
+        "filename": "g4f-gpt40",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Gandalf",
+        "endpoint": "/api/ai/gandalf",
+        "filename": "gandalf",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt to send to Gandalf Lakera"
+          }
+        ]
+      },
+      {
+        "name": "Gandalf Lakera",
+        "endpoint": "/api/ai/gandalf",
+        "filename": "gandalf",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt to send to Gandalf Lakera"
+          }
+        ]
+      },
+      {
+        "name": "Gemini [ BETA ]",
+        "endpoint": "/api/ai/gemini",
+        "filename": "gemini",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text content to process with Gemini"
+          },
+          {
+            "name": "cookie",
+            "required": true,
+            "description": "Authentication cookie for Gemini API"
+          },
+          {
+            "name": "promptSystem",
+            "required": false,
+            "description": "Optional system prompt for the AI to guide its behavior"
+          },
+          {
+            "name": "imageUrl",
+            "required": false,
+            "description": "Optional URL of an image to process with the text prompt"
+          }
+        ]
+      },
+      {
+        "name": "Gemini Lite",
+        "endpoint": "/api/ai/gemini-lite",
+        "filename": "gemini-lite",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "User prompt for the AI"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Gemini model to use"
+          },
+          {
+            "name": "imgUrl",
+            "required": false,
+            "description": "URL of an image to analyze"
+          }
+        ]
+      },
+      {
+        "name": "Gemini Lite 2",
+        "endpoint": "/api/ai/gemini-lite",
+        "filename": "gemini-lite",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "User prompt for the AI"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Gemini model to use"
+          },
+          {
+            "name": "imgUrl",
+            "required": false,
+            "description": "URL of an image to analyze"
+          }
+        ]
+      },
+      {
+        "name": "Gita",
+        "endpoint": "/api/ai/gita",
+        "filename": "gita",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The query for Gita AI"
+          }
+        ]
+      },
+      {
+        "name": "Gita 2",
+        "endpoint": "/api/ai/gita",
+        "filename": "gita",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The query to ask gita"
+          }
+        ]
+      },
+      {
+        "name": "GPT 4O",
+        "endpoint": "/api/ai/gpt-4o",
+        "filename": "g4f-gpt40",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The system prompt for the GPT-4o model"
+          },
+          {
+            "name": "content",
+            "required": true,
+            "description": "The user message for the GPT-4o model"
+          }
+        ]
+      },
+      {
+        "name": "GPT OSS",
+        "endpoint": "/api/ai/gpt-oss",
+        "filename": "g4f-gpt-oss",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The system prompt for the GPT-OSS-120B model"
+          },
+          {
+            "name": "content",
+            "required": true,
+            "description": "The user message for the GPT-OSS-120B model"
+          }
+        ]
+      },
+      {
+        "name": "Gpt3",
+        "endpoint": "/api/ai/gpt3",
+        "filename": "gpt3",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The system prompt for the GPT-3 model"
+          },
+          {
+            "name": "content",
+            "required": true,
+            "description": "The user message for the GPT-3 model"
+          }
+        ]
+      },
+      {
+        "name": "Gpt3 2",
+        "endpoint": "/api/ai/gpt3",
+        "filename": "gpt3",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Hikachat",
+        "endpoint": "/api/ai/hikachat",
+        "filename": "hix",
+        "method": "GET",
+        "params": [
+          {
+            "name": "keyword",
+            "required": true,
+            "description": "The keyword to search for (minimum 2 characters)"
+          },
+          {
+            "name": "language",
+            "required": false,
+            "description": "The language code for the response (e.g., 'en', 'id')"
+          }
+        ]
+      },
+      {
+        "name": "HIX",
+        "endpoint": "/api/ai/hikachat",
+        "filename": "hix",
+        "method": "POST",
+        "params": [
+          {
+            "name": "keyword",
+            "required": true,
+            "description": "The keyword to search for (minimum 2 characters)"
+          },
+          {
+            "name": "language",
+            "required": false,
+            "description": "The language code for the response (e.g., 'en', 'id')"
+          }
+        ]
+      },
+      {
+        "name": "Kimi",
+        "endpoint": "/api/ai/kimi",
+        "filename": "kimi",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Kimi 2",
+        "endpoint": "/api/ai/kimi",
+        "filename": "kimi",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Latukam",
+        "endpoint": "/api/ai/latukam",
+        "filename": "latukam",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI"
+          }
+        ]
+      },
+      {
+        "name": "Latukam 2",
+        "endpoint": "/api/ai/latukam",
+        "filename": "latukam",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI"
+          }
+        ]
+      },
+      {
+        "name": "Llama3 3",
+        "endpoint": "/api/ai/llama33",
+        "filename": "Llama3-3",
+        "method": "POST",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "Prompt for Llama 3.3"
+          },
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text input for Llama 3.3"
+          }
+        ]
+      },
+      {
+        "name": "Llama3.3",
+        "endpoint": "/api/ai/llama33",
+        "filename": "Llama3-3",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "Prompt for Llama 3.3"
+          },
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text input for Llama 3.3"
+          }
+        ]
+      },
+      {
+        "name": "Luminai",
+        "endpoint": "/api/ai/luminai",
+        "filename": "luminai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Luminai 2",
+        "endpoint": "/api/ai/luminai",
+        "filename": "luminai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Magicstudio",
+        "endpoint": "/api/ai/magicstudio",
+        "filename": "aimage-magicstudio",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The text prompt for generating the AI art"
+          }
+        ]
+      },
+      {
+        "name": "Meta AI",
+        "endpoint": "/api/ai/metaai",
+        "filename": "metaai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to Meta AI"
+          }
+        ]
+      },
+      {
+        "name": "Meta Llama 3.3 70B Instruct Turbo",
+        "endpoint": "/api/ai/meta-llama-33-70B-instruct-turbo",
+        "filename": "Meta-Llama-3.3-70B-Instruct-Turbo",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Meta Llama 3.3 70B Instruct Turbo 2",
+        "endpoint": "/api/ai/meta-llama-33-70B-instruct-turbo",
+        "filename": "Meta-Llama-3.3-70B-Instruct-Turbo",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Metaai",
+        "endpoint": "/api/ai/metaai",
+        "filename": "metaai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to Meta AI"
+          }
+        ]
+      },
+      {
+        "name": "Mistral 7B Instruct V0.2",
+        "endpoint": "/api/ai/mistral-7b-instruct-v0.2",
+        "filename": "mistral-7B-Instruct-v02",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Mistral 7B Instruct V02",
+        "endpoint": "/api/ai/mistral-7b-instruct-v0.2",
+        "filename": "mistral-7B-Instruct-v02",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Muslimai",
+        "endpoint": "/api/ai/muslimai",
+        "filename": "muslimai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to ask muslimai"
+          }
+        ]
+      },
+      {
+        "name": "Muslimai 2",
+        "endpoint": "/api/ai/muslimai",
+        "filename": "muslimai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to ask muslimai"
+          }
+        ]
+      },
+      {
+        "name": "Nous Hermes",
+        "endpoint": "/api/ai/nous-hermes",
+        "filename": "Nous-Hermes-2-Mixtral-8x7B-DPO",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Nous Hermes 2 Mixtral 8x7B DPO",
+        "endpoint": "/api/ai/nous-hermes",
+        "filename": "Nous-Hermes-2-Mixtral-8x7B-DPO",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Powerbrainai",
+        "endpoint": "/api/ai/powerbrainai",
+        "filename": "powerbrainai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to PowerBrain AI"
+          }
+        ]
+      },
+      {
+        "name": "Powerbrainai 2",
+        "endpoint": "/api/ai/powerbrainai",
+        "filename": "powerbrainai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The query to send to PowerBrain AI"
+          }
+        ]
+      },
+      {
+        "name": "Qwen QwQ 32B Preview",
+        "endpoint": "/api/ai/qwq-32b-preview",
+        "filename": "qwq-32B-Preview",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "QWQ 32B Preview",
+        "endpoint": "/api/ai/qwq-32b-preview",
+        "filename": "qwq-32B-Preview",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Sahabat AI",
+        "endpoint": "/api/ai/sahabat-ai",
+        "filename": "sahabatai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Sahabatai",
+        "endpoint": "/api/ai/sahabat-ai",
+        "filename": "sahabatai",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI processing"
+          }
+        ]
+      },
+      {
+        "name": "Stabilityai",
+        "endpoint": "/api/ai/stabilityai",
+        "filename": "aimage-stabilityai",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt for generating the image"
+          }
+        ]
+      },
+      {
+        "name": "Stable Diffusion",
+        "endpoint": "/api/ai/stable-diffusion",
+        "filename": "aimage-stable-diffusion-xl-lightning",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": true,
+            "description": "The prompt to generate the image with stable diffusion"
+          }
+        ]
+      },
+      {
+        "name": "Teach Anything",
+        "endpoint": "/api/ai/teachanything",
+        "filename": "teach-anything",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content for AI explanation"
+          }
+        ]
+      },
+      {
+        "name": "Teach Anything 2",
+        "endpoint": "/api/ai/teachanything",
+        "filename": "teach-anything",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The text content to process with teach anything"
+          }
+        ]
       }
     ],
     "maker": [
@@ -41,6 +922,52 @@
             "name": "text",
             "required": true,
             "description": "Text"
+          }
+        ]
+      },
+      {
+        "name": "Textpro",
+        "endpoint": "/api/m/textpro",
+        "filename": "textpro",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "TextPro URL ending in .html"
+          },
+          {
+            "name": "text1",
+            "required": true,
+            "description": "First text input"
+          },
+          {
+            "name": "text2",
+            "required": false,
+            "description": "Second text input (optional)"
+          }
+        ]
+      },
+      {
+        "name": "Textpro 2",
+        "endpoint": "/api/m/textpro",
+        "filename": "textpro",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "TextPro URL ending in .html"
+          },
+          {
+            "name": "text1",
+            "required": true,
+            "description": "First text input"
+          },
+          {
+            "name": "text2",
+            "required": false,
+            "description": "Second text input (optional)"
           }
         ]
       }
@@ -344,6 +1271,104 @@
         "filename": "waifu",
         "method": "GET",
         "params": []
+      },
+      {
+        "name": "Animequotes",
+        "endpoint": "/api/r/quotesanime",
+        "filename": "quotesanime",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Blue Archive",
+        "endpoint": "/api/r/blue-archive",
+        "filename": "blue-archive",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Kucing",
+        "endpoint": "/api/r/cats",
+        "filename": "kucing",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Lahelu",
+        "endpoint": "/api/r/lahelu",
+        "filename": "lahelu",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Lahelu 2",
+        "endpoint": "/api/r/lahelu",
+        "filename": "lahelu",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Neko",
+        "endpoint": "/api/r/neko",
+        "filename": "neko",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Quotesanime",
+        "endpoint": "/api/r/quotesanime",
+        "filename": "quotesanime",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Random Anime Neko",
+        "endpoint": "/api/r/neko",
+        "filename": "neko",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Random Blue Archive",
+        "endpoint": "/api/r/blue-archive",
+        "filename": "blue-archive",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Random Foto Kucing",
+        "endpoint": "/api/r/cats",
+        "filename": "kucing",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Rumah Misteri",
+        "endpoint": "/api/r/rumahmisteri",
+        "filename": "rumah-misteri",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Rumah Misteri 2",
+        "endpoint": "/api/r/rumahmisteri",
+        "filename": "rumah-misteri",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Seegore",
+        "endpoint": "/api/r/seegore",
+        "filename": "seegore",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Seegore 2",
+        "endpoint": "/api/r/seegore",
+        "filename": "seegore",
+        "method": "POST",
+        "params": []
       }
     ],
     "tools": [
@@ -380,6 +1405,567 @@
             "name": "alias",
             "required": false,
             "description": "Custom alias"
+          }
+        ]
+      },
+      {
+        "name": "Base642text",
+        "endpoint": "/api/tools/base642text",
+        "filename": "base64totext",
+        "method": "GET",
+        "params": [
+          {
+            "name": "base64",
+            "required": true,
+            "description": "The Base64 encoded string to decode"
+          }
+        ]
+      },
+      {
+        "name": "Base64totext",
+        "endpoint": "/api/tools/base642text",
+        "filename": "base64totext",
+        "method": "POST",
+        "params": [
+          {
+            "name": "base64",
+            "required": true,
+            "description": "The Base64 encoded string to decode"
+          }
+        ]
+      },
+      {
+        "name": "Binary2text",
+        "endpoint": "/api/tools/binary2text",
+        "filename": "binner2text",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The binary string to convert to text (e.g., \"01001000 01100101\")"
+          }
+        ]
+      },
+      {
+        "name": "Binner2text",
+        "endpoint": "/api/tools/binary2text",
+        "filename": "binner2text",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "The binary string to convert to text (e.g., \"01001000 01100101\")"
+          }
+        ]
+      },
+      {
+        "name": "Colorize",
+        "endpoint": "/api/tools/colorize",
+        "filename": "colorize",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the grayscale image to colorize."
+          }
+        ]
+      },
+      {
+        "name": "Country Info",
+        "endpoint": "/api/tools/countryInfo",
+        "filename": "countryinfo",
+        "method": "GET",
+        "params": [
+          {
+            "name": "name",
+            "required": true,
+            "description": "The name of the country to search for"
+          }
+        ]
+      },
+      {
+        "name": "Countryinfo",
+        "endpoint": "/api/tools/countryInfo",
+        "filename": "countryinfo",
+        "method": "POST",
+        "params": [
+          {
+            "name": "name",
+            "required": true,
+            "description": "The name of the country to search for"
+          }
+        ]
+      },
+      {
+        "name": "Dewatermark",
+        "endpoint": "/api/tools/dewatermark",
+        "filename": "dewatermark",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Image URL with watermark"
+          }
+        ]
+      },
+      {
+        "name": "DNS",
+        "endpoint": "/api/tools/dns",
+        "filename": "dns",
+        "method": "GET",
+        "params": [
+          {
+            "name": "domain",
+            "required": true,
+            "description": "Domain name"
+          },
+          {
+            "name": "dnsServer",
+            "required": false,
+            "description": "DNS server"
+          }
+        ]
+      },
+      {
+        "name": "DNS 2",
+        "endpoint": "/api/tools/dns",
+        "filename": "dns",
+        "method": "POST",
+        "params": [
+          {
+            "name": "domain",
+            "required": true,
+            "description": "The domain to lookup DNS records for"
+          },
+          {
+            "name": "dnsServer",
+            "required": false,
+            "description": "The DNS server to use for the lookup (e.g., cloudflare, google)"
+          }
+        ]
+      },
+      {
+        "name": "Fake Data",
+        "endpoint": "/api/tools/fake-data",
+        "filename": "fakedata",
+        "method": "GET",
+        "params": [
+          {
+            "name": "type",
+            "required": true,
+            "description": "Type of data"
+          },
+          {
+            "name": "count",
+            "required": false,
+            "description": "Number of entries"
+          }
+        ]
+      },
+      {
+        "name": "Fakedata",
+        "endpoint": "/api/tools/fake-data",
+        "filename": "fakedata",
+        "method": "POST",
+        "params": [
+          {
+            "name": "type",
+            "required": true,
+            "description": "The type of fake data to generate"
+          },
+          {
+            "name": "count",
+            "required": false,
+            "description": "The number of fake data entries to generate"
+          }
+        ]
+      },
+      {
+        "name": "GET Voice",
+        "endpoint": "/api/tools/voices",
+        "filename": "get-voice",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Identify Anime",
+        "endpoint": "/api/tools/identify-anime",
+        "filename": "animefind",
+        "method": "GET",
+        "params": [
+          {
+            "name": "imageUrl",
+            "required": true,
+            "description": "URL of the image to identify"
+          }
+        ]
+      },
+      {
+        "name": "Kodepos",
+        "endpoint": "/api/tools/kodepos",
+        "filename": "kodepos",
+        "method": "GET",
+        "params": [
+          {
+            "name": "form",
+            "required": true,
+            "description": "Location name"
+          }
+        ]
+      },
+      {
+        "name": "Kodepos 2",
+        "endpoint": "/api/tools/kodepos",
+        "filename": "kodepos",
+        "method": "POST",
+        "params": [
+          {
+            "name": "form",
+            "required": true,
+            "description": "The location name (e.g., village, district) to search for postal code"
+          }
+        ]
+      },
+      {
+        "name": "List Voice",
+        "endpoint": "/api/tools/voices",
+        "filename": "get-voice",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "NGL",
+        "endpoint": "/api/tools/ngl",
+        "filename": "ngl",
+        "method": "GET",
+        "params": [
+          {
+            "name": "link",
+            "required": true,
+            "description": "The NGL.link profile URL"
+          },
+          {
+            "name": "text",
+            "required": true,
+            "description": "The anonymous message to send"
+          }
+        ]
+      },
+      {
+        "name": "NGL 2",
+        "endpoint": "/api/tools/ngl",
+        "filename": "ngl",
+        "method": "POST",
+        "params": [
+          {
+            "name": "link",
+            "required": true,
+            "description": "The NGL.link profile URL (e.g., https://ngl.link/xxxx)"
+          },
+          {
+            "name": "text",
+            "required": true,
+            "description": "The anonymous message to send"
+          }
+        ]
+      },
+      {
+        "name": "Subdomain Finder",
+        "endpoint": "/api/tools/subdomains",
+        "filename": "subdomainfind",
+        "method": "GET",
+        "params": [
+          {
+            "name": "domain",
+            "required": true,
+            "description": "Domain to search"
+          }
+        ]
+      },
+      {
+        "name": "Subdomainfind",
+        "endpoint": "/api/tools/subdomains",
+        "filename": "subdomainfind",
+        "method": "POST",
+        "params": [
+          {
+            "name": "domain",
+            "required": true,
+            "description": "Domain to search"
+          }
+        ]
+      },
+      {
+        "name": "Text2base64",
+        "endpoint": "/api/tools/text2base64",
+        "filename": "text2base64",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to encode"
+          }
+        ]
+      },
+      {
+        "name": "Text2base64 2",
+        "endpoint": "/api/tools/text2base64",
+        "filename": "text2base64",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to encode"
+          }
+        ]
+      },
+      {
+        "name": "Text2binary",
+        "endpoint": "/api/tools/text2binary",
+        "filename": "text2binner",
+        "method": "GET",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content"
+          }
+        ]
+      },
+      {
+        "name": "Text2binner",
+        "endpoint": "/api/tools/text2binary",
+        "filename": "text2binner",
+        "method": "POST",
+        "params": [
+          {
+            "name": "content",
+            "required": true,
+            "description": "Text content"
+          }
+        ]
+      },
+      {
+        "name": "Text2qr",
+        "endpoint": "/api/tools/text2qr",
+        "filename": "text2qr",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text for QR code"
+          }
+        ]
+      },
+      {
+        "name": "Text2qr 2",
+        "endpoint": "/api/tools/text2qr",
+        "filename": "text2qr",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text for QR code"
+          }
+        ]
+      },
+      {
+        "name": "Translate",
+        "endpoint": "/api/tools/translate",
+        "filename": "translate",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to translate"
+          },
+          {
+            "name": "source",
+            "required": false,
+            "description": "Source language code"
+          },
+          {
+            "name": "target",
+            "required": false,
+            "description": "Target language code"
+          }
+        ]
+      },
+      {
+        "name": "Translate 2",
+        "endpoint": "/api/tools/translate",
+        "filename": "translate",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to translate"
+          },
+          {
+            "name": "source",
+            "required": false,
+            "description": "Source language code"
+          },
+          {
+            "name": "target",
+            "required": false,
+            "description": "Target language code"
+          }
+        ]
+      },
+      {
+        "name": "TTS",
+        "endpoint": "/api/tools/tts",
+        "filename": "tts",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to convert"
+          },
+          {
+            "name": "voice",
+            "required": true,
+            "description": "Voice for TTS"
+          },
+          {
+            "name": "rate",
+            "required": true,
+            "description": "Speech rate"
+          },
+          {
+            "name": "pitch",
+            "required": true,
+            "description": "Speech pitch"
+          },
+          {
+            "name": "volume",
+            "required": true,
+            "description": "Speech volume"
+          }
+        ]
+      },
+      {
+        "name": "TTS 2",
+        "endpoint": "/api/tools/tts",
+        "filename": "tts",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to convert"
+          },
+          {
+            "name": "voice",
+            "required": true,
+            "description": "Voice for TTS"
+          },
+          {
+            "name": "rate",
+            "required": true,
+            "description": "Speech rate"
+          },
+          {
+            "name": "pitch",
+            "required": true,
+            "description": "Speech pitch"
+          },
+          {
+            "name": "volume",
+            "required": true,
+            "description": "Speech volume"
+          }
+        ]
+      },
+      {
+        "name": "TTS Google",
+        "endpoint": "/api/tools/ttsgoogle",
+        "filename": "ttsgoogle",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to convert to speech"
+          }
+        ]
+      },
+      {
+        "name": "Ttsgoogle",
+        "endpoint": "/api/tools/ttsgoogle",
+        "filename": "ttsgoogle",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to convert to speech"
+          }
+        ]
+      },
+      {
+        "name": "Upscale",
+        "endpoint": "/api/tools/upscale",
+        "filename": "upscale",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the image to upscale."
+          },
+          {
+            "name": "scale",
+            "required": false,
+            "description": "The upscale factor (1-20). Higher values produce larger images."
+          }
+        ]
+      },
+      {
+        "name": "VCC Generator",
+        "endpoint": "/api/tools/vcc-generator",
+        "filename": "vccgen",
+        "method": "GET",
+        "params": [
+          {
+            "name": "type",
+            "required": true,
+            "description": "Credit card type"
+          },
+          {
+            "name": "count",
+            "required": false,
+            "description": "Number of VCCs"
+          }
+        ]
+      },
+      {
+        "name": "Vccgen",
+        "endpoint": "/api/tools/vcc-generator",
+        "filename": "vccgen",
+        "method": "POST",
+        "params": [
+          {
+            "name": "type",
+            "required": true,
+            "description": "Credit card type"
+          },
+          {
+            "name": "count",
+            "required": false,
+            "description": "Number of VCCs"
           }
         ]
       }
@@ -498,6 +2084,318 @@
             "description": "mp3 (default) atau mp4"
           }
         ]
+      },
+      {
+        "name": "Capcut",
+        "endpoint": "/api/d/capcut",
+        "filename": "capcut",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "CapCut video URL"
+          }
+        ]
+      },
+      {
+        "name": "Capcut 2",
+        "endpoint": "/api/d/capcut",
+        "filename": "capcut",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The CapCut video URL to fetch metadata from"
+          }
+        ]
+      },
+      {
+        "name": "Capcutv2",
+        "endpoint": "/api/d/capcutv2",
+        "filename": "capcutv2",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "CapCut video URL"
+          }
+        ]
+      },
+      {
+        "name": "Capcutv2 2",
+        "endpoint": "/api/d/capcutv2",
+        "filename": "capcutv2",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The CapCut video URL to download"
+          }
+        ]
+      },
+      {
+        "name": "Gdrive",
+        "endpoint": "/api/d/gdrive",
+        "filename": "gdrive",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Google Drive URL"
+          }
+        ]
+      },
+      {
+        "name": "Gdrive 2",
+        "endpoint": "/api/d/gdrive",
+        "filename": "gdrive",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Google Drive URL"
+          }
+        ]
+      },
+      {
+        "name": "Github",
+        "endpoint": "/api/d/github",
+        "filename": "github",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "GitHub URL (repo, file, raw, or gist)"
+          }
+        ]
+      },
+      {
+        "name": "Github 2",
+        "endpoint": "/api/d/github",
+        "filename": "github",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "GitHub URL (repo, file, raw, or gist)"
+          }
+        ]
+      },
+      {
+        "name": "Lahelu",
+        "endpoint": "/api/d/lahelu",
+        "filename": "lahelu",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The Lahelu post URL"
+          }
+        ]
+      },
+      {
+        "name": "Lahelu 2",
+        "endpoint": "/api/d/lahelu",
+        "filename": "lahelu",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The Lahelu post URL"
+          }
+        ]
+      },
+      {
+        "name": "Pinterest",
+        "endpoint": "/api/d/pinterest",
+        "filename": "pinterest",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Pinterest URL"
+          }
+        ]
+      },
+      {
+        "name": "Pinterest 2",
+        "endpoint": "/api/d/pinterest",
+        "filename": "pinterest",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Pinterest URL"
+          }
+        ]
+      },
+      {
+        "name": "Scdl",
+        "endpoint": "/api/d/soundcloud",
+        "filename": "scdl",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "SoundCloud track URL"
+          }
+        ]
+      },
+      {
+        "name": "Seegore",
+        "endpoint": "/api/d/seegore",
+        "filename": "seegore",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The Seegore article URL to fetch data from"
+          }
+        ]
+      },
+      {
+        "name": "Seegore 2",
+        "endpoint": "/api/d/seegore",
+        "filename": "seegore",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The Seegore article URL to fetch data from"
+          }
+        ]
+      },
+      {
+        "name": "Snack Video",
+        "endpoint": "/api/d/snackvideo",
+        "filename": "snackvideo",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Snack Video URL"
+          }
+        ]
+      },
+      {
+        "name": "Snackvideo",
+        "endpoint": "/api/d/snackvideo",
+        "filename": "snackvideo",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Snack Video URL"
+          }
+        ]
+      },
+      {
+        "name": "SoundCloud",
+        "endpoint": "/api/d/soundcloud",
+        "filename": "scdl",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "SoundCloud track URL"
+          }
+        ]
+      },
+      {
+        "name": "Spotify",
+        "endpoint": "/api/d/spotify",
+        "filename": "spotify",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Spotify URL"
+          }
+        ]
+      },
+      {
+        "name": "Spotify 2",
+        "endpoint": "/api/d/spotify",
+        "filename": "spotify",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Spotify URL"
+          }
+        ]
+      },
+      {
+        "name": "Twitter",
+        "endpoint": "/api/d/twitter",
+        "filename": "Twitter",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Twitter video URL"
+          }
+        ]
+      },
+      {
+        "name": "Twitter 2",
+        "endpoint": "/api/d/twitter",
+        "filename": "Twitter",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Twitter video URL"
+          }
+        ]
+      },
+      {
+        "name": "Youtube Community",
+        "endpoint": "/api/d/ytpost",
+        "filename": "ytpost",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the YouTube channel's community tab"
+          }
+        ]
+      },
+      {
+        "name": "Ytpost",
+        "endpoint": "/api/d/ytpost",
+        "filename": "ytpost",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the YouTube channel's community tab"
+          }
+        ]
       }
     ],
     "search": [
@@ -550,6 +2448,2898 @@
             "name": "q",
             "required": true,
             "description": "Query"
+          }
+        ]
+      },
+      {
+        "name": "8 Font",
+        "endpoint": "/api/s/8font",
+        "filename": "8font",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "Page number"
+          }
+        ]
+      },
+      {
+        "name": "8font",
+        "endpoint": "/api/s/8font",
+        "filename": "8font",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for fonts (e.g., \"cartoon\")"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number for search results (default: 1)"
+          }
+        ]
+      },
+      {
+        "name": "Apple Music",
+        "endpoint": "/api/s/applemusic",
+        "filename": "apple-music",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for music (e.g., \"duka\")"
+          },
+          {
+            "name": "region",
+            "required": false,
+            "description": "The two-letter country code for the Apple Music region (e.g., \"id\" for Indonesia, \"us\" for United States)"
+          }
+        ]
+      },
+      {
+        "name": "Bimg",
+        "endpoint": "/api/s/bimg",
+        "filename": "bimg",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for images (e.g., \"kucing\")"
+          }
+        ]
+      },
+      {
+        "name": "Bing Image",
+        "endpoint": "/api/s/bimg",
+        "filename": "bimg",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Image search query"
+          }
+        ]
+      },
+      {
+        "name": "Brave",
+        "endpoint": "/api/s/brave",
+        "filename": "brave",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query"
+          }
+        ]
+      },
+      {
+        "name": "Brave 2",
+        "endpoint": "/api/s/brave",
+        "filename": "brave",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query (e.g., \"apa itu nodejs\")"
+          }
+        ]
+      },
+      {
+        "name": "Dependents",
+        "endpoint": "/api/github/dependents",
+        "filename": "github-dependents",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The GitHub repository URL"
+          },
+          {
+            "name": "begin",
+            "required": false,
+            "description": "Starting page for scraping"
+          },
+          {
+            "name": "end",
+            "required": false,
+            "description": "Ending page for scraping"
+          }
+        ]
+      },
+      {
+        "name": "Duckduckgo",
+        "endpoint": "/api/s/duckduckgo",
+        "filename": "duckduckgo",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query string"
+          },
+          {
+            "name": "kl",
+            "required": false,
+            "description": "Country/region code (e.g., 'au-en', 'id-en')"
+          },
+          {
+            "name": "df",
+            "required": false,
+            "description": "Time filter ('d'=day, 'w'=week, 'm'=month, 'y'=year)"
+          }
+        ]
+      },
+      {
+        "name": "Duckduckgo 2",
+        "endpoint": "/api/s/duckduckgo",
+        "filename": "duckduckgo",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query string"
+          },
+          {
+            "name": "kl",
+            "required": false,
+            "description": "Country/region code (e.g., 'au-en', 'id-en')"
+          },
+          {
+            "name": "df",
+            "required": false,
+            "description": "Time filter ('d'=day, 'w'=week, 'm'=month, 'y'=year)"
+          }
+        ]
+      },
+      {
+        "name": "Gitagram",
+        "endpoint": "/api/s/gitagram",
+        "filename": "gitgram",
+        "method": "GET",
+        "params": [
+          {
+            "name": "search",
+            "required": true,
+            "description": "Music title or artist"
+          }
+        ]
+      },
+      {
+        "name": "Gitgram",
+        "endpoint": "/api/s/gitagram",
+        "filename": "gitgram",
+        "method": "POST",
+        "params": [
+          {
+            "name": "search",
+            "required": true,
+            "description": "Music title or artist"
+          }
+        ]
+      },
+      {
+        "name": "Github Dependents",
+        "endpoint": "/api/github/dependents",
+        "filename": "github-dependents",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The GitHub repository URL"
+          },
+          {
+            "name": "begin",
+            "required": false,
+            "description": "Starting page for scraping"
+          },
+          {
+            "name": "end",
+            "required": false,
+            "description": "Ending page for scraping"
+          }
+        ]
+      },
+      {
+        "name": "Google Image",
+        "endpoint": "/api/images",
+        "filename": "googleimg",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search term for Google Images"
+          }
+        ]
+      },
+      {
+        "name": "Googleimg",
+        "endpoint": "/api/images",
+        "filename": "googleimg",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search term for Google Images"
+          }
+        ]
+      },
+      {
+        "name": "Gsmarena",
+        "endpoint": "/api/s/gsmarena",
+        "filename": "gsmarena",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for mobile phones (e.g., 'iphone', 'samsung galaxy')"
+          }
+        ]
+      },
+      {
+        "name": "Gsmarena 2",
+        "endpoint": "/api/s/gsmarena",
+        "filename": "gsmarena",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for mobile phones (e.g., 'iphone', 'samsung galaxy')"
+          }
+        ]
+      },
+      {
+        "name": "Kbbi",
+        "endpoint": "/api/s/kbbi",
+        "filename": "kbbi",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The word to search in KBBI"
+          }
+        ]
+      },
+      {
+        "name": "Kbbi 2",
+        "endpoint": "/api/s/kbbi",
+        "filename": "kbbi",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The word to search in KBBI"
+          }
+        ]
+      },
+      {
+        "name": "Lahelu",
+        "endpoint": "/api/s/lahelu",
+        "filename": "lahelu",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Lahelu posts"
+          }
+        ]
+      },
+      {
+        "name": "Lahelu 2",
+        "endpoint": "/api/s/lahelu",
+        "filename": "lahelu",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Lahelu posts"
+          }
+        ]
+      },
+      {
+        "name": "Mangatoon",
+        "endpoint": "/api/s/mangatoon",
+        "filename": "mangatoon",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Mangatoon"
+          }
+        ]
+      },
+      {
+        "name": "Mangatoon 2",
+        "endpoint": "/api/s/mangatoon",
+        "filename": "mangatoon",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Mangatoon"
+          }
+        ]
+      },
+      {
+        "name": "Mcpe",
+        "endpoint": "/api/s/mcpedl",
+        "filename": "mcpe",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The search query for MCPEDL"
+          }
+        ]
+      },
+      {
+        "name": "Mcpedlsearch",
+        "endpoint": "/api/s/mcpedl",
+        "filename": "mcpe",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The search query for MCPEDL"
+          }
+        ]
+      },
+      {
+        "name": "Music Apple",
+        "endpoint": "/api/s/applemusic",
+        "filename": "apple-music",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Music search query"
+          },
+          {
+            "name": "region",
+            "required": false,
+            "description": "Two-letter country code"
+          }
+        ]
+      },
+      {
+        "name": "Musixmatch",
+        "endpoint": "/api/s/musixmatch",
+        "filename": "musixmatch",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The track title or artist to search for on Musixmatch"
+          }
+        ]
+      },
+      {
+        "name": "Musixmatch 2",
+        "endpoint": "/api/s/musixmatch",
+        "filename": "musixmatch",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The track title or artist to search for on Musixmatch"
+          }
+        ]
+      },
+      {
+        "name": "MY Instants",
+        "endpoint": "/api/s/myinstants",
+        "filename": "myinstant",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query"
+          }
+        ]
+      },
+      {
+        "name": "Myinstant",
+        "endpoint": "/api/s/myinstants",
+        "filename": "myinstant",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for sound clips"
+          }
+        ]
+      },
+      {
+        "name": "Otakotaku",
+        "endpoint": "/api/s/otakotaku",
+        "filename": "otakotaku",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Otakotaku"
+          }
+        ]
+      },
+      {
+        "name": "Otakotaku 2",
+        "endpoint": "/api/s/otakotaku",
+        "filename": "otakotaku",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Otakotaku"
+          }
+        ]
+      },
+      {
+        "name": "Pinterest Lens Search",
+        "endpoint": "/api/s/pinterest-lens",
+        "filename": "pinterest-lens",
+        "method": "GET",
+        "params": [
+          {
+            "name": "imageUrl",
+            "required": true,
+            "description": "URL of the image to search on Pinterest"
+          }
+        ]
+      },
+      {
+        "name": "Quoted Anime",
+        "endpoint": "/api/s/animequotes",
+        "filename": "quotesanime",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for anime quotes (e.g., 'sad', 'love', character name)."
+          }
+        ]
+      },
+      {
+        "name": "Quotesanime",
+        "endpoint": "/api/s/animequotes",
+        "filename": "quotesanime",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for anime quotes (e.g., 'sad', 'love', character name)."
+          }
+        ]
+      },
+      {
+        "name": "Resep Koki",
+        "endpoint": "/api/s/resep",
+        "filename": "resepkoki",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for recipes (e.g., 'ayam goreng', 'nasi goreng')."
+          }
+        ]
+      },
+      {
+        "name": "Resepkoki",
+        "endpoint": "/api/s/resep",
+        "filename": "resepkoki",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for recipes (e.g., 'ayam goreng', 'nasi goreng')."
+          }
+        ]
+      },
+      {
+        "name": "Seegore",
+        "endpoint": "/api/s/seegore",
+        "filename": "seegore",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query"
+          }
+        ]
+      },
+      {
+        "name": "Seegore 2",
+        "endpoint": "/api/s/seegore",
+        "filename": "seegore",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query"
+          }
+        ]
+      },
+      {
+        "name": "Soundcloud",
+        "endpoint": "/api/s/soundcloud",
+        "filename": "soundcloud",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "SoundCloud search query"
+          }
+        ]
+      },
+      {
+        "name": "Soundcloud 2",
+        "endpoint": "/api/s/soundcloud",
+        "filename": "soundcloud",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "SoundCloud search query"
+          }
+        ]
+      },
+      {
+        "name": "Spotify",
+        "endpoint": "/api/s/spotify",
+        "filename": "spotify",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query"
+          }
+        ]
+      },
+      {
+        "name": "Spotify 2",
+        "endpoint": "/api/s/spotify",
+        "filename": "spotify",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Spotify tracks."
+          }
+        ]
+      },
+      {
+        "name": "Wikipedia",
+        "endpoint": "/api/s/wikipedia",
+        "filename": "wikipedia",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Wikipedia (e.g., 'prabowo', 'jakarta')."
+          }
+        ]
+      },
+      {
+        "name": "Wikipedia 2",
+        "endpoint": "/api/s/wikipedia",
+        "filename": "wikipedia",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for Wikipedia (e.g., 'prabowo', 'jakarta')."
+          }
+        ]
+      }
+    ],
+    "anime": [
+      {
+        "name": "Anichin Detail",
+        "endpoint": "/api/anime/anichin-detail",
+        "filename": "anichin-detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Detail 2",
+        "endpoint": "/api/anime/anichin-detail",
+        "filename": "anichin-detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Download",
+        "endpoint": "/api/anime/anichin-download",
+        "filename": "anichin-download",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime detail page URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Download 2",
+        "endpoint": "/api/anime/anichin-download",
+        "filename": "anichin-download",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime detail page URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Episode",
+        "endpoint": "/api/anime/anichin-episode",
+        "filename": "anichin-episode",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime page URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Episode 2",
+        "endpoint": "/api/anime/anichin-episode",
+        "filename": "anichin-episode",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime page URL"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Latest",
+        "endpoint": "/api/anime/anichin-latest",
+        "filename": "anichin-latest",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Anichin Latest 2",
+        "endpoint": "/api/anime/anichin-latest",
+        "filename": "anichin-latest",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Anichin Popular",
+        "endpoint": "/api/anime/anichin-popular",
+        "filename": "anichin-popular",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Anichin Popular 2",
+        "endpoint": "/api/anime/anichin-popular",
+        "filename": "anichin-popular",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Anichin Search",
+        "endpoint": "/api/anime/anichin-search",
+        "filename": "anichin-search",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Anichin Search 2",
+        "endpoint": "/api/anime/anichin-search",
+        "filename": "anichin-search",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search term for anime"
+          }
+        ]
+      },
+      {
+        "name": "Auratail Detail",
+        "endpoint": "/api/anime/auratail-detail",
+        "filename": "auratail-detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime detail page URL"
+          }
+        ]
+      },
+      {
+        "name": "Auratail Detail 2",
+        "endpoint": "/api/anime/auratail-detail",
+        "filename": "auratail-detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the anime detail page on Auratail"
+          }
+        ]
+      },
+      {
+        "name": "Auratail Latest",
+        "endpoint": "/api/anime/auratail-latest",
+        "filename": "auratail-latest",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Auratail Latest 2",
+        "endpoint": "/api/anime/auratail-latest",
+        "filename": "auratail-latest",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Auratail Popular",
+        "endpoint": "/api/anime/auratail-popular",
+        "filename": "auratail-popular",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Auratail Popular 2",
+        "endpoint": "/api/anime/auratail-popular",
+        "filename": "auratail-popular",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Auratail Search",
+        "endpoint": "/api/anime/auratail-search",
+        "filename": "auratail-serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Auratail Serach",
+        "endpoint": "/api/anime/auratail-search",
+        "filename": "auratail-serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for anime"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Detail",
+        "endpoint": "/api/anime/komikindo-detail",
+        "filename": "komikindo-komikindo-detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the anime detail page on Komikindo"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Download",
+        "endpoint": "/api/anime/komikindo-download",
+        "filename": "komikindo-komikindo-download",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the Komikindo chapter page"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Komikindo Detail",
+        "endpoint": "/api/anime/komikindo-detail",
+        "filename": "komikindo-komikindo-detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the anime detail page on Komikindo"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Komikindo Download",
+        "endpoint": "/api/anime/komikindo-download",
+        "filename": "komikindo-komikindo-download",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "The URL of the Komikindo chapter page"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Komikindo Serach",
+        "endpoint": "/api/anime/komikindo-search",
+        "filename": "komikindo-komikindo-serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for anime on Komikindo"
+          }
+        ]
+      },
+      {
+        "name": "Komikindo Search",
+        "endpoint": "/api/anime/komikindo-search",
+        "filename": "komikindo-komikindo-serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for anime on Komikindo"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Download",
+        "endpoint": "/api/anime/oploverz-download",
+        "filename": "oploverz-download",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Oploverz episode URL"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Download 2",
+        "endpoint": "/api/anime/oploverz-download",
+        "filename": "oploverz-download",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Oploverz episode URL"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Episode",
+        "endpoint": "/api/anime/oploverz-episode",
+        "filename": "oploverz-episode",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Oploverz anime series URL"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Episode 2",
+        "endpoint": "/api/anime/oploverz-episode",
+        "filename": "oploverz-episode",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Oploverz anime series URL"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Ongoing",
+        "endpoint": "/api/anime/oploverz-ongoing",
+        "filename": "oploverz-ongoing",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Oploverz Ongoing 2",
+        "endpoint": "/api/anime/oploverz-ongoing",
+        "filename": "oploverz-ongoing",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Oploverz Search",
+        "endpoint": "/api/anime/oploverz-search",
+        "filename": "oploverz-serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Oploverz Serach",
+        "endpoint": "/api/anime/oploverz-search",
+        "filename": "oploverz-serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Otakdesu Detail",
+        "endpoint": "/api/anime/otakudesu/detail",
+        "filename": "otakdesu-detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Otakudesu anime detail URL"
+          }
+        ]
+      },
+      {
+        "name": "Otakdesu Download",
+        "endpoint": "/api/anime/otakudesu/download",
+        "filename": "otakdesu-download",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Otakudesu anime download page URL"
+          }
+        ]
+      },
+      {
+        "name": "Otakdesu Ongoing",
+        "endpoint": "/api/anime/otakudesu/ongoing",
+        "filename": "otakdesu-ongoing",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Otakdesu Serach",
+        "endpoint": "/api/anime/otakudesu/search",
+        "filename": "otakdesu-serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "s",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Otakudesu Detail",
+        "endpoint": "/api/anime/otakudesu/detail",
+        "filename": "otakdesu-detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Otakudesu anime detail URL"
+          }
+        ]
+      },
+      {
+        "name": "Otakudesu Download",
+        "endpoint": "/api/anime/otakudesu/download",
+        "filename": "otakdesu-download",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Otakudesu anime download page URL"
+          }
+        ]
+      },
+      {
+        "name": "Otakudesu Ongoing",
+        "endpoint": "/api/anime/otakudesu/ongoing",
+        "filename": "otakdesu-ongoing",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Otakudesu Search",
+        "endpoint": "/api/anime/otakudesu/search",
+        "filename": "otakdesu-serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "s",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Detail",
+        "endpoint": "/api/anime/samehadaku/detail",
+        "filename": "samehadaku-detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "link",
+            "required": true,
+            "description": "Anime detail URL"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Detail 2",
+        "endpoint": "/api/anime/samehadaku/detail",
+        "filename": "samehadaku-detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "link",
+            "required": true,
+            "description": "Anime detail URL"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Download",
+        "endpoint": "/api/anime/samehadaku/download",
+        "filename": "samehadaku-download",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime episode URL"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Download 2",
+        "endpoint": "/api/anime/samehadaku/download",
+        "filename": "samehadaku-download",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Anime episode URL"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Latest",
+        "endpoint": "/api/anime/samehadaku/latest",
+        "filename": "samehadaku-latest",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Samehadaku Latest 2",
+        "endpoint": "/api/anime/samehadaku/latest",
+        "filename": "samehadaku-latest",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Samehadaku Release",
+        "endpoint": "/api/anime/samehadaku/release",
+        "filename": "samehadaku-release",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Samehadaku Release 2",
+        "endpoint": "/api/anime/samehadaku/release",
+        "filename": "samehadaku-release",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Samehadaku Search",
+        "endpoint": "/api/anime/samehadaku/search",
+        "filename": "samehadaku-serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      },
+      {
+        "name": "Samehadaku Serach",
+        "endpoint": "/api/anime/samehadaku/search",
+        "filename": "samehadaku-serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Anime search query"
+          }
+        ]
+      }
+    ],
+    "apk": [
+      {
+        "name": "AN1",
+        "endpoint": "/api/apk/an1",
+        "filename": "an1",
+        "method": "GET",
+        "params": [
+          {
+            "name": "search",
+            "required": true,
+            "description": "Search query for applications"
+          }
+        ]
+      },
+      {
+        "name": "AN1 2",
+        "endpoint": "/api/apk/an1",
+        "filename": "an1",
+        "method": "POST",
+        "params": [
+          {
+            "name": "search",
+            "required": true,
+            "description": "The search term for applications on an1.com"
+          }
+        ]
+      },
+      {
+        "name": "Openapk",
+        "endpoint": "/api/apk/openapk",
+        "filename": "openapk",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query for applications"
+          }
+        ]
+      },
+      {
+        "name": "Openapk 2",
+        "endpoint": "/api/apk/openapk",
+        "filename": "openapk",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for applications on OpenAPK.net"
+          }
+        ]
+      },
+      {
+        "name": "Playstore",
+        "endpoint": "/api/apk/playstore",
+        "filename": "playstore",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search query for applications"
+          }
+        ]
+      },
+      {
+        "name": "Playstore 2",
+        "endpoint": "/api/apk/playstore",
+        "filename": "playstore",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "The search query for applications on Google Play Store"
+          }
+        ]
+      }
+    ],
+    "berita": [
+      {
+        "name": "Antara",
+        "endpoint": "/api/berita/antara",
+        "filename": "antara",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Antara News",
+        "endpoint": "/api/berita/antara",
+        "filename": "antara",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Cnbc",
+        "endpoint": "/api/berita/cnbcindonesia",
+        "filename": "cnbc",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Cnbc Indonesia",
+        "endpoint": "/api/berita/cnbcindonesia",
+        "filename": "cnbc",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "CNN",
+        "endpoint": "/api/berita/cnn",
+        "filename": "cnn",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "CNN Indonesia",
+        "endpoint": "/api/berita/cnn",
+        "filename": "cnn",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Jkt48",
+        "endpoint": "/api/berita/jkt48",
+        "filename": "jkt48",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Jkt48 News",
+        "endpoint": "/api/berita/jkt48",
+        "filename": "jkt48",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Kompas",
+        "endpoint": "/api/berita/kompas",
+        "filename": "kompas",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Kompas News",
+        "endpoint": "/api/berita/kompas",
+        "filename": "kompas",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Liputan",
+        "endpoint": "/api/berita/liputan6",
+        "filename": "liputan",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Liputan6",
+        "endpoint": "/api/berita/liputan6",
+        "filename": "liputan",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Merdeka",
+        "endpoint": "/api/berita/merdeka",
+        "filename": "merdeka",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Merdeka News",
+        "endpoint": "/api/berita/merdeka",
+        "filename": "merdeka",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Sindonews",
+        "endpoint": "/api/berita/sindonews",
+        "filename": "sindonews",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Sindonews 2",
+        "endpoint": "/api/berita/sindonews",
+        "filename": "sindonews",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Suara",
+        "endpoint": "/api/berita/suara",
+        "filename": "suara",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Suara News",
+        "endpoint": "/api/berita/suara",
+        "filename": "suara",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Tribun",
+        "endpoint": "/api/berita/tribunnews",
+        "filename": "tribun",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Tribunnews",
+        "endpoint": "/api/berita/tribunnews",
+        "filename": "tribun",
+        "method": "GET",
+        "params": []
+      }
+    ],
+    "check": [
+      {
+        "name": "Cektagihanpln",
+        "endpoint": "/api/check/tagihanpln",
+        "filename": "cektagihanpln",
+        "method": "POST",
+        "params": [
+          {
+            "name": "nopel",
+            "required": true,
+            "description": "Nomor pelanggan PLN"
+          }
+        ]
+      },
+      {
+        "name": "Check Resi",
+        "endpoint": "/api/check/resi",
+        "filename": "checkresi",
+        "method": "GET",
+        "params": [
+          {
+            "name": "resi",
+            "required": true,
+            "description": "Nomor resi/tracking number"
+          },
+          {
+            "name": "courier",
+            "required": true,
+            "description": "Nama ekspedisi/courier name"
+          }
+        ]
+      },
+      {
+        "name": "Checkresi",
+        "endpoint": "/api/check/resi",
+        "filename": "checkresi",
+        "method": "POST",
+        "params": [
+          {
+            "name": "resi",
+            "required": true,
+            "description": "Nomor resi/tracking number"
+          },
+          {
+            "name": "courier",
+            "required": true,
+            "description": "Nama ekspedisi/courier name"
+          }
+        ]
+      },
+      {
+        "name": "NPM",
+        "endpoint": "/api/check/npm",
+        "filename": "npm",
+        "method": "GET",
+        "params": [
+          {
+            "name": "packageName",
+            "required": true,
+            "description": "The name of the NPM package"
+          }
+        ]
+      },
+      {
+        "name": "NPM 2",
+        "endpoint": "/api/stalk/npm",
+        "filename": "npm",
+        "method": "POST",
+        "params": [
+          {
+            "name": "packageName",
+            "required": true,
+            "description": "The name of the NPM package"
+          }
+        ]
+      },
+      {
+        "name": "Tagihan Listrik",
+        "endpoint": "/api/check/tagihanpln",
+        "filename": "cektagihanpln",
+        "method": "GET",
+        "params": [
+          {
+            "name": "nopel",
+            "required": true,
+            "description": "Nomor pelanggan PLN"
+          }
+        ]
+      }
+    ],
+    "cloudflare": [
+      {
+        "name": "Chat",
+        "endpoint": "/api/cf/chat",
+        "filename": "chat",
+        "method": "GET",
+        "params": [
+          {
+            "name": "prompt",
+            "required": false,
+            "description": "User's message to AI"
+          },
+          {
+            "name": "system",
+            "required": false,
+            "description": "System instruction for AI"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use"
+          }
+        ]
+      },
+      {
+        "name": "Chat 2",
+        "endpoint": "/api/cf/chat",
+        "filename": "chat",
+        "method": "POST",
+        "params": [
+          {
+            "name": "messages",
+            "required": true,
+            "description": "Messages"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use"
+          }
+        ]
+      },
+      {
+        "name": "Embed",
+        "endpoint": "/api/cf/embedding",
+        "filename": "embed",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to generate embedding for"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for embedding"
+          }
+        ]
+      },
+      {
+        "name": "Embedding",
+        "endpoint": "/api/cf/embedding",
+        "filename": "embed",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to generate embedding for"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for embedding"
+          }
+        ]
+      },
+      {
+        "name": "Image Classification",
+        "endpoint": "/api/cf/image-classification",
+        "filename": "image-classification",
+        "method": "GET",
+        "params": [
+          {
+            "name": "imageUrl",
+            "required": true,
+            "description": "The URL of the image to classify"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for classification"
+          }
+        ]
+      },
+      {
+        "name": "Image Classification 2",
+        "endpoint": "/api/cf/image-classification",
+        "filename": "image-classification",
+        "method": "POST",
+        "params": [
+          {
+            "name": "imageUrl",
+            "required": true,
+            "description": "The URL of the image to classify"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for classification"
+          }
+        ]
+      },
+      {
+        "name": "Sentiment",
+        "endpoint": "/api/cf/sentiment",
+        "filename": "sentiment",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to analyze sentiment for"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for sentiment analysis"
+          }
+        ]
+      },
+      {
+        "name": "Sentiment 2",
+        "endpoint": "/api/cf/sentiment",
+        "filename": "sentiment",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to analyze sentiment for"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for sentiment analysis"
+          }
+        ]
+      },
+      {
+        "name": "Translate",
+        "endpoint": "/api/cf/translation",
+        "filename": "translate",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to translate"
+          },
+          {
+            "name": "sourceLang",
+            "required": true,
+            "description": "The source language code (e.g., fr)"
+          },
+          {
+            "name": "targetLang",
+            "required": true,
+            "description": "The target language code (e.g., en)"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for translation"
+          }
+        ]
+      },
+      {
+        "name": "Translation",
+        "endpoint": "/api/cf/translation",
+        "filename": "translate",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "The text to translate"
+          },
+          {
+            "name": "sourceLang",
+            "required": true,
+            "description": "The source language code (e.g., en, id)"
+          },
+          {
+            "name": "targetLang",
+            "required": true,
+            "description": "The target language code (e.g., id, es)"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for translation"
+          }
+        ]
+      },
+      {
+        "name": "Whisper",
+        "endpoint": "/api/cf/whisper",
+        "filename": "whisper",
+        "method": "GET",
+        "params": [
+          {
+            "name": "audioUrl",
+            "required": true,
+            "description": "The URL of the audio file to transcribe"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for speech-to-text"
+          }
+        ]
+      },
+      {
+        "name": "Whisper 2",
+        "endpoint": "/api/cf/whisper",
+        "filename": "whisper",
+        "method": "POST",
+        "params": [
+          {
+            "name": "audioUrl",
+            "required": true,
+            "description": "The URL of the audio file to transcribe"
+          },
+          {
+            "name": "model",
+            "required": false,
+            "description": "Custom AI model to use for speech-to-text"
+          }
+        ]
+      }
+    ],
+    "currency": [
+      {
+        "name": "Convert",
+        "endpoint": "/api/currency/convert",
+        "filename": "convert",
+        "method": "POST",
+        "params": [
+          {
+            "name": "amount",
+            "required": true,
+            "description": "Amount to convert"
+          },
+          {
+            "name": "from",
+            "required": true,
+            "description": "Source currency (e.g., USD, BTC, ETH)"
+          },
+          {
+            "name": "to",
+            "required": true,
+            "description": "Target currency (e.g., IDR, BTC, ETH)"
+          }
+        ]
+      },
+      {
+        "name": "Convert 2",
+        "endpoint": "/api/currency/list",
+        "filename": "convert",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Convert 3",
+        "endpoint": "/api/currency/rates",
+        "filename": "convert",
+        "method": "POST",
+        "params": []
+      },
+      {
+        "name": "Convert 4",
+        "endpoint": "/api/currency/crypto/:symbol",
+        "filename": "convert",
+        "method": "POST",
+        "params": [
+          {
+            "name": "symbol",
+            "required": true,
+            "description": "Cryptocurrency symbol (e.g., BTC, ETH)"
+          }
+        ]
+      },
+      {
+        "name": "Crypto Detail",
+        "endpoint": "/api/currency/crypto/:symbol",
+        "filename": "convert",
+        "method": "GET",
+        "params": [
+          {
+            "name": "symbol",
+            "required": true,
+            "description": "Cryptocurrency symbol"
+          }
+        ]
+      },
+      {
+        "name": "Currency Convert",
+        "endpoint": "/api/currency/convert",
+        "filename": "convert",
+        "method": "GET",
+        "params": [
+          {
+            "name": "amount",
+            "required": true,
+            "description": "Amount to convert"
+          },
+          {
+            "name": "from",
+            "required": true,
+            "description": "Source currency"
+          },
+          {
+            "name": "to",
+            "required": true,
+            "description": "Target currency"
+          }
+        ]
+      },
+      {
+        "name": "Currency List",
+        "endpoint": "/api/currency/list",
+        "filename": "convert",
+        "method": "GET",
+        "params": []
+      },
+      {
+        "name": "Currency Rates",
+        "endpoint": "/api/currency/rates",
+        "filename": "convert",
+        "method": "GET",
+        "params": []
+      }
+    ],
+    "fun": [
+      {
+        "name": "Alay",
+        "endpoint": "/api/fun/alay",
+        "filename": "alay",
+        "method": "GET",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to convert"
+          }
+        ]
+      },
+      {
+        "name": "Alay 2",
+        "endpoint": "/api/fun/alay",
+        "filename": "alay",
+        "method": "POST",
+        "params": [
+          {
+            "name": "text",
+            "required": true,
+            "description": "Text to convert"
+          }
+        ]
+      },
+      {
+        "name": "Diri",
+        "endpoint": "/api/fun/livefunfact",
+        "filename": "diri",
+        "method": "POST",
+        "params": [
+          {
+            "name": "birthdate",
+            "required": true,
+            "description": "Birth date in YYYY-MM-DD format"
+          }
+        ]
+      },
+      {
+        "name": "Jagokata",
+        "endpoint": "/api/fun/jagokata",
+        "filename": "jagokata",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The query to search for quotes"
+          }
+        ]
+      },
+      {
+        "name": "Jagokata 2",
+        "endpoint": "/api/fun/jagokata",
+        "filename": "jagokata",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The query to search for quotes"
+          }
+        ]
+      },
+      {
+        "name": "Livefunfact",
+        "endpoint": "/api/fun/livefunfact",
+        "filename": "diri",
+        "method": "GET",
+        "params": [
+          {
+            "name": "birthdate",
+            "required": true,
+            "description": "Birth date in YYYY-MM-DD format"
+          }
+        ]
+      }
+    ],
+    "get": [
+      {
+        "name": "Alightmotion",
+        "endpoint": "/api/get/ampreset",
+        "filename": "alightmotion",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Alight Motion project URL (e.g., https://alight.link/u/UID/p/PID)"
+          }
+        ]
+      },
+      {
+        "name": "Detail Alight Motion Preset",
+        "endpoint": "/api/get/ampreset",
+        "filename": "alightmotion",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Alight Motion project URL (e.g., https://alight.link/u/UID/p/PID)"
+          }
+        ]
+      }
+    ],
+    "iloveimg": [
+      {
+        "name": "Blurface",
+        "endpoint": "/api/iloveimg/blurface",
+        "filename": "blurface",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          }
+        ]
+      },
+      {
+        "name": "Compress",
+        "endpoint": "/api/iloveimg/compress",
+        "filename": "compress",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          }
+        ]
+      },
+      {
+        "name": "Image2jpg",
+        "endpoint": "/api/iloveimg/image2jpg",
+        "filename": "image2jpg",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          }
+        ]
+      },
+      {
+        "name": "Image2png",
+        "endpoint": "/api/iloveimg/image2png",
+        "filename": "image2png",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          }
+        ]
+      },
+      {
+        "name": "Removebg",
+        "endpoint": "/api/iloveimg/removebg",
+        "filename": "removebg",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          }
+        ]
+      },
+      {
+        "name": "Upscale",
+        "endpoint": "/api/iloveimg/upscale",
+        "filename": "upscale",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          },
+          {
+            "name": "scale",
+            "required": false,
+            "description": "Upscale factor (2 or 4). Defaults to 2."
+          }
+        ]
+      }
+    ],
+    "imgedit": [
+      {
+        "name": "Convert Photo",
+        "endpoint": "/api/imgedit/convphoto",
+        "filename": "carton",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image",
+            "required": true,
+            "description": "Image URL"
+          },
+          {
+            "name": "template",
+            "required": true,
+            "description": "The cartoon template to apply. Available: sketch_v2, anime."
+          },
+          {
+            "name": "style",
+            "required": true,
+            "description": "The specific style within the chosen template. Examples for sketch_v2: manga_sketch, ink_painting. Examples for anime: color_rough, 3d."
+          }
+        ]
+      },
+      {
+        "name": "Face Swap",
+        "endpoint": "/api/imgedit/faceswap",
+        "filename": "faceswap",
+        "method": "GET",
+        "params": [
+          {
+            "name": "image1",
+            "required": true,
+            "description": "URL of the first image (main image to swap face into)."
+          },
+          {
+            "name": "image2",
+            "required": true,
+            "description": "URL of the second image (image containing the face to be swapped)."
+          }
+        ]
+      }
+    ],
+    "primbon": [
+      {
+        "name": "Arti Nama",
+        "endpoint": "/api/primbon/artinama",
+        "filename": "artinama",
+        "method": "GET",
+        "params": [
+          {
+            "name": "nama",
+            "required": true,
+            "description": "The name to search for."
+          }
+        ]
+      },
+      {
+        "name": "Artinama",
+        "endpoint": "/api/primbon/artinama",
+        "filename": "artinama",
+        "method": "POST",
+        "params": [
+          {
+            "name": "nama",
+            "required": true,
+            "description": "The name to search for."
+          }
+        ]
+      },
+      {
+        "name": "CEK Potensi Penyakit",
+        "endpoint": "/api/primbon/cek_potensi_penyakit",
+        "filename": "penyakit",
+        "method": "GET",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 12)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 05 for May)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 1998)."
+          }
+        ]
+      },
+      {
+        "name": "Cocokpasangan",
+        "endpoint": "/api/primbon/kecocokan_nama_pasangan",
+        "filename": "cocokpasangan",
+        "method": "POST",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "The first name for compatibility."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "The second name for compatibility."
+          }
+        ]
+      },
+      {
+        "name": "Kecocokan Nama Pasangan",
+        "endpoint": "/api/primbon/kecocokan_nama_pasangan",
+        "filename": "cocokpasangan",
+        "method": "GET",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "The first name for compatibility."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "The second name for compatibility."
+          }
+        ]
+      },
+      {
+        "name": "Nomor Hoki",
+        "endpoint": "/api/primbon/nomorhoki",
+        "filename": "nomorhoki",
+        "method": "GET",
+        "params": [
+          {
+            "name": "phoneNumber",
+            "required": true,
+            "description": "The phone number to check (numbers only, e.g., '6281234567890')."
+          }
+        ]
+      },
+      {
+        "name": "Nomorhoki",
+        "endpoint": "/api/primbon/nomorhoki",
+        "filename": "nomorhoki",
+        "method": "POST",
+        "params": [
+          {
+            "name": "phoneNumber",
+            "required": true,
+            "description": "The phone number to check (numbers only, e.g., '6281234567890')."
+          }
+        ]
+      },
+      {
+        "name": "Penyakit",
+        "endpoint": "/api/primbon/cek_potensi_penyakit",
+        "filename": "penyakit",
+        "method": "POST",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 12)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 5 for May)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 1998)."
+          }
+        ]
+      },
+      {
+        "name": "Ramalan Jodoh",
+        "endpoint": "/api/primbon/ramalanjodoh",
+        "filename": "ramaljodoh",
+        "method": "GET",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "Name of the first person."
+          },
+          {
+            "name": "tgl1",
+            "required": true,
+            "description": "Birth day of the first person (e.g., 16)."
+          },
+          {
+            "name": "bln1",
+            "required": true,
+            "description": "Birth month of the first person (e.g., 11 for November)."
+          },
+          {
+            "name": "thn1",
+            "required": true,
+            "description": "Birth year of the first person (e.g., 2007)."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "Name of the second person."
+          },
+          {
+            "name": "tgl2",
+            "required": true,
+            "description": "Birth day of the second person (e.g., 1)."
+          },
+          {
+            "name": "bln2",
+            "required": true,
+            "description": "Birth month of the second person (e.g., 1 for January)."
+          },
+          {
+            "name": "thn2",
+            "required": true,
+            "description": "Birth year of the second person (e.g., 2008)."
+          }
+        ]
+      },
+      {
+        "name": "Ramalan Jodoh Bali",
+        "endpoint": "/api/primbon/ramalanjodohbali",
+        "filename": "ramalanjodohbali",
+        "method": "GET",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "Name of the first person."
+          },
+          {
+            "name": "tgl1",
+            "required": true,
+            "description": "Birth day of the first person (e.g., 16)."
+          },
+          {
+            "name": "bln1",
+            "required": true,
+            "description": "Birth month of the first person (e.g., 11 for November)."
+          },
+          {
+            "name": "thn1",
+            "required": true,
+            "description": "Birth year of the first person (e.g., 2007)."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "Name of the second person."
+          },
+          {
+            "name": "tgl2",
+            "required": true,
+            "description": "Birth day of the second person (e.g., 1)."
+          },
+          {
+            "name": "bln2",
+            "required": true,
+            "description": "Birth month of the second person (e.g., 1 for January)."
+          },
+          {
+            "name": "thn2",
+            "required": true,
+            "description": "Birth year of the second person (e.g., 2008)."
+          }
+        ]
+      },
+      {
+        "name": "Ramalanjodohbali",
+        "endpoint": "/api/primbon/ramalanjodohbali",
+        "filename": "ramalanjodohbali",
+        "method": "POST",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "Name of the first person."
+          },
+          {
+            "name": "tgl1",
+            "required": true,
+            "description": "Birth day of the first person (e.g., 16)."
+          },
+          {
+            "name": "bln1",
+            "required": true,
+            "description": "Birth month of the first person (e.g., 11 for November)."
+          },
+          {
+            "name": "thn1",
+            "required": true,
+            "description": "Birth year of the first person (e.g., 2007)."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "Name of the second person."
+          },
+          {
+            "name": "tgl2",
+            "required": true,
+            "description": "Birth day of the second person (e.g., 1)."
+          },
+          {
+            "name": "bln2",
+            "required": true,
+            "description": "Birth month of the second person (e.g., 1 for January)."
+          },
+          {
+            "name": "thn2",
+            "required": true,
+            "description": "Birth year of the second person (e.g., 2008)."
+          }
+        ]
+      },
+      {
+        "name": "Ramaljodoh",
+        "endpoint": "/api/primbon/ramalanjodoh",
+        "filename": "ramaljodoh",
+        "method": "POST",
+        "params": [
+          {
+            "name": "nama1",
+            "required": true,
+            "description": "Name of the first person."
+          },
+          {
+            "name": "tgl1",
+            "required": true,
+            "description": "Birth day of the first person (e.g., 16)."
+          },
+          {
+            "name": "bln1",
+            "required": true,
+            "description": "Birth month of the first person (e.g., 11 for November)."
+          },
+          {
+            "name": "thn1",
+            "required": true,
+            "description": "Birth year of the first person (e.g., 2007)."
+          },
+          {
+            "name": "nama2",
+            "required": true,
+            "description": "Name of the second person."
+          },
+          {
+            "name": "tgl2",
+            "required": true,
+            "description": "Birth day of the second person (e.g., 1)."
+          },
+          {
+            "name": "bln2",
+            "required": true,
+            "description": "Birth month of the second person (e.g., 1 for January)."
+          },
+          {
+            "name": "thn2",
+            "required": true,
+            "description": "Birth year of the second person (e.g., 2008)."
+          }
+        ]
+      },
+      {
+        "name": "Rejeki Hoki Weton",
+        "endpoint": "/api/primbon/rejeki_hoki_weton",
+        "filename": "rezekihokiweton",
+        "method": "GET",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 1)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 1 for January)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 2025)."
+          }
+        ]
+      },
+      {
+        "name": "Rezekihokiweton",
+        "endpoint": "/api/primbon/rejeki_hoki_weton",
+        "filename": "rezekihokiweton",
+        "method": "POST",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 1)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 1 for January)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 2025)."
+          }
+        ]
+      },
+      {
+        "name": "Sifat Usaha Bisnis",
+        "endpoint": "/api/primbon/sifat_usaha_bisnis",
+        "filename": "sifatusaha",
+        "method": "GET",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 1)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 1 for January)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 2000)."
+          }
+        ]
+      },
+      {
+        "name": "Sifatusaha",
+        "endpoint": "/api/primbon/sifat_usaha_bisnis",
+        "filename": "sifatusaha",
+        "method": "POST",
+        "params": [
+          {
+            "name": "tgl",
+            "required": true,
+            "description": "Day of birth (e.g., 1)."
+          },
+          {
+            "name": "bln",
+            "required": true,
+            "description": "Month of birth (e.g., 1 for January)."
+          },
+          {
+            "name": "thn",
+            "required": true,
+            "description": "Year of birth (e.g., 2000)."
+          }
+        ]
+      },
+      {
+        "name": "Tafsir Mimpi",
+        "endpoint": "/api/primbon/tafsirmimpi",
+        "filename": "tafsirmimpi",
+        "method": "GET",
+        "params": [
+          {
+            "name": "mimpi",
+            "required": true,
+            "description": "The dream keyword to interpret (e.g., 'bertemu' for meeting, 'ular' for snake)."
+          }
+        ]
+      },
+      {
+        "name": "Tafsirmimpi",
+        "endpoint": "/api/primbon/tafsirmimpi",
+        "filename": "tafsirmimpi",
+        "method": "POST",
+        "params": [
+          {
+            "name": "mimpi",
+            "required": true,
+            "description": "The dream keyword to interpret (e.g., 'bertemu' for meeting, 'ular' for snake)."
+          }
+        ]
+      },
+      {
+        "name": "Zodiac",
+        "endpoint": "/api/primbon/zodiak",
+        "filename": "zodiac",
+        "method": "POST",
+        "params": [
+          {
+            "name": "zodiak",
+            "required": true,
+            "description": "The name of the zodiac sign (e.g., 'gemini')."
+          }
+        ]
+      },
+      {
+        "name": "Zodiak",
+        "endpoint": "/api/primbon/zodiak",
+        "filename": "zodiac",
+        "method": "GET",
+        "params": [
+          {
+            "name": "zodiak",
+            "required": true,
+            "description": "The name of the zodiac sign (e.g., 'gemini')."
+          }
+        ]
+      }
+    ],
+    "stalker": [
+      {
+        "name": "Github",
+        "endpoint": "/api/stalk/github",
+        "filename": "github",
+        "method": "GET",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "GitHub username"
+          }
+        ]
+      },
+      {
+        "name": "Github 2",
+        "endpoint": "/api/stalk/github",
+        "filename": "github",
+        "method": "POST",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "GitHub username"
+          }
+        ]
+      },
+      {
+        "name": "Instagram",
+        "endpoint": "/api/stalk/instagram",
+        "filename": "Instagram",
+        "method": "GET",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The Instagram username"
+          }
+        ]
+      },
+      {
+        "name": "Instagram 2",
+        "endpoint": "/api/stalk/instagram",
+        "filename": "Instagram",
+        "method": "POST",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The Instagram username"
+          }
+        ]
+      },
+      {
+        "name": "Pinterest",
+        "endpoint": "/api/stalk/pinterest",
+        "filename": "pinterest",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The Pinterest username"
+          }
+        ]
+      },
+      {
+        "name": "Pinterest 2",
+        "endpoint": "/api/stalk/pinterest",
+        "filename": "pinterest",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The Pinterest username"
+          }
+        ]
+      },
+      {
+        "name": "Roblox",
+        "endpoint": "/api/stalk/roblox",
+        "filename": "roblox",
+        "method": "GET",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "Roblox username"
+          }
+        ]
+      },
+      {
+        "name": "Roblox 2",
+        "endpoint": "/api/stalk/roblox",
+        "filename": "roblox",
+        "method": "POST",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "Roblox username"
+          }
+        ]
+      },
+      {
+        "name": "Threads",
+        "endpoint": "/api/stalk/threads",
+        "filename": "treads",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The Threads username (without @)"
+          }
+        ]
+      },
+      {
+        "name": "Tiktok",
+        "endpoint": "/api/stalk/tiktok",
+        "filename": "tiktok",
+        "method": "GET",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The TikTok username to stalk"
+          }
+        ]
+      },
+      {
+        "name": "Tiktok 2",
+        "endpoint": "/api/stalk/tiktok",
+        "filename": "tiktok",
+        "method": "POST",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The TikTok username to stalk"
+          }
+        ]
+      },
+      {
+        "name": "Treads",
+        "endpoint": "/api/stalk/threads",
+        "filename": "treads",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The Threads username (without @)"
+          }
+        ]
+      },
+      {
+        "name": "Twitter",
+        "endpoint": "/api/stalk/twitter",
+        "filename": "twitter",
+        "method": "GET",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "The Twitter (X) username to stalk"
+          }
+        ]
+      },
+      {
+        "name": "Twitter 2",
+        "endpoint": "/api/stalk/twitter",
+        "filename": "twitter",
+        "method": "POST",
+        "params": [
+          {
+            "name": "user",
+            "required": true,
+            "description": "The Twitter (X) username to stalk"
+          }
+        ]
+      },
+      {
+        "name": "Youtube",
+        "endpoint": "/api/stalk/youtube",
+        "filename": "youtube",
+        "method": "GET",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The YouTube channel username"
+          }
+        ]
+      },
+      {
+        "name": "Youtube 2",
+        "endpoint": "/api/stalk/youtube",
+        "filename": "youtube",
+        "method": "POST",
+        "params": [
+          {
+            "name": "username",
+            "required": true,
+            "description": "The YouTube channel username"
+          }
+        ]
+      }
+    ],
+    "sticker": [
+      {
+        "name": "Combot",
+        "endpoint": "/api/sticker/combot-search",
+        "filename": "combot",
+        "method": "POST",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "The search query for stickers"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number for search results"
+          }
+        ]
+      },
+      {
+        "name": "Combot Sticker",
+        "endpoint": "/api/sticker/combot-search",
+        "filename": "combot",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Search query for stickers"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "Page number for results"
+          }
+        ]
+      },
+      {
+        "name": "Detail",
+        "endpoint": "/api/sticker/stickerly-detail",
+        "filename": "detail",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Sticker.ly share URL"
+          }
+        ]
+      },
+      {
+        "name": "Serach",
+        "endpoint": "/api/sticker/stickerly-search",
+        "filename": "serach",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search keyword for sticker packs"
+          }
+        ]
+      },
+      {
+        "name": "Stickerly Detail",
+        "endpoint": "/api/sticker/stickerly-detail",
+        "filename": "detail",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Sticker.ly share URL"
+          }
+        ]
+      },
+      {
+        "name": "Stickerly Search",
+        "endpoint": "/api/sticker/stickerly-search",
+        "filename": "serach",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Search keyword for sticker packs"
           }
         ]
       }
