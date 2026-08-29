@@ -1,6 +1,6 @@
 # LǐRénXīn API
 
-REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalker, dan tools. **283 endpoint** dalam 19 kategori, dokumentasi interaktif langsung di browser.
+REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalker, dan tools. **285 endpoint** dalam 19 kategori, dokumentasi interaktif langsung di browser.
 
 🔗 **[lirenxin-api.my.id](https://lirenxin-api.my.id)** · [Dokumentasi](https://lirenxin-api.my.id/docs)
 
@@ -16,7 +16,7 @@ REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalk
 | `games`      | 24     | Tebak-tebakan: gambar, bendera, lagu, lirik, logo, kata, kimia, JKT48, Free Fire, family100, teka-teki |
 | `primbon`    | 20     | Ramalan jodoh, arti nama, weton, nomor hoki, tafsir mimpi, zodiak       |
 | `berita`     | 18     | CNN, CNBC, Antara, Kompas, Liputan6, Merdeka, Sindo, Suara, Tribun      |
-| `download`   | 17     | AIO (TikTok/Douyin/YouTube), TikTok, YouTube (+MP3), Twitter, GDrive, GitHub, SoundCloud, Lahelu |
+| `download`   | 19     | AIO (TikTok/Douyin/YouTube/Bilibili), TikTok, YouTube (+MP3), Bilibili.tv, Twitter, GDrive, GitHub, SoundCloud, Lahelu |
 | `ai`         | 15     | Gemini (+ lite), Bard, Flux text-to-image, PowerBrain, Muslim AI, Bible AI, Gita |
 | `random`     | 14     | Gambar random per negara, Blue Archive, quotes anime, Lahelu, kucing    |
 | `stalker`    | 14     | TikTok, YouTube, Twitter, Threads, Pinterest, GitHub, Roblox            |
@@ -66,6 +66,7 @@ npm run pm2          # deploy pakai pm2 (VPS)
 | TikTok, Douyin      | `snaptik.fi` (video, slideshow foto, story)| no watermark, watermark, mp3, photos |
 | YouTube             | delegasi ke `router/download/youtube.ts`   | mp4 720p                             |
 | YouTube (`format=mp3`) | delegasi ke `router/download/ytmp3.ts`  | mp3                                  |
+| Bilibili.tv / Bstation | delegasi ke `router/download/bilibili.ts` | DASH: video per kualitas (tanpa audio) + track audio |
 
 Semua hasil dinormalisasi ke bentuk yang sama:
 
@@ -87,6 +88,44 @@ Semua hasil dinormalisasi ke bentuk yang sama:
 ```
 
 Link di luar daftar dibalas `400` beserta field `supported`. Platform yang didelegasikan mewarisi error dari handler aslinya apa adanya.
+
+---
+
+## Bilibili.tv Downloader
+
+`GET|POST /api/download/bilibili?url=<link>` — bilibili.tv / Bstation.
+
+Yang diterima: `/video/<aid>` (UGC), `/play/<season>/<ep>` (anime & film), short link (`b23.tv`, `bili.im`, `bili2233.cn`, …) yang di-resolve dulu, atau ID mentah.
+
+| Param | Wajib | Isi |
+|-------|-------|-----|
+| `url` | ya | link, short link, atau ID |
+| `quality` | tidak | saring satu kualitas: `144P` … `720P`, `1080P`, `1080P HD`, `1080P 60FPS`, `4K` |
+| `cookie` | tidak | cookie akun premium; default dari env `BILIBILI_COOKIE` |
+| `locale` | tidak | default `id_ID` |
+
+Formatnya DASH, jadi **video dan audio terpisah** — tiap entri di `videos` belum ada suaranya:
+
+```json
+{
+  "status": true,
+  "data": {
+    "platform": "bilibili.tv",
+    "type": "ogv",
+    "title": "Black Clover E1 - Asta dan Yuno",
+    "duration": "23:56",
+    "cookie_status": "none",
+    "videos": { "480P": { "url": "https://...m4s", "size": "84.6 MB", "codec": "hevc" } },
+    "locked_qualities": ["1080P HD", "1080P", "720P"],
+    "audio": { "url": "https://...m4s", "size": "29.2 MB", "codec": "mp4a.40.2" },
+    "headers": { "Referer": "https://www.bilibili.tv/" }
+  }
+}
+```
+
+Waktu mengunduh, header `Referer` itu **wajib** dikirim — CDN bilibili nolak request tanpa itu. Gabung dua file-nya sendiri, misal `ffmpeg -i video.m4s -i audio.m4s -c copy out.mp4`.
+
+Kualitas 1080P ke atas hampir selalu masuk `locked_qualities` (butuh akun premium). Isi env `BILIBILI_COOKIE` atau kirim `?cookie=SESSDATA=...` untuk membukanya; field `cookie_status` menandai cookie-nya masih valid atau sudah kedaluwarsa. Kalau kontennya premium penuh, API balas `403` dengan pesan "Butuh login / premium", dan konten yang diblokir wilayah balas `451`.
 
 ---
 
@@ -214,6 +253,7 @@ Semua opsional:
 | `PROXY_URL`         | Prefix proxy untuk endpoint yang butuh (BMKG, situs yang blokir IP server) | kosong  |
 | `CLOUDFLARE_AI_URL` | Gateway Workers AI untuk kategori `cloudflare` + endpoint text-to-image | pool bawaan |
 | `PINTEREST_TOKEN`   | Token API Pinterest untuk `/api/s/pinterest-lens` (opsional: `PINTEREST_COOKIE`) | kosong  |
+| `BILIBILI_COOKIE`   | Cookie premium bilibili.tv untuk buka kualitas 1080P+ (`SESSDATA=...; bili_jct=...`) | kosong  |
 | `YTMP3_MAX_POLL`    | Batas polling `/api/download/ytmp3` (×1.5 detik)  | `18`    |
 
 QRIS diatur lewat `STATIC_QRIS` di `src/qris.ts`. Kalau belum diisi, `/api/create-payment` balas `503` dan halaman donasi tetap aman dibuka.

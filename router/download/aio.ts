@@ -17,6 +17,7 @@ import axios from "axios";
 */
 import youtubeHandler from "./youtube";
 import ytmp3Handler from "./ytmp3";
+import { getBilibiliTvStreams } from "./bilibili";
 
 
 type MediaType = "video" | "audio" | "image";
@@ -28,7 +29,12 @@ const HOSTS: Record<string, string> = {
     "douyin.com": "douyin",
     "iesdouyin.com": "douyin",
     "youtube.com": "youtube",
-    "youtu.be": "youtube"
+    "youtu.be": "youtube",
+    "bilibili.tv": "bilibili",
+    "bstation.app": "bilibili",
+    "b23.tv": "bilibili",
+    "bili.im": "bilibili",
+    "bili2233.cn": "bilibili"
 };
 
 const SUPPORTED = Array.from(new Set(Object.values(HOSTS)));
@@ -224,8 +230,37 @@ const delegate = async (platform: string, url: string, format?: string): Promise
     };
 };
 
-export default async function aioDownloader(req: Request, res: Response) {
-    const url = String(req.query.url || req.query.q || req.body?.url || "").trim();
+/*
+  bilibili.tv pakai DASH: tiap kualitas video nggak ada audionya, audio dikirim
+  sebagai track terpisah. Jadi label-nya ditandai "tanpa audio" biar pemakai
+  tahu harus menggabung sendiri, dan header Referer ikut dibawa.
+*/
+const bilibiliAio = async (url: string): Promise<Result> => {
+    const r: any = await getBilibiliTvStreams(url, { cookie: process.env.BILIBILI_COOKIE || "" });
+    const medias: Media[] = [];
+
+    for (const [label, v] of Object.entries<any>(r.videos || {})) {
+        pushMedia(medias, "video", `${label} ${v.codec} (tanpa audio)`, v.url);
+    }
+    if (r.audio) pushMedia(medias, "audio", "audio only", r.audio.url);
+
+    return {
+        type: "video",
+        title: r.title,
+        description: null,
+        author: null,
+        duration: r.duration,
+        cover: r.thumbnail,
+        medias,
+        engine: "router/download/bilibili",
+        headers: r.headers,
+        ...(r.locked_qualities && { locked_qualities: r.locked_qualities }),
+        note: r.note,
+        raw: r
+    };
+};
+
+export default async function aioDownloader(req: Request, res: Response) {    const url = String(req.query.url || req.query.q || req.body?.url || "").trim();
 
     if (!url) {
         return res.status(400).json({
@@ -249,7 +284,9 @@ export default async function aioDownloader(req: Request, res: Response) {
         const result =
             platform === "tiktok" || platform === "douyin"
                 ? await snaptikFi(url)
-                : await delegate(platform, url, req.query.format as string);
+                : platform === "bilibili"
+                    ? await bilibiliAio(url)
+                    : await delegate(platform, url, req.query.format as string);
 
         if (!result.medias.length) {
             return res.status(404).json({ status: false, platform, message: "Media tidak ditemukan" });

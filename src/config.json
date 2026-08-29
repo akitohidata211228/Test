@@ -1249,6 +1249,62 @@
         ]
       },
       {
+        "name": "Bilibili.tv Downloader",
+        "endpoint": "/api/download/bilibili",
+        "filename": "bilibili",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link bilibili.tv / Bstation, short link (b23.tv, bili.im), atau ID mentah"
+          },
+          {
+            "name": "quality",
+            "required": false,
+            "description": "Saring satu kualitas: 144P 240P 360P 480P 720P 1080P, 1080P HD, 1080P 60FPS, 4K"
+          },
+          {
+            "name": "cookie",
+            "required": false,
+            "description": "Cookie akun premium untuk buka kualitas 1080P+ (default dari env BILIBILI_COOKIE)"
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "description": "Locale bilibili.tv, default id_ID"
+          }
+        ]
+      },
+      {
+        "name": "Bilibili.tv Downloader",
+        "endpoint": "/api/download/bilibili",
+        "filename": "bilibili",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link bilibili.tv / Bstation, short link (b23.tv, bili.im), atau ID mentah"
+          },
+          {
+            "name": "quality",
+            "required": false,
+            "description": "Saring satu kualitas: 144P 240P 360P 480P 720P 1080P, 1080P HD, 1080P 60FPS, 4K"
+          },
+          {
+            "name": "cookie",
+            "required": false,
+            "description": "Cookie akun premium untuk buka kualitas 1080P+ (default dari env BILIBILI_COOKIE)"
+          },
+          {
+            "name": "locale",
+            "required": false,
+            "description": "Locale bilibili.tv, default id_ID"
+          }
+        ]
+      },
+      {
         "name": "TikTok Downloader",
         "endpoint": "/api/download/tiktok",
         "filename": "tiktok",
