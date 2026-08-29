@@ -3,16 +3,46 @@
   Kredit scraper: siputzx. Dipasang di sini lewat adapter descriptor src/autoload.ts.
 */
 import axios from "axios"
-import * as cheerio from "cheerio"
 
+/*
+  Dulu ini nyeruput HTML id.m.wikipedia.org dan ngambil #mf-section-0.
+  Per 29 Agustus 2026 dua-duanya sudah nggak jalan: tanpa User-Agent Wikimedia
+  balas 403, dan /wiki/<judul> versi mobile di-redirect ke desktop yang
+  markup-nya Parsoid (paragraf dibungkus <section>), jadi selector lamanya
+  selalu kosong -> semua query dibalas "artikel tidak ditemukan".
+
+  Sekarang pakai MediaWiki API resmi: kontraknya stabil, redirect + normalisasi
+  judul ditangani server (prabowo -> Prabowo Subianto), dan responsenya ~2 KB
+  bukan 2 MB. Bentuk data yang dikembalikan tetap { wiki, thumb }.
+*/
 async function wikipediaScraper(query: string): Promise<any> {
   try {
-    const response = await axios.get(`https://id.m.wikipedia.org/wiki/${encodeURIComponent(query)}`, {
+    const response = await axios.get("https://id.wikipedia.org/w/api.php", {
       timeout: 30000,
+      params: {
+        action: "query",
+        format: "json",
+        prop: "extracts|pageimages",
+        exintro: 1,
+        explaintext: 1,
+        redirects: 1,
+        piprop: "original|thumbnail",
+        pithumbsize: 600,
+        titles: query,
+      },
+      // Wikimedia wajib minta User-Agent, kalau nggak dibalas 403.
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "Accept-Language": "id-ID,id;q=0.9",
+      },
     })
-    const $ = cheerio.load(response.data)
-    const wiki = $("#mf-section-0").find("p").text().trim()
-    const thumb = $('meta[property="og:image"]').attr("content")
+
+    const pages = response.data?.query?.pages || {}
+    // Key-nya pageid, dan halaman yang nggak ada dapat key negatif + flag "missing".
+    const page: any = Object.values(pages).find((p: any) => p && !p.missing)
+    const wiki = String(page?.extract || "").trim()
+    const thumb = page?.original?.source || page?.thumbnail?.source
 
     if (!wiki) {
       throw new Error("Artikel tidak ditemukan atau tidak memiliki deskripsi.")

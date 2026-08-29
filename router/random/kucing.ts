@@ -21,7 +21,13 @@ const createImageResponse = (buffer: Buffer, filename: string | null = null) => 
 
 async function getRandomCatImage() {
   try {
-    const API_URL = "https://api.sefinek.net/api/v2/random/animal/cat"
+    /*
+      Upstream lama (api.sefinek.net) rate-limit-nya galak: probe pertama 200,
+      sesudahnya 403 terus, jadi endpoint ini praktis selalu gagal.
+      Diganti TheCatAPI yang publik + tanpa kunci. Bentuk hasilnya array,
+      URL gambar ada di [0].url.
+    */
+    const API_URL = "https://api.thecatapi.com/v1/images/search"
     const { data } = await axios.get(API_URL, {
       timeout: 30000,
       headers: {
@@ -29,11 +35,11 @@ async function getRandomCatImage() {
       },
     })
 
-    if (!data || !data.message) {
+    const imageUrl = Array.isArray(data) ? data[0]?.url : data?.message
+    if (!imageUrl) {
       throw new Error("Invalid response from external API: Missing image URL.")
     }
 
-    const imageUrl = data.message
     const imageResponse = await axios.get(imageUrl, {
       responseType: "arraybuffer",
       timeout: 30000,

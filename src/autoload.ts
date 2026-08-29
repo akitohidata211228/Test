@@ -138,8 +138,20 @@ const dropExistingLayer = (target: any, route: any) => {
 */
 const fromDescriptor = (descriptors: any[], route: any) => {
     const wanted = String(route.method || 'GET').toUpperCase();
+
+    /*
+      Satu file bisa isi beberapa descriptor dengan endpoint berbeda
+      (mis. currency/convert punya convert, list, rates, crypto/:symbol).
+      Jadi cocokkan endpoint dulu, method saja nggak cukup — kalau nggak,
+      semuanya kelayan descriptor pertama.
+    */
+    const sameMethod = descriptors.filter(
+        (d: any) => String(d?.metode || d?.method || 'GET').toUpperCase() === wanted
+    );
     const picked =
-        descriptors.find((d: any) => String(d?.metode || d?.method || 'GET').toUpperCase() === wanted) ||
+        sameMethod.find((d: any) => d?.endpoint === route.endpoint) ||
+        descriptors.find((d: any) => d?.endpoint === route.endpoint) ||
+        sameMethod[0] ||
         descriptors[0];
 
     if (!picked || typeof picked.run !== 'function') return null;

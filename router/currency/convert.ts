@@ -766,7 +766,8 @@ export default [
     isMaintenance: false,
     isPublic: true,
     async run({ req }) {
-      const { symbol } = req.query || {}
+      // endpoint-nya /api/currency/crypto/:symbol, jadi baca path param dulu.
+      const symbol = (req.params as any)?.symbol || (req.query as any)?.symbol
 
       if (!symbol) {
         return {
@@ -841,7 +842,7 @@ export default [
     isMaintenance: false,
     isPublic: true,
     async run({ req }) {
-      const { symbol } = req.body || {}
+      const symbol = (req.body || {}).symbol || (req.params as any)?.symbol
 
       if (!symbol) {
         return {

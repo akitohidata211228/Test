@@ -4,27 +4,59 @@
 */
 import axios from "axios"
 
+/*
+  Upstream lama (POST https://www.nslookup.io/api/v1/records) sudah nggak
+  nerima request dari luar situsnya -> semua lookup dibalas "Failed to get
+  response from API". Sekarang query langsung ke DNS-over-HTTPS resmi
+  (Cloudflare / Google), jadi nggak nebeng API internal orang lagi.
+
+  Bentuk hasil dijaga: { domain, dnsServer, records: { A: [], MX: [], ... } }.
+*/
+const DOH: Record<string, string> = {
+  cloudflare: "https://cloudflare-dns.com/dns-query",
+  google: "https://dns.google/resolve",
+}
+
+const TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "SOA", "CAA", "SRV"]
+
 async function scrape(domain: string, dnsServer: string) {
+  const resolver = DOH[String(dnsServer || "cloudflare").toLowerCase()] || DOH.cloudflare
   try {
-    const response = await axios.post(
-      "https://www.nslookup.io/api/v1/records",
-      {
-        domain: domain,
-        dnsServer: dnsServer,
-      },
-      {
-        headers: {
-          "accept": "application/json, text/plain, */*",
-          "content-type": "application/json",
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        },
-        timeout: 30000,
-      },
+    const answers = await Promise.all(
+      TYPES.map(async (type) => {
+        try {
+          const { data } = await axios.get(resolver, {
+            params: { name: domain, type },
+            headers: { accept: "application/dns-json" },
+            timeout: 20000,
+          })
+          // Status 0 = NOERROR; tipe yang nggak ada record-nya balas tanpa Answer.
+          const list = (data?.Answer || [])
+            .filter((a: any) => a?.data)
+            .map((a: any) => ({ name: a.name, ttl: a.TTL, value: String(a.data) }))
+          return [type, list] as const
+        } catch {
+          return [type, []] as const
+        }
+      }),
     )
-    return response.data.result || response.data
+
+    const records: Record<string, any[]> = {}
+    let found = 0
+    for (const [type, list] of answers) {
+      if (!list.length) continue
+      records[type] = list
+      found += list.length
+    }
+
+    if (!found) {
+      throw new Error(`Tidak ada record DNS untuk ${domain}`)
+    }
+
+    return { domain, dnsServer: dnsServer || "cloudflare", records }
   } catch (error: any) {
     console.error("API Error:", error.message)
-    throw new Error("Failed to get response from API")
+    throw new Error(error.message || "Failed to get response from API")
   }
 }
 

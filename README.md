@@ -1,6 +1,6 @@
 # LǐRénXīn API
 
-REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalker, dan tools. **400 endpoint** dalam 21 kategori, dokumentasi interaktif langsung di browser.
+REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalker, dan tools. **283 endpoint** dalam 19 kategori, dokumentasi interaktif langsung di browser.
 
 🔗 **[lirenxin-api.my.id](https://lirenxin-api.my.id)** · [Dokumentasi](https://lirenxin-api.my.id/docs)
 
@@ -10,27 +10,25 @@ REST API gratis berisi downloader, AI, anime, berita, games, info, search, stalk
 
 | Kategori     | Jumlah | Isi                                                                     |
 |--------------|--------|-------------------------------------------------------------------------|
-| `ai`         | 64     | Gemini, Kimi, Meta AI, Llama 3.3, DeepSeek, Qwen, Blackbox, Felo, + text-to-image (Flux, MagicStudio, StabilityAI, SDXL) |
-| `anime`      | 52     | Otakudesu, Samehadaku, Anichin, Oploverz, Auratail, Komikindo — search / detail / episode / download |
-| `search`     | 49     | Brave, DuckDuckGo, Google Images, Pinterest (+ Lens), SoundCloud, Spotify, Apple Music, Wikipedia, KBBI, GSMArena, resep, dll |
-| `tools`      | 38     | QR, TTS, translate, base64, binary, dewatermark, upscale, colorize, DNS, subdomain, kodepos, fake data, ssweb, shorturl |
-| `download`   | 32     | AIO (semua platform), TikTok, Instagram, Facebook, YouTube (+MP3), Rednote, Twitter, CapCut, GDrive, SoundCloud, Spotify, Pinterest, GitHub |
-| `games`      | 27     | Tebak-tebakan: bendera, kabupaten, JKT48, hero ML, dll                  |
-| `random`     | 21     | Gambar random per negara, waifu, neko, kucing, Blue Archive, quotes anime |
-| `berita`     | 20     | CNN, CNBC, Antara, Kompas, Liputan6, Merdeka, Sindo, Suara, Tribun, JKT48 |
+| `search`     | 42     | Brave, Google Images, Pinterest (+ Lens), SoundCloud, Apple Music, Wikipedia, GSMArena, resep, dll |
+| `tools`      | 37     | QR, TTS, translate, base64, binary, dewatermark, upscale, colorize, DNS, subdomain, kodepos, fake data, shorturl |
+| `anime`      | 32     | Otakudesu, Samehadaku, Oploverz, Auratail, Anichin — search / detail / episode / download |
+| `games`      | 24     | Tebak-tebakan: gambar, bendera, lagu, lirik, logo, kata, kimia, JKT48, Free Fire, family100, teka-teki |
 | `primbon`    | 20     | Ramalan jodoh, arti nama, weton, nomor hoki, tafsir mimpi, zodiak       |
-| `stalker`    | 16     | Instagram, TikTok, YouTube, Twitter, Threads, Pinterest, GitHub, Roblox |
-| `cloudflare` | 12     | Workers AI: chat, translate, whisper, sentiment, embedding, image classification |
+| `berita`     | 18     | CNN, CNBC, Antara, Kompas, Liputan6, Merdeka, Sindo, Suara, Tribun      |
+| `download`   | 17     | AIO (TikTok/Douyin/YouTube), TikTok, YouTube (+MP3), Twitter, GDrive, GitHub, SoundCloud, Lahelu |
+| `ai`         | 15     | Gemini (+ lite), Bard, Flux text-to-image, PowerBrain, Muslim AI, Bible AI, Gita |
+| `random`     | 14     | Gambar random per negara, Blue Archive, quotes anime, Lahelu, kucing    |
+| `stalker`    | 14     | TikTok, YouTube, Twitter, Threads, Pinterest, GitHub, Roblox            |
+| `cloudflare` | 10     | Workers AI: chat, translate, sentiment, embedding, image classification |
 | `currency`   | 8      | Konversi fiat + crypto, daftar mata uang, kurs                          |
-| `apk`        | 6      | Playstore, AN1, OpenAPK                                                 |
-| `check`      | 6      | Cek resi, tagihan PLN, paket NPM                                        |
 | `fun`        | 6      | Bahasa alay, fun fact, jagokata                                         |
 | `iloveimg`   | 6      | Remove background, upscale, compress, blur face, konversi JPG/PNG       |
 | `sticker`    | 6      | Sticker.ly (search + detail), Combot                                    |
-| `info`       | 4      | Cuaca, gempa BMKG, hari libur nasional, jadwal TV                       |
+| `apk`        | 4      | AN1, OpenAPK                                                            |
+| `check`      | 4      | Cek resi, paket NPM                                                     |
 | `maker`      | 3      | Brat generator, TextPro                                                 |
-| `imgedit`    | 2      | Cartoon photo, face swap                                                |
-| `get`        | 2      | Preset Alight Motion                                                    |
+| `info`       | 3      | Cuaca, gempa BMKG, jadwal TV                                            |
 
 Sebagian besar endpoint punya dua varian: `GET` (parameter di query) dan `POST` (parameter di body JSON). Keduanya jalan dari playground `/docs`.
 
@@ -66,11 +64,8 @@ npm run pm2          # deploy pakai pm2 (VPS)
 | Platform            | Engine                                     | Hasil                                |
 |---------------------|--------------------------------------------|--------------------------------------|
 | TikTok, Douyin      | `snaptik.fi` (video, slideshow foto, story)| no watermark, watermark, mp3, photos |
-| Instagram           | delegasi ke `router/download/instagram.ts` | media utama                          |
-| Facebook            | delegasi ke `router/download/facebook.ts`  | hd, sd                               |
 | YouTube             | delegasi ke `router/download/youtube.ts`   | mp4 720p                             |
 | YouTube (`format=mp3`) | delegasi ke `router/download/ytmp3.ts`  | mp3                                  |
-| RedNote             | delegasi ke `router/download/rednote.ts`   | daftar media                         |
 
 Semua hasil dinormalisasi ke bentuk yang sama:
 
@@ -97,7 +92,7 @@ Link di luar daftar dibalas `400` beserta field `supported`. Platform yang didel
 
 ## Endpoint hasil port dari apisku
 
-178 file router di `router/` diadaptasi dari koleksi endpoint **[siputzx/apisku](https://github.com/siputzx/apisku)** — kredit scraper sepenuhnya ke siputzx, dan tiap file yang diambil tetap membawa header kreditnya. Aslinya jalan di Bun + Elysia; di sini dipakai apa adanya lewat adapter descriptor di `src/autoload.ts`, jadi nggak ada scraper yang ditulis ulang.
+124 file router di `router/` diadaptasi dari koleksi endpoint **[siputzx/apisku](https://github.com/siputzx/apisku)** — kredit scraper sepenuhnya ke siputzx, dan tiap file yang diambil tetap membawa header kreditnya. Aslinya jalan di Bun + Elysia; di sini dipakai apa adanya lewat adapter descriptor di `src/autoload.ts`.
 
 Yang perlu ditambal supaya jalan di runtime Node/Express:
 
@@ -243,9 +238,31 @@ QRIS diatur lewat `STATIC_QRIS` di `src/qris.ts`. Kalau belum diisi, `/api/creat
 
 ## Catatan
 
-Beberapa endpoint scraping bergantung pada website pihak ketiga. Kalau situs sumbernya berubah struktur atau memblokir IP server, endpoint itu bisa balas error meski kodenya benar.
+Endpoint scraping bergantung pada website pihak ketiga. Kalau situs sumbernya berubah struktur, mati, atau memblokir IP server, endpoint itu balas error meski kodenya benar.
 
-Dari smoke test 156 endpoint `GET` yang punya contoh parameter, sekitar 90 balas sukses dan sisanya gagal di sisi sumber — bukan di kode: host mati (`luminai.my.id`), DNS diblokir dari jaringan lokal (`anichin.forum`, `kbbi.kemdikbud.go.id`), atau balas `403`/`429` ke IP yang dipakai waktu tes (Wikipedia, Spotify, DuckDuckGo, Instagram stalk). Hasilnya bisa beda dari IP server lain, jadi endpoint-nya tetap didaftarkan. Kalau ada yang mati permanen, hapus entry-nya di `src/config.json`.
+### Audit 29 Agustus 2026
+
+Semua endpoint `GET` ditembak dari dua tempat sekaligus (mesin lokal + produksi Vercel), yang gagal diuji ulang dengan parameter yang benar, lalu tiap host upstream-nya dicek DNS (lokal + Google DoH) dan status HTTP-nya. Hasilnya dipisah jadi empat sebab:
+
+**Bug di sisi repo ini — diperbaiki, endpoint hidup lagi:**
+
+| Endpoint | Sebab | Perbaikan |
+|----------|-------|-----------|
+| kategori `cloudflare` + `ai/flux` | 5 dari 7 gateway di pool `src/cfai.ts` mati (3 balas 404, 2 NXDOMAIN) → gagal acak tergantung gateway yang kepilih | pool dipangkas ke 2 gateway yang masih hidup |
+| `/api/currency/list`, `/api/currency/rates`, `/api/currency/crypto/:symbol` | adapter descriptor cuma cocokkan `metode`, jadi 4 descriptor dalam satu file semuanya dilayani descriptor pertama | `src/autoload.ts` cocokkan `endpoint` dulu, baru `metode`; `crypto` juga baca path param |
+| `/api/download/youtube` | engine lama (`iframe.y2meta-uk.com` + `cnv.cx`) balas 403 ke semua request | dipindah ke backend `ytmp3.mobi` yang sama dengan `/api/download/ytmp3` |
+| `/api/download/tiktok` | `snaptik.app` nggak ngasih token lagi | dipindah ke engine `snaptik.fi` yang dipakai `/api/download/aio` |
+| `/api/s/wikipedia` | tanpa User-Agent Wikimedia balas 403, dan selector `#mf-section-0` sudah nggak ada di markup baru | pakai MediaWiki API resmi (`action=query&prop=extracts`) |
+| `/api/tools/dns` | `nslookup.io/api/v1/records` nggak nerima request dari luar situsnya | query langsung ke DNS-over-HTTPS Cloudflare/Google |
+| `/api/r/cats` | `api.sefinek.net` rate-limit galak (403 sesudah request pertama) | pindah ke TheCatAPI |
+
+**Upstream mati permanen — endpoint dihapus.** Host-nya NXDOMAIN global atau di-blackhole: `luminai.my.id`, `llm.siputzx.my.id`, `api.hika.fyi`, `api.waifu.pics`, `kbbi.kemdikbud.go.id` (penggantinya `kbbi.kemendikdasmen.go.id` sekarang pakai login wall), `tanggalan.com`, plus gateway Workers AI pihak ketiga yang dipakai belasan endpoint `ai/*`.
+
+**Kontrak / markup upstream berubah — endpoint dihapus** karena butuh scraper baru, bukan tambalan: `apk/playstore`, `games/tebakkabupaten`, `games/tebakhewan`, `games/tebakheroml` (Cloudflare challenge), `imgedit/*` (`imgedit.ai` hidup tapi endpoint API-nya 404), `komikindo-*`, `anichin-*` (526), `samehadaku/release` + `search`, `download/facebook`, `download/instagram`, `download/rednote`, `d/capcut`, `d/spotify`, `d/snackvideo`, `d/pinterest`, `d/ytpost`, `s/duckduckgo`, `s/spotify`, `search/tiktok`, `r/neko`, `r/seegore`, `r/rumahmisteri`, `random/waifu`, `tools/ssweb`, `check/tagihanpln`, `berita/jkt48`, `get/ampreset`, `ai/cici`, `ai/metaai`, `ai/kimi`, `ai/felo`, `ai/gpt3`, `ai/teachanything`, dan sisanya — total **65 endpoint `GET` + 52 kembaran `POST`** dibuang dari `src/config.json`, 65 file router ikut dihapus. Kategori `get` dan `imgedit` jadi kosong dan dicabut.
+
+Karena scraper `facebook`, `instagram`, dan `rednote` mati semua, `/api/download/aio` sekarang cuma menerima link TikTok, Douyin, dan YouTube — link lain dibalas `400` + daftar `supported`.
+
+**Diblokir per-jaringan, bukan mati — tetap didaftarkan.** Sisa 169 endpoint `GET` diuji lagi: 163 sukses, 6 gagal cuma karena lingkungan tes. `ai/bard`, `ai/gemini`, dan `tools/ttsgoogle` gagal dari jaringan lokal (DNS Google dibajak ISP) tapi jalan di produksi; `stalk/tiktok` dan `tools/subdomains` sebaliknya; `s/pinterest-lens` butuh `PINTEREST_TOKEN` diisi di environment server. Endpoint semacam ini jangan dihapus cuma karena merah di satu tempat.
 
 ---
 

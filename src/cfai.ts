@@ -10,14 +10,15 @@
 
     CLOUDFLARE_AI_URL=https://worker-punyaku.workers.dev
 */
+/*
+  Pool asli isi 7 gateway, tapi 29 Agustus 2026 cuma 2 yang masih hidup:
+  3 balas 404 (worker-nya dihapus) dan 2 domainnya sudah NXDOMAIN. Yang mati
+  dibuang, kalau nggak endpoint cloudflare/* + text-to-image gagal acak
+  tergantung gateway mana yang kepilih.
+*/
 const POOL = [
-    'https://wandering-darkness-6422.apis6.workers.dev',
     'https://sparkling-queen-1b32.apis1.workers.dev',
-    'https://crimson-tooth-0977.proxyserver2.workers.dev',
-    'https://orange-boat-30e1.apis3.workers.dev',
-    'https://round-tree-4e29.apis7.workers.dev',
-    'https://long-recipe-176d.apis4.workers.dev',
-    'https://elkon.proxyserver1.workers.dev'
+    'https://orange-boat-30e1.apis3.workers.dev'
 ];
 
 export const CloudflareAi = (): string =>

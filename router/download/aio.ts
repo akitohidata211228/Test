@@ -9,11 +9,15 @@
 import type { Request, Response } from "express";
 import axios from "axios";
 
-import facebookHandler from "./facebook";
-import instagramHandler from "./instagram";
-import rednoteHandler from "./rednote";
+/*
+  Scraper facebook / instagram / rednote sudah mati semua per 29 Agustus 2026
+  (fb: "Video is private or URL is invalid", ig: upstream 404, rednote: null),
+  jadi file-nya dihapus dan platform-nya dicabut dari sini. Link fb/ig/xhs
+  sekarang jujur dibalas "Link tidak dikenali" + daftar platform yang jalan.
+*/
 import youtubeHandler from "./youtube";
 import ytmp3Handler from "./ytmp3";
+
 
 type MediaType = "video" | "audio" | "image";
 type Media = { type: MediaType; label: string; url: string };
@@ -23,14 +27,8 @@ const HOSTS: Record<string, string> = {
     "tiktok.com": "tiktok",
     "douyin.com": "douyin",
     "iesdouyin.com": "douyin",
-    "instagram.com": "instagram",
-    "facebook.com": "facebook",
-    "fb.watch": "facebook",
-    "fb.me": "facebook",
     "youtube.com": "youtube",
-    "youtu.be": "youtube",
-    "xiaohongshu.com": "rednote",
-    "xhslink.com": "rednote"
+    "youtu.be": "youtube"
 };
 
 const SUPPORTED = Array.from(new Set(Object.values(HOSTS)));
@@ -184,9 +182,6 @@ const delegate = async (platform: string, url: string, format?: string): Promise
     const asMp3 = platform === "youtube" && String(format || "").toLowerCase() === "mp3";
 
     const handlers: Record<string, (req: any, res: any) => any> = {
-        facebook: facebookHandler,
-        instagram: instagramHandler,
-        rednote: rednoteHandler,
         youtube: asMp3 ? ytmp3Handler : youtubeHandler
     };
 
@@ -209,21 +204,7 @@ const delegate = async (platform: string, url: string, format?: string): Promise
     const data = body.data ?? body;
     const medias: Media[] = [];
 
-    if (platform === "facebook") {
-        pushMedia(medias, "video", "hd", data.hd);
-        pushMedia(medias, "video", "sd", data.sd);
-    } else if (platform === "instagram") {
-        const links: string[] = Array.isArray(data.download) ? data.download : [data.download];
-        links.forEach((l, i) => pushMedia(medias, guessType(l || ""), `media ${i + 1}`, l));
-    } else if (platform === "rednote") {
-        const list: any[] = Array.isArray(data.medias) ? data.medias : [];
-        list.forEach((m, i) => {
-            const type: MediaType = /image|photo|jpg|jpeg|png/i.test(String(m?.type || ""))
-                ? "image"
-                : guessType(String(m?.url || ""));
-            pushMedia(medias, type, m?.quality || m?.extension || `media ${i + 1}`, m?.url);
-        });
-    } else {
+    {
         const type: MediaType = data.format === "mp3" ? "audio" : "video";
         const label = data.quality ? `${data.quality}p` : data.format || "media";
         pushMedia(medias, type, label, data.download);

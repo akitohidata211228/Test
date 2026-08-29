@@ -12,24 +12,6 @@
   "tags": {
     "ai": [
       {
-        "name": "Zhuanxin Chat",
-        "endpoint": "/api/ai/zhuanxin",
-        "filename": "zhuanxin",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "Question"
-          },
-          {
-            "name": "session",
-            "required": false,
-            "description": "Session ID"
-          }
-        ]
-      },
-      {
         "name": "Aimage Flux 1 Schnell",
         "endpoint": "/api/ai/flux",
         "filename": "aimage-flux-1-schnell",
@@ -39,45 +21,6 @@
             "name": "prompt",
             "required": true,
             "description": "The prompt for the image generation"
-          }
-        ]
-      },
-      {
-        "name": "Aimage Magicstudio",
-        "endpoint": "/api/ai/magicstudio",
-        "filename": "aimage-magicstudio",
-        "method": "POST",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The text prompt for generating the AI art"
-          }
-        ]
-      },
-      {
-        "name": "Aimage Stabilityai",
-        "endpoint": "/api/ai/stabilityai",
-        "filename": "aimage-stabilityai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt for generating the image"
-          }
-        ]
-      },
-      {
-        "name": "Aimage Stable Diffusion XL Lightning",
-        "endpoint": "/api/ai/stable-diffusion",
-        "filename": "aimage-stable-diffusion-xl-lightning",
-        "method": "POST",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt to generate the image with stable diffusion"
           }
         ]
       },
@@ -144,136 +87,6 @@
         ]
       },
       {
-        "name": "Blackboxai",
-        "endpoint": "/api/ai/blackboxai",
-        "filename": "blackboxai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with BlackboxAI"
-          }
-        ]
-      },
-      {
-        "name": "Blackboxai 2",
-        "endpoint": "/api/ai/blackboxai",
-        "filename": "blackboxai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with BlackboxAI"
-          }
-        ]
-      },
-      {
-        "name": "Cici",
-        "endpoint": "/api/ai/cici",
-        "filename": "ciciai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content or question for CICI AI to process"
-          }
-        ]
-      },
-      {
-        "name": "Ciciai",
-        "endpoint": "/api/ai/cici",
-        "filename": "ciciai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content or question for CICI AI to process"
-          }
-        ]
-      },
-      {
-        "name": "Dbrx Instruct",
-        "endpoint": "/api/ai/dbrx-instruct",
-        "filename": "dbrx-instruct",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with DBRX Instruct"
-          }
-        ]
-      },
-      {
-        "name": "DBRX Instruct",
-        "endpoint": "/api/ai/dbrx-instruct",
-        "filename": "dbrx-instruct",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with DBRX Instruct"
-          }
-        ]
-      },
-      {
-        "name": "Deepseek LLM 67B Chat",
-        "endpoint": "/api/ai/deepseek-llm-67b-chat",
-        "filename": "deepseek-llm-67b-chat",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with DeepSeek LLM 67B Chat"
-          }
-        ]
-      },
-      {
-        "name": "Deepseek LLM 67B Chat 2",
-        "endpoint": "/api/ai/deepseek-llm-67b-chat",
-        "filename": "deepseek-llm-67b-chat",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with DeepSeek LLM 67B Chat"
-          }
-        ]
-      },
-      {
-        "name": "Felo",
-        "endpoint": "/api/ai/felo",
-        "filename": "felo",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The query to process with Felo"
-          }
-        ]
-      },
-      {
-        "name": "Felo 2",
-        "endpoint": "/api/ai/felo",
-        "filename": "felo",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The query to process with Felo"
-          }
-        ]
-      },
-      {
         "name": "Flux",
         "endpoint": "/api/ai/flux",
         "filename": "aimage-flux-1-schnell",
@@ -283,46 +96,6 @@
             "name": "prompt",
             "required": true,
             "description": "Text prompt for image generation"
-          }
-        ]
-      },
-      {
-        "name": "G4F GPT OSS",
-        "endpoint": "/api/ai/gpt-oss",
-        "filename": "g4f-gpt-oss",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "G4F Gpt40",
-        "endpoint": "/api/ai/gpt-4o",
-        "filename": "g4f-gpt40",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Gandalf",
-        "endpoint": "/api/ai/gandalf",
-        "filename": "gandalf",
-        "method": "POST",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt to send to Gandalf Lakera"
-          }
-        ]
-      },
-      {
-        "name": "Gandalf Lakera",
-        "endpoint": "/api/ai/gandalf",
-        "filename": "gandalf",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt to send to Gandalf Lakera"
           }
         ]
       },
@@ -427,308 +200,6 @@
         ]
       },
       {
-        "name": "GPT 4O",
-        "endpoint": "/api/ai/gpt-4o",
-        "filename": "g4f-gpt40",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The system prompt for the GPT-4o model"
-          },
-          {
-            "name": "content",
-            "required": true,
-            "description": "The user message for the GPT-4o model"
-          }
-        ]
-      },
-      {
-        "name": "GPT OSS",
-        "endpoint": "/api/ai/gpt-oss",
-        "filename": "g4f-gpt-oss",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The system prompt for the GPT-OSS-120B model"
-          },
-          {
-            "name": "content",
-            "required": true,
-            "description": "The user message for the GPT-OSS-120B model"
-          }
-        ]
-      },
-      {
-        "name": "Gpt3",
-        "endpoint": "/api/ai/gpt3",
-        "filename": "gpt3",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The system prompt for the GPT-3 model"
-          },
-          {
-            "name": "content",
-            "required": true,
-            "description": "The user message for the GPT-3 model"
-          }
-        ]
-      },
-      {
-        "name": "Gpt3 2",
-        "endpoint": "/api/ai/gpt3",
-        "filename": "gpt3",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Hikachat",
-        "endpoint": "/api/ai/hikachat",
-        "filename": "hix",
-        "method": "GET",
-        "params": [
-          {
-            "name": "keyword",
-            "required": true,
-            "description": "The keyword to search for (minimum 2 characters)"
-          },
-          {
-            "name": "language",
-            "required": false,
-            "description": "The language code for the response (e.g., 'en', 'id')"
-          }
-        ]
-      },
-      {
-        "name": "HIX",
-        "endpoint": "/api/ai/hikachat",
-        "filename": "hix",
-        "method": "POST",
-        "params": [
-          {
-            "name": "keyword",
-            "required": true,
-            "description": "The keyword to search for (minimum 2 characters)"
-          },
-          {
-            "name": "language",
-            "required": false,
-            "description": "The language code for the response (e.g., 'en', 'id')"
-          }
-        ]
-      },
-      {
-        "name": "Kimi",
-        "endpoint": "/api/ai/kimi",
-        "filename": "kimi",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Kimi 2",
-        "endpoint": "/api/ai/kimi",
-        "filename": "kimi",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Latukam",
-        "endpoint": "/api/ai/latukam",
-        "filename": "latukam",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI"
-          }
-        ]
-      },
-      {
-        "name": "Latukam 2",
-        "endpoint": "/api/ai/latukam",
-        "filename": "latukam",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI"
-          }
-        ]
-      },
-      {
-        "name": "Llama3 3",
-        "endpoint": "/api/ai/llama33",
-        "filename": "Llama3-3",
-        "method": "POST",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "Prompt for Llama 3.3"
-          },
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text input for Llama 3.3"
-          }
-        ]
-      },
-      {
-        "name": "Llama3.3",
-        "endpoint": "/api/ai/llama33",
-        "filename": "Llama3-3",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "Prompt for Llama 3.3"
-          },
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text input for Llama 3.3"
-          }
-        ]
-      },
-      {
-        "name": "Luminai",
-        "endpoint": "/api/ai/luminai",
-        "filename": "luminai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Luminai 2",
-        "endpoint": "/api/ai/luminai",
-        "filename": "luminai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Magicstudio",
-        "endpoint": "/api/ai/magicstudio",
-        "filename": "aimage-magicstudio",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The text prompt for generating the AI art"
-          }
-        ]
-      },
-      {
-        "name": "Meta AI",
-        "endpoint": "/api/ai/metaai",
-        "filename": "metaai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The query to send to Meta AI"
-          }
-        ]
-      },
-      {
-        "name": "Meta Llama 3.3 70B Instruct Turbo",
-        "endpoint": "/api/ai/meta-llama-33-70B-instruct-turbo",
-        "filename": "Meta-Llama-3.3-70B-Instruct-Turbo",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Meta Llama 3.3 70B Instruct Turbo 2",
-        "endpoint": "/api/ai/meta-llama-33-70B-instruct-turbo",
-        "filename": "Meta-Llama-3.3-70B-Instruct-Turbo",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Metaai",
-        "endpoint": "/api/ai/metaai",
-        "filename": "metaai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The query to send to Meta AI"
-          }
-        ]
-      },
-      {
-        "name": "Mistral 7B Instruct V0.2",
-        "endpoint": "/api/ai/mistral-7b-instruct-v0.2",
-        "filename": "mistral-7B-Instruct-v02",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Mistral 7B Instruct V02",
-        "endpoint": "/api/ai/mistral-7b-instruct-v0.2",
-        "filename": "mistral-7B-Instruct-v02",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
         "name": "Muslimai",
         "endpoint": "/api/ai/muslimai",
         "filename": "muslimai",
@@ -755,32 +226,6 @@
         ]
       },
       {
-        "name": "Nous Hermes",
-        "endpoint": "/api/ai/nous-hermes",
-        "filename": "Nous-Hermes-2-Mixtral-8x7B-DPO",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Nous Hermes 2 Mixtral 8x7B DPO",
-        "endpoint": "/api/ai/nous-hermes",
-        "filename": "Nous-Hermes-2-Mixtral-8x7B-DPO",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
         "name": "Powerbrainai",
         "endpoint": "/api/ai/powerbrainai",
         "filename": "powerbrainai",
@@ -803,110 +248,6 @@
             "name": "query",
             "required": true,
             "description": "The query to send to PowerBrain AI"
-          }
-        ]
-      },
-      {
-        "name": "Qwen QwQ 32B Preview",
-        "endpoint": "/api/ai/qwq-32b-preview",
-        "filename": "qwq-32B-Preview",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "QWQ 32B Preview",
-        "endpoint": "/api/ai/qwq-32b-preview",
-        "filename": "qwq-32B-Preview",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Sahabat AI",
-        "endpoint": "/api/ai/sahabat-ai",
-        "filename": "sahabatai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Sahabatai",
-        "endpoint": "/api/ai/sahabat-ai",
-        "filename": "sahabatai",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI processing"
-          }
-        ]
-      },
-      {
-        "name": "Stabilityai",
-        "endpoint": "/api/ai/stabilityai",
-        "filename": "aimage-stabilityai",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt for generating the image"
-          }
-        ]
-      },
-      {
-        "name": "Stable Diffusion",
-        "endpoint": "/api/ai/stable-diffusion",
-        "filename": "aimage-stable-diffusion-xl-lightning",
-        "method": "GET",
-        "params": [
-          {
-            "name": "prompt",
-            "required": true,
-            "description": "The prompt to generate the image with stable diffusion"
-          }
-        ]
-      },
-      {
-        "name": "Teach Anything",
-        "endpoint": "/api/ai/teachanything",
-        "filename": "teach-anything",
-        "method": "GET",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "Text content for AI explanation"
-          }
-        ]
-      },
-      {
-        "name": "Teach Anything 2",
-        "endpoint": "/api/ai/teachanything",
-        "filename": "teach-anything",
-        "method": "POST",
-        "params": [
-          {
-            "name": "content",
-            "required": true,
-            "description": "The text content to process with teach anything"
           }
         ]
       }
@@ -1068,30 +409,9 @@
         "params": []
       },
       {
-        "name": "Tebak Hero ML",
-        "endpoint": "/api/games/tebakheroml",
-        "filename": "tebakheroml",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Tebak Hewan",
-        "endpoint": "/api/games/tebakhewan",
-        "filename": "tebakhewan",
-        "method": "GET",
-        "params": []
-      },
-      {
         "name": "Tebak JKT48",
         "endpoint": "/api/games/tebakjkt",
         "filename": "tebakjkt48",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Tebak Kabupaten",
-        "endpoint": "/api/games/kabupaten",
-        "filename": "tebakkabupaten",
         "method": "GET",
         "params": []
       },
@@ -1202,13 +522,6 @@
         "params": []
       },
       {
-        "name": "Hari Libur Indonesia",
-        "endpoint": "/api/info/event-Indonesia",
-        "filename": "hari-libur",
-        "method": "GET",
-        "params": []
-      },
-      {
         "name": "Jadwal TV",
         "endpoint": "/api/info/jadwaltv",
         "filename": "jadwaltv",
@@ -1266,13 +579,6 @@
         "params": []
       },
       {
-        "name": "Random Waifu",
-        "endpoint": "/api/random/waifu",
-        "filename": "waifu",
-        "method": "GET",
-        "params": []
-      },
-      {
         "name": "Animequotes",
         "endpoint": "/api/r/quotesanime",
         "filename": "quotesanime",
@@ -1308,24 +614,10 @@
         "params": []
       },
       {
-        "name": "Neko",
-        "endpoint": "/api/r/neko",
-        "filename": "neko",
-        "method": "POST",
-        "params": []
-      },
-      {
         "name": "Quotesanime",
         "endpoint": "/api/r/quotesanime",
         "filename": "quotesanime",
         "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Random Anime Neko",
-        "endpoint": "/api/r/neko",
-        "filename": "neko",
-        "method": "GET",
         "params": []
       },
       {
@@ -1341,55 +633,9 @@
         "filename": "kucing",
         "method": "GET",
         "params": []
-      },
-      {
-        "name": "Rumah Misteri",
-        "endpoint": "/api/r/rumahmisteri",
-        "filename": "rumah-misteri",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Rumah Misteri 2",
-        "endpoint": "/api/r/rumahmisteri",
-        "filename": "rumah-misteri",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Seegore",
-        "endpoint": "/api/r/seegore",
-        "filename": "seegore",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Seegore 2",
-        "endpoint": "/api/r/seegore",
-        "filename": "seegore",
-        "method": "POST",
-        "params": []
       }
     ],
     "tools": [
-      {
-        "name": "Screenshot Web",
-        "endpoint": "/api/tools/ssweb",
-        "filename": "ssweb",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Website URL"
-          },
-          {
-            "name": "type",
-            "required": false,
-            "description": "mobile | desktop"
-          }
-        ]
-      },
       {
         "name": "Short URL",
         "endpoint": "/api/tools/shorturl",
@@ -1990,32 +1236,6 @@
         ]
       },
       {
-        "name": "Facebook Downloader",
-        "endpoint": "/api/download/facebook",
-        "filename": "facebook",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Facebook URL"
-          }
-        ]
-      },
-      {
-        "name": "Instagram Downloader",
-        "endpoint": "/api/download/instagram",
-        "filename": "instagram",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Instagram URL"
-          }
-        ]
-      },
-      {
         "name": "YouTube Downloader",
         "endpoint": "/api/download/youtube",
         "filename": "youtube",
@@ -2055,19 +1275,6 @@
         ]
       },
       {
-        "name": "RedNote Downloader",
-        "endpoint": "/api/download/rednote",
-        "filename": "rednote",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "RedNote / Xiaohongshu URL"
-          }
-        ]
-      },
-      {
         "name": "YouTube To MP3 / MP4",
         "endpoint": "/api/download/ytmp3",
         "filename": "ytmp3",
@@ -2082,58 +1289,6 @@
             "name": "format",
             "required": false,
             "description": "mp3 (default) atau mp4"
-          }
-        ]
-      },
-      {
-        "name": "Capcut",
-        "endpoint": "/api/d/capcut",
-        "filename": "capcut",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "CapCut video URL"
-          }
-        ]
-      },
-      {
-        "name": "Capcut 2",
-        "endpoint": "/api/d/capcut",
-        "filename": "capcut",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The CapCut video URL to fetch metadata from"
-          }
-        ]
-      },
-      {
-        "name": "Capcutv2",
-        "endpoint": "/api/d/capcutv2",
-        "filename": "capcutv2",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "CapCut video URL"
-          }
-        ]
-      },
-      {
-        "name": "Capcutv2 2",
-        "endpoint": "/api/d/capcutv2",
-        "filename": "capcutv2",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The CapCut video URL to download"
           }
         ]
       },
@@ -2216,32 +1371,6 @@
         ]
       },
       {
-        "name": "Pinterest",
-        "endpoint": "/api/d/pinterest",
-        "filename": "pinterest",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Pinterest URL"
-          }
-        ]
-      },
-      {
-        "name": "Pinterest 2",
-        "endpoint": "/api/d/pinterest",
-        "filename": "pinterest",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Pinterest URL"
-          }
-        ]
-      },
-      {
         "name": "Scdl",
         "endpoint": "/api/d/soundcloud",
         "filename": "scdl",
@@ -2281,32 +1410,6 @@
         ]
       },
       {
-        "name": "Snack Video",
-        "endpoint": "/api/d/snackvideo",
-        "filename": "snackvideo",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Snack Video URL"
-          }
-        ]
-      },
-      {
-        "name": "Snackvideo",
-        "endpoint": "/api/d/snackvideo",
-        "filename": "snackvideo",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Snack Video URL"
-          }
-        ]
-      },
-      {
         "name": "SoundCloud",
         "endpoint": "/api/d/soundcloud",
         "filename": "scdl",
@@ -2316,32 +1419,6 @@
             "name": "url",
             "required": true,
             "description": "SoundCloud track URL"
-          }
-        ]
-      },
-      {
-        "name": "Spotify",
-        "endpoint": "/api/d/spotify",
-        "filename": "spotify",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Spotify URL"
-          }
-        ]
-      },
-      {
-        "name": "Spotify 2",
-        "endpoint": "/api/d/spotify",
-        "filename": "spotify",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Spotify URL"
           }
         ]
       },
@@ -2370,32 +1447,6 @@
             "description": "Twitter video URL"
           }
         ]
-      },
-      {
-        "name": "Youtube Community",
-        "endpoint": "/api/d/ytpost",
-        "filename": "ytpost",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the YouTube channel's community tab"
-          }
-        ]
-      },
-      {
-        "name": "Ytpost",
-        "endpoint": "/api/d/ytpost",
-        "filename": "ytpost",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the YouTube channel's community tab"
-          }
-        ]
       }
     ],
     "search": [
@@ -2422,19 +1473,6 @@
             "name": "q",
             "required": true,
             "description": "Judul film yang ingin dicari"
-          }
-        ]
-      },
-      {
-        "name": "TikTok Search",
-        "endpoint": "/api/search/tiktok",
-        "filename": "tiktok",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "Query"
           }
         ]
       },
@@ -2581,52 +1619,6 @@
         ]
       },
       {
-        "name": "Duckduckgo",
-        "endpoint": "/api/s/duckduckgo",
-        "filename": "duckduckgo",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query string"
-          },
-          {
-            "name": "kl",
-            "required": false,
-            "description": "Country/region code (e.g., 'au-en', 'id-en')"
-          },
-          {
-            "name": "df",
-            "required": false,
-            "description": "Time filter ('d'=day, 'w'=week, 'm'=month, 'y'=year)"
-          }
-        ]
-      },
-      {
-        "name": "Duckduckgo 2",
-        "endpoint": "/api/s/duckduckgo",
-        "filename": "duckduckgo",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query string"
-          },
-          {
-            "name": "kl",
-            "required": false,
-            "description": "Country/region code (e.g., 'au-en', 'id-en')"
-          },
-          {
-            "name": "df",
-            "required": false,
-            "description": "Time filter ('d'=day, 'w'=week, 'm'=month, 'y'=year)"
-          }
-        ]
-      },
-      {
         "name": "Gitagram",
         "endpoint": "/api/s/gitagram",
         "filename": "gitgram",
@@ -2724,32 +1716,6 @@
             "name": "query",
             "required": true,
             "description": "The search query for mobile phones (e.g., 'iphone', 'samsung galaxy')"
-          }
-        ]
-      },
-      {
-        "name": "Kbbi",
-        "endpoint": "/api/s/kbbi",
-        "filename": "kbbi",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "The word to search in KBBI"
-          }
-        ]
-      },
-      {
-        "name": "Kbbi 2",
-        "endpoint": "/api/s/kbbi",
-        "filename": "kbbi",
-        "method": "POST",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "The word to search in KBBI"
           }
         ]
       },
@@ -3045,32 +2011,6 @@
         ]
       },
       {
-        "name": "Spotify",
-        "endpoint": "/api/s/spotify",
-        "filename": "spotify",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Search query"
-          }
-        ]
-      },
-      {
-        "name": "Spotify 2",
-        "endpoint": "/api/s/spotify",
-        "filename": "spotify",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query for Spotify tracks."
-          }
-        ]
-      },
-      {
         "name": "Wikipedia",
         "endpoint": "/api/s/wikipedia",
         "filename": "wikipedia",
@@ -3098,112 +2038,6 @@
       }
     ],
     "anime": [
-      {
-        "name": "Anichin Detail",
-        "endpoint": "/api/anime/anichin-detail",
-        "filename": "anichin-detail",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Detail 2",
-        "endpoint": "/api/anime/anichin-detail",
-        "filename": "anichin-detail",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Download",
-        "endpoint": "/api/anime/anichin-download",
-        "filename": "anichin-download",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime detail page URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Download 2",
-        "endpoint": "/api/anime/anichin-download",
-        "filename": "anichin-download",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime detail page URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Episode",
-        "endpoint": "/api/anime/anichin-episode",
-        "filename": "anichin-episode",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime page URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Episode 2",
-        "endpoint": "/api/anime/anichin-episode",
-        "filename": "anichin-episode",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime page URL"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Latest",
-        "endpoint": "/api/anime/anichin-latest",
-        "filename": "anichin-latest",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Anichin Latest 2",
-        "endpoint": "/api/anime/anichin-latest",
-        "filename": "anichin-latest",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Anichin Popular",
-        "endpoint": "/api/anime/anichin-popular",
-        "filename": "anichin-popular",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Anichin Popular 2",
-        "endpoint": "/api/anime/anichin-popular",
-        "filename": "anichin-popular",
-        "method": "POST",
-        "params": []
-      },
       {
         "name": "Anichin Search",
         "endpoint": "/api/anime/anichin-search",
@@ -3307,84 +2141,6 @@
             "name": "query",
             "required": true,
             "description": "The search query for anime"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Detail",
-        "endpoint": "/api/anime/komikindo-detail",
-        "filename": "komikindo-komikindo-detail",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the anime detail page on Komikindo"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Download",
-        "endpoint": "/api/anime/komikindo-download",
-        "filename": "komikindo-komikindo-download",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the Komikindo chapter page"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Komikindo Detail",
-        "endpoint": "/api/anime/komikindo-detail",
-        "filename": "komikindo-komikindo-detail",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the anime detail page on Komikindo"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Komikindo Download",
-        "endpoint": "/api/anime/komikindo-download",
-        "filename": "komikindo-komikindo-download",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the Komikindo chapter page"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Komikindo Serach",
-        "endpoint": "/api/anime/komikindo-search",
-        "filename": "komikindo-komikindo-serach",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query for anime on Komikindo"
-          }
-        ]
-      },
-      {
-        "name": "Komikindo Search",
-        "endpoint": "/api/anime/komikindo-search",
-        "filename": "komikindo-komikindo-serach",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query for anime on Komikindo"
           }
         ]
       },
@@ -3637,46 +2393,6 @@
         "filename": "samehadaku-latest",
         "method": "POST",
         "params": []
-      },
-      {
-        "name": "Samehadaku Release",
-        "endpoint": "/api/anime/samehadaku/release",
-        "filename": "samehadaku-release",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Samehadaku Release 2",
-        "endpoint": "/api/anime/samehadaku/release",
-        "filename": "samehadaku-release",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Samehadaku Search",
-        "endpoint": "/api/anime/samehadaku/search",
-        "filename": "samehadaku-serach",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Anime search query"
-          }
-        ]
-      },
-      {
-        "name": "Samehadaku Serach",
-        "endpoint": "/api/anime/samehadaku/search",
-        "filename": "samehadaku-serach",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Anime search query"
-          }
-        ]
       }
     ],
     "apk": [
@@ -3731,32 +2447,6 @@
             "description": "The search query for applications on OpenAPK.net"
           }
         ]
-      },
-      {
-        "name": "Playstore",
-        "endpoint": "/api/apk/playstore",
-        "filename": "playstore",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Search query for applications"
-          }
-        ]
-      },
-      {
-        "name": "Playstore 2",
-        "endpoint": "/api/apk/playstore",
-        "filename": "playstore",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query for applications on Google Play Store"
-          }
-        ]
       }
     ],
     "berita": [
@@ -3799,20 +2489,6 @@
         "name": "CNN Indonesia",
         "endpoint": "/api/berita/cnn",
         "filename": "cnn",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Jkt48",
-        "endpoint": "/api/berita/jkt48",
-        "filename": "jkt48",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Jkt48 News",
-        "endpoint": "/api/berita/jkt48",
-        "filename": "jkt48",
         "method": "GET",
         "params": []
       },
@@ -3903,19 +2579,6 @@
     ],
     "check": [
       {
-        "name": "Cektagihanpln",
-        "endpoint": "/api/check/tagihanpln",
-        "filename": "cektagihanpln",
-        "method": "POST",
-        "params": [
-          {
-            "name": "nopel",
-            "required": true,
-            "description": "Nomor pelanggan PLN"
-          }
-        ]
-      },
-      {
         "name": "Check Resi",
         "endpoint": "/api/check/resi",
         "filename": "checkresi",
@@ -3974,19 +2637,6 @@
             "name": "packageName",
             "required": true,
             "description": "The name of the NPM package"
-          }
-        ]
-      },
-      {
-        "name": "Tagihan Listrik",
-        "endpoint": "/api/check/tagihanpln",
-        "filename": "cektagihanpln",
-        "method": "GET",
-        "params": [
-          {
-            "name": "nopel",
-            "required": true,
-            "description": "Nomor pelanggan PLN"
           }
         ]
       }
@@ -4196,42 +2846,6 @@
             "description": "Custom AI model to use for translation"
           }
         ]
-      },
-      {
-        "name": "Whisper",
-        "endpoint": "/api/cf/whisper",
-        "filename": "whisper",
-        "method": "GET",
-        "params": [
-          {
-            "name": "audioUrl",
-            "required": true,
-            "description": "The URL of the audio file to transcribe"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for speech-to-text"
-          }
-        ]
-      },
-      {
-        "name": "Whisper 2",
-        "endpoint": "/api/cf/whisper",
-        "filename": "whisper",
-        "method": "POST",
-        "params": [
-          {
-            "name": "audioUrl",
-            "required": true,
-            "description": "The URL of the audio file to transcribe"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for speech-to-text"
-          }
-        ]
       }
     ],
     "currency": [
@@ -4416,34 +3030,6 @@
         ]
       }
     ],
-    "get": [
-      {
-        "name": "Alightmotion",
-        "endpoint": "/api/get/ampreset",
-        "filename": "alightmotion",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Alight Motion project URL (e.g., https://alight.link/u/UID/p/PID)"
-          }
-        ]
-      },
-      {
-        "name": "Detail Alight Motion Preset",
-        "endpoint": "/api/get/ampreset",
-        "filename": "alightmotion",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Alight Motion project URL (e.g., https://alight.link/u/UID/p/PID)"
-          }
-        ]
-      }
-    ],
     "iloveimg": [
       {
         "name": "Blurface",
@@ -4525,49 +3111,6 @@
             "name": "scale",
             "required": false,
             "description": "Upscale factor (2 or 4). Defaults to 2."
-          }
-        ]
-      }
-    ],
-    "imgedit": [
-      {
-        "name": "Convert Photo",
-        "endpoint": "/api/imgedit/convphoto",
-        "filename": "carton",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          },
-          {
-            "name": "template",
-            "required": true,
-            "description": "The cartoon template to apply. Available: sketch_v2, anime."
-          },
-          {
-            "name": "style",
-            "required": true,
-            "description": "The specific style within the chosen template. Examples for sketch_v2: manga_sketch, ink_painting. Examples for anime: color_rough, 3d."
-          }
-        ]
-      },
-      {
-        "name": "Face Swap",
-        "endpoint": "/api/imgedit/faceswap",
-        "filename": "faceswap",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image1",
-            "required": true,
-            "description": "URL of the first image (main image to swap face into)."
-          },
-          {
-            "name": "image2",
-            "required": true,
-            "description": "URL of the second image (image containing the face to be swapped)."
           }
         ]
       }
@@ -5068,32 +3611,6 @@
             "name": "user",
             "required": true,
             "description": "GitHub username"
-          }
-        ]
-      },
-      {
-        "name": "Instagram",
-        "endpoint": "/api/stalk/instagram",
-        "filename": "Instagram",
-        "method": "GET",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The Instagram username"
-          }
-        ]
-      },
-      {
-        "name": "Instagram 2",
-        "endpoint": "/api/stalk/instagram",
-        "filename": "Instagram",
-        "method": "POST",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The Instagram username"
           }
         ]
       },
