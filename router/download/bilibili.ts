@@ -210,6 +210,13 @@ export async function getBilibiliTvStreams(
     if (isGeoBlocked(data.code, msg))
       throw fail(`Dibatasi wilayah: IP server nggak diizinkan bilibili.tv (${msg}). Isi env PROXY_URL.`, 451)
     if ([10004004, 10004005, 10023006].includes(data.code)) throw fail("Butuh login / premium: " + msg, 403)
+    /*
+      -404 keluar untuk dua hal yang nggak bisa dibedakan dari respon: ID salah,
+      dan konten yang nggak kelihatan dari wilayah IP pemanggil (jalur /play/
+      balas ini, bukan pesan wilayah, padahal ep_id yang sama jalan dari IP lain).
+    */
+    if (data.code === -404)
+      throw fail("Konten nggak ditemukan — cek ID/episode-nya, atau isi env PROXY_URL kalau IP server dibatasi wilayah", 404)
     throw fail(`API Error: ${msg} (code ${data.code})`)
   }
 
