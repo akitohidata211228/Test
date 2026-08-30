@@ -127,7 +127,7 @@ Waktu mengunduh, header `Referer` itu **wajib** dikirim — CDN bilibili nolak r
 
 Kualitas 1080P ke atas hampir selalu masuk `locked_qualities` (butuh akun premium). Isi env `BILIBILI_COOKIE` atau kirim `?cookie=SESSDATA=...` untuk membukanya; field `cookie_status` menandai cookie-nya masih valid atau sudah kedaluwarsa. Kalau kontennya premium penuh, API balas `403` dengan pesan "Butuh login / premium".
 
-> **Batasan wilayah.** bilibili.tv menyaring berdasarkan IP pemanggil. Dari IP rumah / VPS Asia endpoint ini jalan normal, tapi dari IP datacenter Vercel (US) semua link dibalas `451` — API bilibili-nya sendiri yang menolak (`版权地区受限`). Obatnya isi env `PROXY_URL` dengan proxy di wilayah yang diizinkan, sama seperti endpoint lain yang IP Vercel-nya diblokir.
+> **Batasan wilayah.** bilibili.tv menyaring berdasarkan IP pemanggil. Dari IP rumah / VPS Asia endpoint ini jalan normal, tapi dari IP datacenter Vercel (US) semua link dibalas `451` — API bilibili-nya sendiri yang menolak (`版权地区受限` / kode `10004001`). Obatnya isi env `BILIBILI_PROXY_URL` dengan proxy di wilayah yang diizinkan; kalau kosong, `PROXY_URL` yang global dipakai sebagai cadangan.
 
 ---
 
@@ -256,6 +256,7 @@ Semua opsional:
 | `CLOUDFLARE_AI_URL` | Gateway Workers AI untuk kategori `cloudflare` + endpoint text-to-image | pool bawaan |
 | `PINTEREST_TOKEN`   | Token API Pinterest untuk `/api/s/pinterest-lens` (opsional: `PINTEREST_COOKIE`) | kosong  |
 | `BILIBILI_COOKIE`   | Cookie premium bilibili.tv untuk buka kualitas 1080P+ (`SESSDATA=...; bili_jct=...`) | kosong  |
+| `BILIBILI_PROXY_URL`| Prefix proxy khusus `/api/download/bilibili` (bilibili.tv blokir IP datacenter) | isi `PROXY_URL` |
 | `YTMP3_MAX_POLL`    | Batas polling `/api/download/ytmp3` (×1.5 detik)  | `18`    |
 
 QRIS diatur lewat `STATIC_QRIS` di `src/qris.ts`. Kalau belum diisi, `/api/create-payment` balas `503` dan halaman donasi tetap aman dibuka.

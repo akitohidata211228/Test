@@ -13,8 +13,8 @@
   Catatan wilayah: bilibili.tv memfilter berdasarkan IP pemanggil. Dari IP
   datacenter (mis. Vercel US) API-nya balas "版权地区受限" / "Kesalahan tidak
   diketahui" untuk semua link, padahal dari IP rumah/VPS Asia jalan normal.
-  Obatnya isi env PROXY_URL (dipakai juga oleh router lain yang IP-nya diblokir),
-  bukan mengubah scrapernya.
+  Obatnya isi env BILIBILI_PROXY_URL (atau PROXY_URL yang dipakai bareng router
+  lain) dengan proxy di wilayah yang diizinkan, bukan mengubah scrapernya.
 */
 import type { Request, Response } from "express"
 import axios from "axios"
@@ -69,6 +69,14 @@ const fmtDur = (ms: any) => {
 const isHevc = (c = "") => /hev|hvc/i.test(c)
 
 const PLAYURL = "https://api.bilibili.tv/intl/gateway/web/playurl"
+
+/*
+  PROXY_URL itu prefix global yang dipakai belasan router lain, sedangkan yang
+  butuh keluar dari wilayah tertentu cuma bilibili. Jadi BILIBILI_PROXY_URL
+  didahulukan supaya bisa diarahkan ke proxy wilayah Asia sendirian, tanpa
+  ikut membelokkan scraper lain.
+*/
+const biliProxy = (): string => process.env.BILIBILI_PROXY_URL || proxy()
 
 /* Kode geo-block nggak konsisten, jadi pesannya ikut dicek. */
 const isGeoBlocked = (code: any, msg = "") =>
@@ -187,11 +195,11 @@ export async function getBilibiliTvStreams(
   const call = (p: any) => {
     /*
       Query-nya dirangkai manual (bukan lewat axios `params`) supaya prefix
-      proxy() bertipe `?url=` nggak kebagian params-nya sendiri.
+      biliProxy() bertipe `?url=` nggak kebagian params-nya sendiri.
     */
     const qs = new URLSearchParams()
     for (const [k, v] of Object.entries(p)) qs.set(k, String(v))
-    return axios.get(proxy() + `${PLAYURL}?${qs.toString()}`, { headers, timeout: 20000 }).then((r) => r.data)
+    return axios.get(biliProxy() + `${PLAYURL}?${qs.toString()}`, { headers, timeout: 20000 }).then((r) => r.data)
   }
 
   let data = await call(params).catch((e: any) => {
@@ -208,7 +216,7 @@ export async function getBilibiliTvStreams(
   if (data.code !== 0) {
     const msg = data.message || String(data.code)
     if (isGeoBlocked(data.code, msg))
-      throw fail(`Dibatasi wilayah: IP server nggak diizinkan bilibili.tv (${msg}). Isi env PROXY_URL.`, 451)
+      throw fail(`Dibatasi wilayah: IP server nggak diizinkan bilibili.tv (${msg}). Isi env BILIBILI_PROXY_URL.`, 451)
     if ([10004004, 10004005, 10023006].includes(data.code)) throw fail("Butuh login / premium: " + msg, 403)
     /*
       -404 keluar untuk dua hal yang nggak bisa dibedakan dari respon: ID salah,
@@ -216,7 +224,7 @@ export async function getBilibiliTvStreams(
       balas ini, bukan pesan wilayah, padahal ep_id yang sama jalan dari IP lain).
     */
     if (data.code === -404)
-      throw fail("Konten nggak ditemukan — cek ID/episode-nya, atau isi env PROXY_URL kalau IP server dibatasi wilayah", 404)
+      throw fail("Konten nggak ditemukan — cek ID/episode-nya, atau isi env BILIBILI_PROXY_URL kalau IP server dibatasi wilayah", 404)
     throw fail(`API Error: ${msg} (code ${data.code})`)
   }
 
