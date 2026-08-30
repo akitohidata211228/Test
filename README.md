@@ -125,7 +125,9 @@ Formatnya DASH, jadi **video dan audio terpisah** — tiap entri di `videos` bel
 
 Waktu mengunduh, header `Referer` itu **wajib** dikirim — CDN bilibili nolak request tanpa itu. Gabung dua file-nya sendiri, misal `ffmpeg -i video.m4s -i audio.m4s -c copy out.mp4`.
 
-Kualitas 1080P ke atas hampir selalu masuk `locked_qualities` (butuh akun premium). Isi env `BILIBILI_COOKIE` atau kirim `?cookie=SESSDATA=...` untuk membukanya; field `cookie_status` menandai cookie-nya masih valid atau sudah kedaluwarsa. Kalau kontennya premium penuh, API balas `403` dengan pesan "Butuh login / premium", dan konten yang diblokir wilayah balas `451`.
+Kualitas 1080P ke atas hampir selalu masuk `locked_qualities` (butuh akun premium). Isi env `BILIBILI_COOKIE` atau kirim `?cookie=SESSDATA=...` untuk membukanya; field `cookie_status` menandai cookie-nya masih valid atau sudah kedaluwarsa. Kalau kontennya premium penuh, API balas `403` dengan pesan "Butuh login / premium".
+
+> **Batasan wilayah.** bilibili.tv menyaring berdasarkan IP pemanggil. Dari IP rumah / VPS Asia endpoint ini jalan normal, tapi dari IP datacenter Vercel (US) semua link dibalas `451` — API bilibili-nya sendiri yang menolak (`版权地区受限`). Obatnya isi env `PROXY_URL` dengan proxy di wilayah yang diizinkan, sama seperti endpoint lain yang IP Vercel-nya diblokir.
 
 ---
 
@@ -302,7 +304,7 @@ Semua endpoint `GET` ditembak dari dua tempat sekaligus (mesin lokal + produksi 
 
 Karena scraper `facebook`, `instagram`, dan `rednote` mati semua, `/api/download/aio` sekarang cuma menerima link TikTok, Douyin, dan YouTube — link lain dibalas `400` + daftar `supported`.
 
-**Diblokir per-jaringan, bukan mati — tetap didaftarkan.** Sisa 169 endpoint `GET` diuji lagi: 163 sukses, 6 gagal cuma karena lingkungan tes. `ai/bard`, `ai/gemini`, dan `tools/ttsgoogle` gagal dari jaringan lokal (DNS Google dibajak ISP) tapi jalan di produksi; `stalk/tiktok` dan `tools/subdomains` sebaliknya; `s/pinterest-lens` butuh `PINTEREST_TOKEN` diisi di environment server. Endpoint semacam ini jangan dihapus cuma karena merah di satu tempat.
+**Diblokir per-jaringan, bukan mati — tetap didaftarkan.** Sisa 169 endpoint `GET` diuji lagi: 163 sukses, 6 gagal cuma karena lingkungan tes. `ai/bard`, `ai/gemini`, dan `tools/ttsgoogle` gagal dari jaringan lokal (DNS Google dibajak ISP) tapi jalan di produksi; `stalk/tiktok` dan `tools/subdomains` sebaliknya; `s/pinterest-lens` butuh `PINTEREST_TOKEN` diisi di environment server. `download/bilibili` (ditambahkan 30 Agustus 2026) masuk golongan yang sama: jalan dari IP rumah/VPS Asia, dibalas `451` dari IP Vercel US. Endpoint semacam ini jangan dihapus cuma karena merah di satu tempat.
 
 ---
 

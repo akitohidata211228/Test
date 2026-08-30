@@ -9,9 +9,16 @@
 
   Kualitas 1080P ke atas biasanya terkunci (butuh akun premium). Kalau punya
   cookie, kirim lewat ?cookie=... atau isi env BILIBILI_COOKIE.
+
+  Catatan wilayah: bilibili.tv memfilter berdasarkan IP pemanggil. Dari IP
+  datacenter (mis. Vercel US) API-nya balas "版权地区受限" / "Kesalahan tidak
+  diketahui" untuk semua link, padahal dari IP rumah/VPS Asia jalan normal.
+  Obatnya isi env PROXY_URL (dipakai juga oleh router lain yang IP-nya diblokir),
+  bukan mengubah scrapernya.
 */
 import type { Request, Response } from "express"
 import axios from "axios"
+import { proxy } from "../../src/proxy"
 
 const QUALITY_MAP: Record<number, string> = {
   5: "144P",
@@ -60,6 +67,12 @@ const fmtDur = (ms: any) => {
 }
 
 const isHevc = (c = "") => /hev|hvc/i.test(c)
+
+const PLAYURL = "https://api.bilibili.tv/intl/gateway/web/playurl"
+
+/* Kode geo-block nggak konsisten, jadi pesannya ikut dicek. */
+const isGeoBlocked = (code: any, msg = "") =>
+  code === 10004001 || /地区|地區|region|not available in your/i.test(msg)
 
 /* Short link (b23.tv dan kawan-kawan) dibuka dulu biar dapat aid/ep_id-nya. */
 export async function resolveShortUrl(input: string): Promise<string> {
@@ -171,10 +184,15 @@ export async function getBilibiliTvStreams(
   const headers: any = { "User-Agent": UA, Referer: REF, Origin: "https://www.bilibili.tv" }
   if (cookie) headers.Cookie = cookie
 
-  const call = (p: any) =>
-    axios
-      .get("https://api.bilibili.tv/intl/gateway/web/playurl", { params: p, headers, timeout: 20000 })
-      .then((r) => r.data)
+  const call = (p: any) => {
+    /*
+      Query-nya dirangkai manual (bukan lewat axios `params`) supaya prefix
+      proxy() bertipe `?url=` nggak kebagian params-nya sendiri.
+    */
+    const qs = new URLSearchParams()
+    for (const [k, v] of Object.entries(p)) qs.set(k, String(v))
+    return axios.get(proxy() + `${PLAYURL}?${qs.toString()}`, { headers, timeout: 20000 }).then((r) => r.data)
+  }
 
   let data = await call(params).catch((e: any) => {
     throw fail("Gagal request API bilibili: " + e.message)
@@ -189,9 +207,10 @@ export async function getBilibiliTvStreams(
 
   if (data.code !== 0) {
     const msg = data.message || String(data.code)
-    if (data.code === 10004001) throw fail("Geo-restricted / tidak tersedia di wilayah server", 451)
+    if (isGeoBlocked(data.code, msg))
+      throw fail(`Dibatasi wilayah: IP server nggak diizinkan bilibili.tv (${msg}). Isi env PROXY_URL.`, 451)
     if ([10004004, 10004005, 10023006].includes(data.code)) throw fail("Butuh login / premium: " + msg, 403)
-    throw fail("API Error: " + msg)
+    throw fail(`API Error: ${msg} (code ${data.code})`)
   }
 
   const playurl = data.data?.playurl
