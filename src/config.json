@@ -2091,6 +2091,42 @@
             "description": "The search query for Wikipedia (e.g., 'prabowo', 'jakarta')."
           }
         ]
+      },
+      {
+        "name": "Google Search",
+        "endpoint": "/api/s/google",
+        "filename": "google",
+        "method": "GET",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Kata kunci pencarian (contoh: 'siapa akito hidata')."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "Jumlah hasil maksimal (1-20, bawaan 10)."
+          }
+        ]
+      },
+      {
+        "name": "Google Search 2",
+        "endpoint": "/api/s/google",
+        "filename": "google",
+        "method": "POST",
+        "params": [
+          {
+            "name": "query",
+            "required": true,
+            "description": "Kata kunci pencarian (contoh: 'siapa akito hidata')."
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "Jumlah hasil maksimal (1-20, bawaan 10)."
+          }
+        ]
       }
     ],
     "anime": [
