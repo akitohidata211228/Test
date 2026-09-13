@@ -1,27 +1,34 @@
 /*
-  Pencarian web umum — satu endpoint, banyak sumber.
+  Pencarian web umum — satu endpoint, banyak sumber, banyak jalur egress.
 
   Kenapa endpoint ini ada padahal sudah ada /api/s/brave:
   brave memblokir IP datacenter (lihat catatan audit 29 Agt 2026), jadi dari
-  Vercel dia SELALU balas "Failed to get response from API". Endpoint ini
-  mencoba beberapa mesin berurutan dan memakai yang pertama berhasil, supaya
-  satu mesin yang ngambek tidak mematikan fiturnya.
+  Vercel dia SELALU balas "Failed to get response from API".
 
-  Urutan sengaja: DuckDuckGo lite dulu (paling ringan, ~24 KB, hasilnya paling
-  relevan untuk query Indonesia), baru mesin lain sebagai cadangan.
+  TEMUAN UTAMA (diukur 13 Sep 2026)
+  Yang diblokir adalah IP-nya, BUKAN cara request-nya. Request DDG yang sama
+  persis balas 10 hasil bersih lewat proxy, dan HTTP 202 "anomaly" kalau
+  langsung dari Azure VPS 40.81.18.4 atau dari Vercel. Dari VPS, query PERTAMA
+  sempat berhasil lalu semua query sesudahnya kena rem dan belum pulih setelah
+  4 menit — itu sebabnya gejalanya dulu terlihat seperti "kadang jalan kadang
+  tidak". Mojeek balas <title>Captcha</title> dengan HTTP 200, Brave 429,
+  Google halaman consent.
 
-  Catatan lapangan 13 Sep 2026, diukur dari IP Azure 40.81.18.4:
-  DDG lite membalas HTTP 200 + 10 hasil untuk query PERTAMA, lalu langsung
-  HTTP 202 "anomaly" untuk semua query sesudahnya, dan belum pulih setelah
-  4 menit. Artinya scraping langsung dari satu IP tetap TIDAK bisa diandalkan
-  untuk dipakai ramai-ramai. Dua penawarnya ada di sini:
-    1. cache in-memory — query yang sama tidak menembak mesin dua kali
-    2. rantai cadangan — kalau DDG kena rem, mesin lain yang jawab
-  Kalau semua mesin kena rem, isi env PROXY_URL (dipakai src/proxy.ts).
+  Karena itu strukturnya dua lapis: tiap MESIN dicoba lewat beberapa JALUR
+  egress (lihat jalurEgress), dan kalau satu mesin habis semua jalurnya,
+  lanjut ke mesin berikutnya.
+
+  Untuk hasil yang bisa diandalkan, deploy proxy sendiri — lihat
+  worker-cari-proxy.js di akar repo (Cloudflare Worker, gratis 100.000
+  request/hari, tanpa kartu kredit) lalu isi env SEARCH_PROXIES.
+
+  Cache in-memory 10 menit dipasang supaya query yang sama tidak menembak
+  mesin pencari dua kali. Di Vercel cache cuma hidup selama instance-nya
+  hangat; itu sudah cukup untuk mencegah satu query viral memicu rem untuk
+  semua pemakai.
 */
 import axios from "axios"
 import * as cheerio from "cheerio"
-import { proxy } from "../../src/proxy"
 
 /* ── cache sederhana ────────────────────────────────────────────────────────
    Vercel serverless: cache cuma hidup selama instance-nya hangat. Itu sudah
@@ -121,19 +128,118 @@ type Hasil = {
   displayUrl: string
 }
 
+/*
+  Anggaran waktu.
+
+  Ini dipakai bot WhatsApp: pemakai mengetik .google lalu menunggu di depan
+  layar. Rantai jalur × rantai mesin bisa panjang, dan tanpa anggaran waktu
+  total, permintaan pertama yang lewat proxy lambat sempat menggantung 90 detik
+  saat diuji — buruk untuk pemakai DAN membuat request menumpuk di Vercel.
+
+  Jadi: tiap percobaan dibatasi PER_COBA_MS, dan seluruh pencarian dibatasi
+  TOTAL_MS. Lebih baik balas "gagal" dalam 25 detik daripada benar dalam 90.
+*/
+const PER_COBA_MS = 9000
+const TOTAL_MS = 25000
+
+/* ── jalur egress ───────────────────────────────────────────────────────────
+   Inti masalahnya BUKAN cara request-nya, tapi IP-nya. Request DDG yang sama
+   persis balas 10 hasil bersih lewat proxy, dan HTTP 202 anomaly kalau
+   langsung. Jadi tiap mesin dicoba lewat beberapa jalur egress berurutan.
+
+   Isi env SEARCH_PROXIES (dipisah koma) dengan proxy sendiri — Cloudflare
+   Worker di worker-cari-proxy.js, gratis 100.000 request/hari. Proxy publik
+   di bawah cuma cadangan: terbukti bisa (10 hasil, 0 anomaly) tapi sering
+   balas 522 karena dipakai ramai-ramai, jadi jangan diandalkan.
+
+   Jalur "langsung" ditaruh TERAKHIR, bukan dibuang: kalau suatu saat IP-nya
+   lepas rem, dia jalan sendiri tanpa perlu ubah kode. */
+function jalurEgress(): ((url: string) => string)[] {
+  const jalur: ((url: string) => string)[] = []
+
+  // 1. proxy milik sendiri (env), paling didahulukan
+  const punyaSendiri = [
+    ...(process.env.SEARCH_PROXIES || "").split(","),
+    process.env.PROXY_URL || "",
+  ]
+    .map((s) => s.trim())
+    .filter(Boolean)
+
+  for (const p of punyaSendiri) {
+    // Worker menerima dua bentuk: prefix polos, atau ?url=<encoded>.
+    jalur.push((url) => (p.includes("?url=") || p.endsWith("=") ? p + encodeURIComponent(url) : p.replace(/\/$/, "") + "/" + url))
+  }
+
+  // 2. proxy publik cadangan
+  jalur.push((url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
+  jalur.push((url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`)
+
+  // 3. langsung — kalau rem-nya sudah lepas
+  jalur.push((url) => url)
+
+  return jalur
+}
+
+/**
+ * Ambil satu URL lewat jalur egress yang tersedia, berhenti di yang pertama
+ * memberi halaman bersih.
+ *
+ * `sah` memutuskan halaman itu hasil sungguhan atau halaman rem. Ini wajib
+ * per-mesin karena halaman rem sering balas HTTP 200 — Mojeek terbukti
+ * mengirim <title>Captcha</title> dengan status 200, jadi menilai dari status
+ * code saja akan lolos.
+ *
+ * `batasWaktu` = epoch ms kapan seluruh pencarian harus sudah berhenti.
+ */
+async function ambilLewatProxy(
+  targetUrl: string,
+  sah: (html: string, status: number) => boolean,
+  label: string,
+  batasWaktu: number,
+): Promise<string> {
+  const kendala: string[] = []
+
+  for (const buat of jalurEgress()) {
+    const sisa = batasWaktu - Date.now()
+    if (sisa <= 500) {
+      kendala.push("waktu habis")
+      break
+    }
+
+    const lewat = buat(targetUrl)
+    try {
+      const { data, status } = await axios.get(lewat, {
+        timeout: Math.min(PER_COBA_MS, sisa),
+        headers: headerUmum(),
+        validateStatus: () => true,
+        // Sebagian proxy membalas JSON; minta teks apa adanya.
+        responseType: "text",
+        transformResponse: [(d: any) => d],
+      })
+      const html = String(data || "")
+      if (sah(html, status)) return html
+      kendala.push(`HTTP ${status}`)
+    } catch (e: any) {
+      kendala.push(e?.code || e?.message || "gagal")
+    }
+  }
+
+  throw new Error(`${label} kena rem di semua jalur (${kendala.slice(0, 4).join(", ")})`)
+}
+
 /* ── sumber 1: DuckDuckGo lite ──────────────────────────────────────────────
    Markup-nya tabel polos: tiap hasil = <a class='result-link'> (judul+href),
    <td class='result-snippet'> (cuplikan), <span class='link-text'> (alamat
    tampil). Jumlah ketiganya sama dan urutannya sejajar, jadi dipasangkan
    berdasarkan indeks. */
-async function cariDdgLite(query: string): Promise<Hasil[]> {
-  const { data, status } = await axios.get(
-    proxy() + `https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`,
-    { timeout: 20000, headers: headerUmum(), validateStatus: () => true },
+async function cariDdgLite(query: string, batasWaktu: number): Promise<Hasil[]> {
+  const html = await ambilLewatProxy(
+    `https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`,
+    // HTTP 202 = halaman anomaly DDG; `is506` flag rem versi JS-nya.
+    (h, s) => s === 200 && !halamanRem(h) && h.includes("result-link"),
+    "ddg-lite",
+    batasWaktu,
   )
-  const html = String(data || "")
-  // HTTP 202 = halaman anomaly DDG. Bukan error jaringan, tapi jelas bukan hasil.
-  if (status !== 200 || halamanRem(html)) throw new Error(`ddg-lite kena rem (HTTP ${status})`)
 
   const $ = cheerio.load(html)
   const judul: { t: string; u: string }[] = []
@@ -165,13 +271,13 @@ async function cariDdgLite(query: string): Promise<Hasil[]> {
 
 /* ── sumber 2: DuckDuckGo html ─────────────────────────────────────────────
    Markup berbeda (div.result), kadang hidup saat /lite kena rem. */
-async function cariDdgHtml(query: string): Promise<Hasil[]> {
-  const { data, status } = await axios.get(
-    proxy() + `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`,
-    { timeout: 20000, headers: headerUmum(), validateStatus: () => true },
+async function cariDdgHtml(query: string, batasWaktu: number): Promise<Hasil[]> {
+  const html = await ambilLewatProxy(
+    `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`,
+    (h, s) => s === 200 && !halamanRem(h) && h.includes("result__a"),
+    "ddg-html",
+    batasWaktu,
   )
-  const html = String(data || "")
-  if (status !== 200 || halamanRem(html)) throw new Error(`ddg-html kena rem (HTTP ${status})`)
 
   const $ = cheerio.load(html)
   const out: Hasil[] = []
@@ -191,14 +297,16 @@ async function cariDdgHtml(query: string): Promise<Hasil[]> {
 }
 
 /* ── sumber 3: Mojeek ──────────────────────────────────────────────────────
-   Indeks sendiri (bukan pinjam Bing/Google), jadi remnya beda dari DDG. */
-async function cariMojeek(query: string): Promise<Hasil[]> {
-  const { data, status } = await axios.get(
-    proxy() + `https://www.mojeek.com/search?q=${encodeURIComponent(query)}`,
-    { timeout: 20000, headers: headerUmum(), validateStatus: () => true },
+   Indeks sendiri (bukan pinjam Bing/Google), jadi remnya beda dari DDG.
+   Catatan: Mojeek mengirim halaman captcha dengan HTTP 200, jadi status code
+   tidak bisa dipercaya — isi halamannya yang diperiksa. */
+async function cariMojeek(query: string, batasWaktu: number): Promise<Hasil[]> {
+  const html = await ambilLewatProxy(
+    `https://www.mojeek.com/search?q=${encodeURIComponent(query)}`,
+    (h, s) => s === 200 && !/<title>\s*captcha/i.test(h) && !halamanRem(h),
+    "mojeek",
+    batasWaktu,
   )
-  const html = String(data || "")
-  if (status !== 200 || halamanRem(html)) throw new Error(`mojeek kena rem (HTTP ${status})`)
 
   const $ = cheerio.load(html)
   const out: Hasil[] = []
@@ -217,52 +325,26 @@ async function cariMojeek(query: string): Promise<Hasil[]> {
   return out
 }
 
-/* ── sumber 4: SearXNG ─────────────────────────────────────────────────────
-   Beberapa instance membuka format=json. Instance publik gonta-ganti aturan,
-   jadi dicoba berurutan dan yang gagal dilewat diam-diam. */
-const SEARX = [
-  "https://searx.be",
-  "https://search.inetol.net",
-  "https://baresearch.org",
-  "https://priv.au",
-]
+/* ── kenapa SearXNG TIDAK dipakai ───────────────────────────────────────────
+   Sempat dicoba sebagai cadangan. Dari 81 instance publik di searx.space,
+   hanya 2 yang membuka format=json dari IP datacenter — dan keduanya
+   Bing-backed. Masalahnya bukan jumlahnya, tapi ISI hasilnya: Bing MEMBERI
+   HASIL PALSU ke IP datacenter. Query "siapa akito hidata" dijawab
+   "cheap flights" dan "YouTube Help"; query "kucing oren lucu" dijawab
+   registry bisnis Australia. Status 200, JSON valid, 10 hasil — tidak ada
+   satu pun tanda error.
 
-async function cariSearx(query: string): Promise<Hasil[]> {
-  for (const basis of SEARX) {
-    try {
-      const { data, status } = await axios.get(
-        proxy() + `${basis}/search`,
-        {
-          timeout: 15000,
-          headers: { ...headerUmum(), Accept: "application/json" },
-          params: { q: query, format: "json", language: "id" },
-          validateStatus: () => true,
-        },
-      )
-      if (status !== 200 || typeof data !== "object" || !Array.isArray(data?.results)) continue
-      const out = data.results
-        .map((r: any) => ({
-          title: rapikan(r.title),
-          description: rapikan(r.content),
-          url: String(r.url || ""),
-          displayUrl: domainDari(String(r.url || "")),
-        }))
-        .filter((h: Hasil) => h.title && h.url)
-      if (out.length) return out
-    } catch {
-      /* instance ini mati/menolak — coba berikutnya */
-    }
-  }
-  throw new Error("semua instance searx menolak")
-}
+   Sumber yang berbohong TANPA gejala lebih berbahaya daripada sumber yang
+   mati: yang mati kelihatan dan bisa ditangani, yang bohong lolos ke pemakai
+   sebagai jawaban yang terlihat sah. Karena itu dibuang, bukan dijadikan
+   cadangan terakhir. */
 
 /* ── rantai sumber ─────────────────────────────────────────────────────── */
 
-const SUMBER: { nama: string; jalan: (q: string) => Promise<Hasil[]> }[] = [
+const SUMBER: { nama: string; jalan: (q: string, batasWaktu: number) => Promise<Hasil[]> }[] = [
   { nama: "DuckDuckGo", jalan: cariDdgLite },
   { nama: "DuckDuckGo", jalan: cariDdgHtml },
   { nama: "Mojeek", jalan: cariMojeek },
-  { nama: "SearXNG", jalan: cariSearx },
 ]
 
 async function cariWeb(query: string, limit: number) {
@@ -270,11 +352,17 @@ async function cariWeb(query: string, limit: number) {
   const dariCache = ambilCache(kunci)
   if (dariCache) return { ...dariCache, cached: true }
 
+  // Satu anggaran waktu untuk SELURUH pencarian, dibagi semua mesin & jalur.
+  const batasWaktu = Date.now() + TOTAL_MS
   const kendala: string[] = []
 
   for (const s of SUMBER) {
+    if (Date.now() >= batasWaktu) {
+      kendala.push("anggaran waktu habis")
+      break
+    }
     try {
-      const hasil = await s.jalan(query)
+      const hasil = await s.jalan(query, batasWaktu)
       if (!hasil.length) {
         kendala.push(`${s.nama}: 0 hasil`)
         continue
