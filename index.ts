@@ -5,8 +5,12 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
+import { loadEnv } from './src/env';
 import { generateQrisDynamic, isStaticQrisConfigured } from './src/qris';
 import { loadRouter, initAutoLoad, createApiRouter, getRouteCount } from './src/autoload';
+
+// Dipanggil paling awal supaya router yang baca process.env sudah kebagian isinya.
+const envLoaded = loadEnv();
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
@@ -146,5 +150,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Routes loaded: ${getRouteCount()}`);
     console.log(`QRIS Configured: ${isStaticQrisConfigured() ? 'Yes' : 'No'}`);
+    // Cuma nama key-nya yang dicetak — isinya cookie/token, jangan sampai bocor ke log.
+    if (envLoaded.length) console.log(`.env loaded: ${envLoaded.join(', ')}`);
 });
 export default app;
