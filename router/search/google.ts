@@ -136,10 +136,35 @@ type Hasil = {
   total, permintaan pertama yang lewat proxy lambat sempat menggantung 90 detik
   saat diuji — buruk untuk pemakai DAN membuat request menumpuk di Vercel.
 
-  Jadi: tiap percobaan dibatasi PER_COBA_MS, dan seluruh pencarian dibatasi
-  TOTAL_MS. Lebih baik balas "gagal" dalam 25 detik daripada benar dalam 90.
+  Angkanya diukur, bukan ditebak (13 Sep 2026):
+    langsung    → gagal 0,2–0,8 dtk (HTTP 202 anomaly) — murah, jadi dicoba duluan
+    allorigins  → ±1 dari 2 berhasil; yang BERHASIL 6,5–6,8 dtk,
+                  yang gagal 0,5–0,7 dtk (HTTP 500) atau menggantung sampai putus
+    codetabs    → 0 dari 5 berhasil, SEMUA menghabiskan ~19 dtk (HTTP 522)
+
+  Dua keputusan lahir dari situ: per-percobaan 9 dtk, dan allorigins dicoba
+  ULANG karena gagalnya murah (0,5–0,7 dtk) sedangkan berhasilnya sering baru
+  datang di percobaan kedua — sementara codetabs ditaruh paling belakang supaya
+  tidak memakan anggaran punya jalur lain.
+
+  Kenapa 9 dtk, bukan 7: allorigins yang BERHASIL diukur 6,5–6,8 dtk. Batas
+  7 dtk persis menempel di angka itu, jadi keberhasilan yang sah ikut terpotong
+  hanya karena selisih ratusan milidetik — terbukti di jejak: percobaan pertama
+  mati di 7024 ms padahal uji terpisah berhasil di 6551 ms. Batasnya harus di
+  ATAS waktu berhasil, bukan menempel.
+
+  MIN_COBA_MS: jangan MULAI percobaan yang sudah pasti tidak akan selesai.
+  Tanpa ini, sisa anggaran 0,8 dtk tetap dipakai menembak proxy yang butuh
+  6,5 dtk — jejaknya terlihat sebagai percobaan mati di 829/976/685 ms. Itu
+  bukan cuma sia-sia, tapi juga menutupi sebab aslinya (kelihatan seperti
+  "proxy gagal" padahal "waktu tidak cukup").
+
+  Total 25 dtk, bukan 30: sisi plugin bot membatalkan di 30 dtk, jadi API harus
+  selesai lebih dulu. Kalau keduanya 30 dtk, pencarian yang lambat tapi
+  SEBENARNYA berhasil selalu keburu dimatikan plugin.
 */
 const PER_COBA_MS = 9000
+const MIN_COBA_MS = 2500
 const TOTAL_MS = 25000
 
 /* ── jalur egress ───────────────────────────────────────────────────────────
@@ -170,12 +195,35 @@ function jalurEgress(): ((url: string) => string)[] {
     jalur.push((url) => (p.includes("?url=") || p.endsWith("=") ? p + encodeURIComponent(url) : p.replace(/\/$/, "") + "/" + url))
   }
 
-  // 2. proxy publik cadangan
-  jalur.push((url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
-  jalur.push((url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`)
+  /*
+    2. langsung — ditaruh SEBELUM proxy publik, bukan sesudah.
 
-  // 3. langsung — kalau rem-nya sudah lepas
+    Diukur: dari IP ini jalur langsung gagal dalam 0,2–0,8 dtk (HTTP 202
+    anomaly, IP-nya memang kena rem). Kegagalan yang hampir gratis itu tidak
+    boleh ditaruh di belakang percobaan 9-detik — kalau ditaruh belakang, jatah
+    mesin habis dulu oleh allorigins dan jalur ini tidak pernah dicoba, padahal
+    dia satu-satunya yang akan langsung menang (hasil instan, tanpa perantara)
+    begitu rem IP-nya lepas.
+  */
   jalur.push((url) => url)
+
+  /*
+    3. proxy publik cadangan.
+
+    allorigins dicoba DUA KALI dengan sengaja. Diukur 13 Sep 2026, URL dan
+    header yang sama persis, lima kali berturut-turut: 500 dalam 0,6 dtk →
+    200 + 8 hasil terparsing dalam 6,6 dtk. Pola itu berulang — kegagalannya
+    murah (0,5–0,7 dtk) sedangkan keberhasilannya butuh ±6,5 dtk, jadi
+    percobaan kedua hampir selalu masih muat di anggaran dan sering justru
+    dia yang berhasil.
+  */
+  jalur.push((url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
+  jalur.push((url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
+
+  // 4. codetabs paling belakang: dari 5 percobaan tidak satu pun berhasil dan
+  //    semuanya memakan ~19 dtk. Tetap disimpan kalau-kalau allorigins mati
+  //    total suatu saat, tapi tidak boleh memakan jatah jalur lain.
+  jalur.push((url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`)
 
   return jalur
 }
@@ -201,7 +249,13 @@ async function ambilLewatProxy(
 
   for (const buat of jalurEgress()) {
     const sisa = batasWaktu - Date.now()
-    if (sisa <= 500) {
+    /*
+      Jangan MULAI percobaan yang sisanya tidak cukup untuk selesai. Jalur yang
+      berhasil butuh ±6,5 dtk; menembak dengan sisa 0,8 dtk pasti gagal, memakan
+      anggaran mesin berikutnya, dan melaporkan sebab yang salah ("proxy gagal"
+      padahal "waktu habis").
+    */
+    if (sisa < MIN_COBA_MS) {
       kendala.push("waktu habis")
       break
     }
@@ -352,17 +406,33 @@ async function cariWeb(query: string, limit: number) {
   const dariCache = ambilCache(kunci)
   if (dariCache) return { ...dariCache, cached: true }
 
-  // Satu anggaran waktu untuk SELURUH pencarian, dibagi semua mesin & jalur.
-  const batasWaktu = Date.now() + TOTAL_MS
+  const batasAkhir = Date.now() + TOTAL_MS
   const kendala: string[] = []
 
-  for (const s of SUMBER) {
-    if (Date.now() >= batasWaktu) {
+  for (let i = 0; i < SUMBER.length; i++) {
+    const s = SUMBER[i]
+    const sisaTotal = batasAkhir - Date.now()
+    if (sisaTotal <= 500) {
       kendala.push("anggaran waktu habis")
       break
     }
+
+    /*
+      Anggaran DIBAGI RATA ke mesin yang belum dicoba, bukan dipakai sepuasnya
+      oleh mesin pertama.
+
+      Tanpa pembagian ini, mesin pertama yang jalurnya lambat menghabiskan
+      seluruh 30 detik dan mesin sesudahnya tidak pernah kebagian — terbukti di
+      uji live: ddg-lite dan ddg-html memakan semuanya, mojeek tidak pernah
+      dicoba sama sekali walau mungkin justru dia yang hidup.
+
+      Pembagiannya dihitung dari sisa waktu / sisa mesin, jadi mesin yang gagal
+      cepat otomatis mewariskan jatahnya ke mesin berikutnya.
+    */
+    const batasMesin = Date.now() + Math.floor(sisaTotal / (SUMBER.length - i))
+
     try {
-      const hasil = await s.jalan(query, batasWaktu)
+      const hasil = await s.jalan(query, Math.min(batasMesin, batasAkhir))
       if (!hasil.length) {
         kendala.push(`${s.nama}: 0 hasil`)
         continue
