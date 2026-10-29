@@ -28,7 +28,7 @@ async function init() {
             box.innerHTML =
                 '<div class="card" style="padding:40px; text-align:center;">' +
                 '<p style="font-weight:600; margin:0 0 6px;">Server sedang tidak merespons</p>' +
-                '<p style="font-size:13.5px; color:var(--ink-faint); margin:0 0 18px;">Cek koneksi, atau jalankan server dengan <code class="mono">npm run dev</code>.</p>' +
+                '<p style="font-size:14px; color:var(--ink-faint); margin:0 0 18px;">Cek koneksi, atau jalankan server dengan <code class="mono">npm run dev</code>.</p>' +
                 '<button onclick="location.reload()" class="btn btn-ghost btn-sm">Coba lagi</button>' +
                 '</div>';
         }

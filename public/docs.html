@@ -4,31 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Documentation | LǐRénXīn API</title>
+    <title>Documentation | LiRénXin API</title>
 
-    <meta name="description" content="Dokumentasi LǐRénXīn API. Coba semua endpoint langsung dari browser: downloader, games, info cuaca & gempa, search, dan tools.">
+    <meta name="description" content="Dokumentasi LiRénXin API. Coba semua endpoint langsung dari browser: downloader, games, info cuaca & gempa, search, dan tools.">
     <meta name="author" content="Akito Hidata">
-    <meta name="theme-color" content="#0b0d10">
+    <meta name="theme-color" content="#171510">
 
     <link rel="canonical" href="https://lirenxin-api.my.id/docs">
 
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="LǐRénXīn API">
-    <meta property="og:title" content="LǐRénXīn API Documentation">
-    <meta property="og:description" content="Coba semua endpoint LǐRénXīn API langsung dari browser.">
+    <meta property="og:site_name" content="LiRénXin API">
+    <meta property="og:title" content="LiRénXin API Documentation">
+    <meta property="og:description" content="Coba semua endpoint LiRénXin API langsung dari browser.">
     <meta property="og:url" content="https://lirenxin-api.my.id/docs">
     <meta property="og:image" content="https://lirenxin-api.my.id/src/thumbnail.jpg">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LǐRénXīn API Documentation">
-    <meta name="twitter:description" content="Coba semua endpoint LǐRénXīn API langsung dari browser.">
+    <meta name="twitter:title" content="LiRénXin API Documentation">
+    <meta name="twitter:description" content="Coba semua endpoint LiRénXin API langsung dari browser.">
     <meta name="twitter:image" content="https://lirenxin-api.my.id/src/thumbnail.jpg">
 
     <link rel="icon" href="/src/danzz.jpg">
 
     <script src="theme.js"></script>
     <script src="motion.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -48,26 +50,22 @@
 
     <header class="nav">
         <div class="container nav-in">
-            <a class="logo" href="/" aria-label="LǐRénXīn API — kembali ke beranda">
-                <span class="logo-mark" aria-hidden="true">李</span>
-                <span class="logo-name" id="nav-title">Lirexin <span>API</span></span>
+            <a class="logo" href="/" aria-label="LiRénXin API — kembali ke beranda">
+                <span class="logo-mark" aria-hidden="true"></span>
+                <span class="logo-name" id="nav-title">LiRénXin <span>API</span></span>
             </a>
-            <div style="display:flex; gap:2px; align-items:center;">
-                <span class="chip chip-brand nav-hide-sm" aria-label="dokumentasi interaktif">
-                    <svg width="11" height="11" style="color:var(--brand)"><use href="#i-book"/></svg>
+            <div>
+                <span class="chip chip-brand nav-hide-sm">
+                    <svg width="13" height="13" style="color:var(--brand)"><use href="#i-book"/></svg>
                     interactive docs
                 </span>
                 <a class="nav-link" href="/donasi">Donasi</a>
-                <a class="icon-btn" href="/donasi" title="Donasi QRIS" aria-label="Donasi QRIS"
-                    style="display:none">
-                    <svg><use href="#i-heart"/></svg>
-                </a>
                 <a class="icon-btn" id="nav-github" href="https://github.com/akitohidata211228" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
-                    <svg><use href="#i-github"/></svg>
+                    <svg viewBox="0 0 24 24"><use href="#i-github"/></svg>
                 </a>
                 <button class="icon-btn" onclick="flipTheme()" title="Ganti tema" aria-label="Ganti tema">
-                    <svg class="icon-sun"><use href="#i-sun"/></svg>
-                    <svg class="icon-moon"><use href="#i-moon"/></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24"><use href="#i-sun"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24"><use href="#i-moon"/></svg>
                 </button>
             </div>
         </div>
@@ -77,39 +75,23 @@
 
         <aside class="docs-side">
 
-            <div class="search-wrap card" style="padding:0; border-radius:10px;">
-                <svg aria-hidden="true"><use href="#i-search"/></svg>
-                <input type="search" id="search-input" placeholder="Cari endpoint..." aria-label="Cari endpoint"
-                    class="field" style="border:none; border-radius:10px;">
+            <div class="card search-wrap">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" id="search-input" placeholder="Cari endpoint..." aria-label="Cari endpoint" class="field">
             </div>
 
             <div class="card side-panel">
                 <p class="side-title">server status</p>
                 <dl style="margin:0">
-                    <div class="status-row">
-                        <dt>WIB</dt>
-                        <dd id="server-time">--:--:--</dd>
-                    </div>
-                    <div class="status-row">
-                        <dt>DATE</dt>
-                        <dd id="server-date">--/--/----</dd>
-                    </div>
-                    <div class="status-row">
-                        <dt>ENDPOINT</dt>
-                        <dd class="accent" id="stat-endpoints">–</dd>
-                    </div>
-                    <div class="status-row">
-                        <dt>KATEGORI</dt>
-                        <dd class="accent" id="stat-categories">–</dd>
-                    </div>
-                    <div class="status-row">
-                        <dt>UPTIME</dt>
-                        <dd class="accent" id="stat-uptime">–</dd>
-                    </div>
+                    <div class="status-row"><dt>WIB</dt><dd id="server-time">--:--:--</dd></div>
+                    <div class="status-row"><dt>tanggal</dt><dd id="server-date">--/--/----</dd></div>
+                    <div class="status-row"><dt>endpoint</dt><dd class="accent" id="stat-endpoints">–</dd></div>
+                    <div class="status-row"><dt>kategori</dt><dd class="accent" id="stat-categories">–</dd></div>
+                    <div class="status-row"><dt>uptime</dt><dd class="accent" id="stat-uptime">–</dd></div>
                 </dl>
             </div>
 
-            <div class="console" style="display:flex; flex-direction:column; min-height:240px; max-height:320px;">
+            <div class="console" style="min-height:240px; max-height:340px;">
                 <div class="console-head">
                     <span class="console-title"><span class="status-dot"></span> console</span>
                     <span class="console-title" id="term-host">localhost</span>
@@ -117,7 +99,7 @@
                 <div id="term-logs" style="flex:1; overflow-y:auto;"></div>
             </div>
 
-            <div class="card side-panel" id="side-nav-panel">
+            <div class="card side-panel">
                 <p class="side-title">navigasi</p>
                 <div class="side-nav" id="side-nav"></div>
             </div>
@@ -127,28 +109,22 @@
         <section aria-label="daftar endpoint">
             <div id="api-container"></div>
 
-            <div id="no-results" class="card" style="display:none; padding:56px 24px; text-align:center;">
-                <p style="font-size:15px; font-weight:600; margin:0 0 6px; color:var(--ink);">Tidak ada hasil</p>
-                <p style="font-size:13.5px; color:var(--ink-faint); margin:0;">Coba kata kunci lain — mis. nama layanan atau path-nya.</p>
+            <div id="no-results" class="card" style="display:none;">
+                <p>Tidak ada hasil</p>
+                <p>Coba kata kunci lain — mis. nama layanan atau path-nya.</p>
             </div>
         </section>
 
     </main>
 
     <div id="custom-toast" class="toast" role="status" aria-live="polite">
-        <svg aria-hidden="true"><use href="#i-check"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>
         <span id="toast-message">OK</span>
     </div>
 
     <script>
     (function () {
-        var btn = document.querySelector('.nav .icon-btn');
-        if (btn && window.LirenxinTheme.current() === 'light') {
-            var sun = btn.querySelector('.icon-sun');
-            var moon = btn.querySelector('.icon-moon');
-            if (sun && moon) { sun.style.display = 'none'; moon.style.display = ''; }
-        }
-        window.flipTheme = function () { window.LirenxinTheme.toggle(); };
+        window.flipTheme = window.LirenxinTheme.toggle;
     })();
     </script>
     <script src="script.js"></script>
