@@ -9,7 +9,7 @@
     <meta name="description" content="LiRénXin API: REST API gratis berisi downloader, games, info cuaca & gempa, search, dan tools. Coba semua endpoint langsung dari dokumentasi.">
     <meta name="keywords" content="LirenxinAPI, Akito Hidata, Taufik Hidayat, API gratis, REST API Indonesia, downloader API, games API">
     <meta name="author" content="Taufik Hidayat (Akito Hidata)">
-    <meta name="theme-color" content="#171510">
+    <meta name="theme-color" content="#0F0E0C">
 
     <link rel="canonical" href="https://lirenxin-api.my.id/">
 
@@ -47,25 +47,22 @@
     <script src="motion.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="nav">
         <div class="container nav-in">
-            <a class="logo" href="/" aria-label="LiRénXin API — beranda">
-                <span class="logo-mark" aria-hidden="true"></span>
-                <span class="logo-name">LiRénXin <span>API</span></span>
-            </a>
-            <div>
-                <a class="nav-link" href="/docs">Dokumentasi</a>
+            <a class="brand" href="/" aria-label="LiRénXin API — beranda">lirenxin<span class="dash">-</span>api</a>
+            <div class="nav">
                 <a class="nav-link nav-hide-sm" href="#kategori">Kategori</a>
-                <a class="nav-link" href="/donasi">Donasi</a>
+                <a class="nav-link nav-hide-sm" href="/donasi">Donasi</a>
                 <a class="nav-link nav-hide-sm" id="nav-github" href="https://github.com/akitohidata211228" target="_blank" rel="noopener">GitHub</a>
+                <a class="go" href="/docs">Jelajahi API</a>
                 <button class="icon-btn" onclick="flipTheme()" title="Ganti tema" aria-label="Ganti tema">
-                    <svg class="icon-sun" viewBox="0 0 24 24"><use href="#i-sun"/></svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24"><use href="#i-moon"/></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sun"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-moon"/></svg>
                 </button>
             </div>
         </div>
@@ -74,87 +71,72 @@
     <main class="lo">
 
         <section class="hero">
-            <div class="container hero-in">
-                <div class="geo" aria-hidden="true">
-                    <i class="g g-hair"></i>
-                    <i class="g g-face"></i>
-                    <i class="g g-eyeL"></i>
-                    <i class="g g-eyeR"></i>
-                    <i class="g g-mouth"></i>
-                    <i class="g g-q1"></i>
-                    <i class="g g-q2"></i>
-                    <span class="geo-cap">wajah server — geometri empat warna</span>
-                </div>
-                <div class="hero-copy">
-                    <h1>Satu server,<br><span id="hero-count">–</span> jalur.</h1>
-                    <p>REST API downloader, games, info cuaca & gempa, search, sampai tools — dibuat sederhana supaya siapapun bisa langsung pakai tanpa ribet.</p>
-                    <div class="hero-actions">
-                        <a href="/docs" class="btn btn-primary">Buka dokumentasi</a>
-                        <a href="#kategori" class="btn">Lihat kategori</a>
-                    </div>
-                    <div class="hero-meta">
-                        <b>v<span id="hero-version">1.1</span></b>
-                        <span>·</span>
-                        <span>uptime <b id="hero-uptime">–</b></span>
-                        <span>·</span>
-                        <span>WIB <b id="hero-clock">--:--:--</b></span>
-                    </div>
+            <div class="wrap">
+                <p class="kick rise" style="--d:.05s">// rest api — downloader, games, info, search, tools</p>
+                <h1 class="h1 rise" style="--d:.12s">API yang <span class="x">langsung tembak.</span><br>Tanpa drama.</h1>
+                <p class="lede rise" style="--d:.2s">REST API downloader, games, info cuaca & gempa, search, sampai tools — dibuat sederhana supaya siapapun bisa langsung pakai tanpa ribet.</p>
+                <div class="cta rise" style="--d:.28s">
+                    <a class="btn a" href="/docs">Dokumentasi lengkap</a>
+                    <a class="btn b" href="#kategori">Lihat kategori</a>
                 </div>
             </div>
         </section>
 
-        <section class="ib">
-            <div class="container ib-in">
-                <span><span id="ib-version">v1.1</span></span>
-                <span><span id="ib-endpoints">–</span> endpoint</span>
-                <span><span id="ib-cats">–</span> kategori</span>
-                <span>gratis 2×24</span>
-                <span>lirenxin-api.my.id</span>
+        <div class="band">
+            <div class="btrack">
+                <span id="band-a">– endpoint <b>/</b> – kategori <b>/</b> satu API key <b>/</b> gratis <b>/</b></span>
+                <span id="band-b">– endpoint <b>/</b> – kategori <b>/</b> satu API key <b>/</b> gratis <b>/</b></span>
+            </div>
+        </div>
+
+        <section>
+            <div class="wrap">
+                <div class="stats">
+                    <div class="stat reveal"><div class="n"><span id="s-end">–</span><i>&nbsp;</i></div><div class="l">endpoint aktif, siap dipakai</div></div>
+                    <div class="stat reveal"><div class="n"><span id="s-cat">–</span><i>&nbsp;</i></div><div class="l">kategori dari ai sampai stalker</div></div>
+                    <div class="stat reveal"><div class="n">24<i>/7</i></div><div class="l">server jalan terus, tidak tidur</div></div>
+                </div>
             </div>
         </section>
 
-        <section class="cat dark" id="kategori">
-            <div class="container">
-                <h2>Kategori</h2>
-                <p class="sub"><span id="cat-total">–</span> endpoint aktif — dihitung dari server, bukan janji.</p>
-                <div class="tiles" id="tiles"></div>
+        <section class="sec" id="kategori">
+            <div class="wrap">
+                <div class="sh">
+                    <h2>Apa yang bisa kamu panggil</h2>
+                    <span class="m"><span id="cat-total">–</span> kategori — lengkapnya ada di docs</span>
+                </div>
+                <div class="cat" id="tiles"></div>
             </div>
         </section>
 
-        <section class="say">
-            <p>Panggil URL-nya, dapatkan balasannya. <b>Semuanya gratis.</b> Tanpa daftar, tanpa kunci.</p>
-            <small>LiRénXin — api v1.1 — dibangun oleh Taufik Hidayat — 李仁心</small>
+        <section class="docs">
+            <div class="wrap">
+                <p class="mono">contoh — <em>games/tebakgambar</em></p>
+                <h2>GET lirenxin-api.my.id<br>/games/tebakgambar — selesai.</h2>
+                <p class="lede">Semua <span id="d-count">–</span> endpoint terdokumentasi rapi: parameter, contoh respons, dan playground yang bisa kamu jalankan langsung dari browser.</p>
+                <div class="cta">
+                    <a class="btn a" href="/docs">Buka dokumentasi</a>
+                </div>
+            </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="ft-in">
-            <div class="ft-top">
-                <div class="wm">LiRénXin<span>API — 李仁心</span></div>
-                <div class="ft-links">
-                    <a href="/docs">Dokumentasi</a>
-                    <a href="/donasi">Donasi</a>
-                    <a href="https://github.com/akitohidata211228" target="_blank" rel="noopener" id="ft-github">GitHub</a>
-                </div>
-            </div>
-            <div class="ft-bot">
-                <span>© <span id="f-year">2025</span> LiRénXin — API gratis para pengembang Indonesia</span>
-                <span>lirenxin-api.my.id</span>
-            </div>
+    <footer class="ft">
+        <div class="wrap">
+            <span><b>lirenxin<span class="dash">-</span>api</b> — v<span id="ft-ver">1.1</span> — dibuat oleh Taufik Hidayat <span aria-label="hanzi">李仁心</span></span>
+            <span><a href="/">beranda</a> — <a href="/docs">docs</a> — <a href="/donasi">donasi</a> — <a id="ft-github" href="https://github.com/akitohidata211228" target="_blank" rel="noopener">github</a></span>
         </div>
     </footer>
 
     <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
         <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
         <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
-        <symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.3 3.8 13a5.5 5.5 0 1 1 7.8-7.8l.4.4.4-.4a5.5 5.5 0 1 1 7.8 7.8z"/></symbol>
     </svg>
 
     <script>
     (function () {
         window.flipTheme = window.LirenxinTheme.toggle;
-        document.getElementById('f-year').textContent = new Date().getFullYear();
 
         function humanUptime(sec) {
             if (sec == null) return '–';
@@ -164,53 +146,73 @@
             return Math.floor(sec / 86400) + 'd';
         }
 
-        function clockTick() {
-            var el = document.getElementById('hero-clock');
-            if (!el) return;
-            var now = new Date();
-            el.textContent = now.toLocaleTimeString('id-ID', {
-                timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
+        function epName(item) {
+            if (item == null) return '';
+            if (typeof item === 'string') return item;
+            if (typeof item === 'object') return item.name || item.path || item.route || '';
+            return '';
+        }
+
+        function chipsFor(list, count) {
+            var names = (list || []).map(epName).filter(function (s) { return !!s; }).slice(0, 5);
+            if (!names.length) return '<span class="chip inkm">' + count + ' endpoint</span>';
+            var out = names.map(function (n) { return '<span class="chip">' + esc(n) + '</span>'; });
+            if ((list || []).length > 5) out.push('<span class="chip more">+' + (list.length - 5) + ' lagi</span>');
+            return out.join('');
+        }
+
+        function esc(s) {
+            return String(s).replace(/[&<>"]/g, function (c) {
+                return { '&': '&', '<': '<', '>': '>', '"': '"' }[c];
             });
         }
-        clockTick();
-        setInterval(clockTick, 1000);
+
+        if (window.LirenxinMotion) window.LirenxinMotion.revealAll();
 
         fetch('/config').then(function (res) { return res.json(); }).then(function (cfg) {
             var s = cfg.settings || {};
             var stats = cfg.stats || {};
-            var total = stats.endpoints || Object.values(cfg.tags || {}).flat().length;
-
-            document.getElementById('hero-count').textContent = total;
-            document.getElementById('ib-endpoints').textContent = total;
-            document.getElementById('cat-total').textContent = total;
+            var tags = cfg.tags || {};
+            var total = stats.endpoints || Object.values(tags).flat().length;
+            var cats = Object.keys(tags).length;
             var ver = (s.apiVersion || '1.1').replace(/^v/, '');
-            document.getElementById('hero-version').textContent = ver;
-            document.getElementById('ib-version').textContent = 'v' + ver;
-            document.getElementById('hero-uptime').textContent = humanUptime(stats.uptimeSeconds);
+
+            var phrase = total + ' endpoint <b>/</b> ' + cats + ' kategori <b>/</b> satu API key <b>/</b> gratis <b>/</b>';
+            document.getElementById('band-a').innerHTML = phrase;
+            document.getElementById('band-b').innerHTML = phrase;
+
+            document.getElementById('s-end').textContent = total;
+            document.getElementById('s-cat').textContent = cats;
+            document.getElementById('cat-total').textContent = cats;
+            document.getElementById('d-count').textContent = total;
+            document.getElementById('ft-ver').textContent = ver;
             if (s.github) { document.getElementById('nav-github').href = s.github; document.getElementById('ft-github').href = s.github; }
             if (s.favicon) document.getElementById('favicon').href = s.favicon;
 
-            document.getElementById('ib-cats').textContent = (cfg.tags && Object.keys(cfg.tags).length) || stats.categories || 0;
-
-            var shapes = ['mk-c', 'mk-s', 'mk-h', 'mk-q'];
-            var colors = ['t-red', 't-paper', 't-must', 't-steel'];
             var tilesEl = document.getElementById('tiles');
             tilesEl.innerHTML = '';
-            Object.entries(cfg.tags || {}).forEach(function (entry, i) {
+            Object.entries(tags).forEach(function (entry) {
                 var cat = entry[0];
-                var n = entry[1].length;
+                var list = entry[1] || [];
+                var n = list.length;
                 var a = document.createElement('a');
-                a.className = 'tile';
+                a.className = 'tl';
                 a.href = '/docs';
                 a.setAttribute('aria-label', cat + ' — ' + n + ' endpoint');
-                a.innerHTML = '<i class="mk ' + shapes[i % shapes.length] + ' ' + colors[(i + Math.floor(i / shapes.length)) % colors.length] + '"></i>' +
-                    '<span class="nm">' + cat + '</span>' +
-                    '<span class="row2"><span class="ct">' + n + ' endpoint</span></span>';
+                a.innerHTML = '<span class="no">' + esc(cat) + ' — ' + n + '</span>' +
+                    '<h3>' + esc(cat.charAt(0).toUpperCase() + cat.slice(1)) + '</h3>' +
+                    '<div class="crow">' + chipsFor(list, n) + '</div>';
                 tilesEl.appendChild(a);
             });
+            if (cats % 2 !== 0) {
+                var blank = document.createElement('span');
+                blank.className = 'tl tl-blank';
+                blank.setAttribute('aria-hidden', 'true');
+                tilesEl.appendChild(blank);
+            }
         }).catch(function () {
             var t = document.getElementById('tiles');
-            if (t) t.innerHTML = '<p class="sub" style="grid-column:1/-1; margin:0;">server di luar jangkauan — statistik ditahan sampai server aktif.</p>';
+            if (t) t.innerHTML = '<p style="grid-column:1/-1; font:14px var(--font-mono); color:var(--muted); margin:0;">server di luar jangkauan — statistik ditahan sampai server aktif.</p>';
         });
     })();
     </script>

@@ -6,13 +6,13 @@
 
     <title>404 — Route Tidak Ditemukan | LiRénXin API</title>
     <meta name="robots" content="noindex, follow">
-    <meta name="theme-color" content="#171510">
+<meta name="theme-color" content="#0F0E0C">
 
     <link rel="icon" href="/src/danzz.jpg">
     <script src="theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -25,10 +25,7 @@
 
     <header class="nav">
         <div class="container nav-in">
-            <a class="logo" href="/" aria-label="LiRénXin API — beranda">
-                <span class="logo-mark" aria-hidden="true"></span>
-                <span class="logo-name">LiRénXin <span>API</span></span>
-            </a>
+            <a class="brand" href="/" aria-label="LiRénXin API — beranda">lirenxin<span class="dash">-</span>api</a>
             <div>
                 <a class="nav-link" href="/docs">Dokumentasi</a>
                 <button class="icon-btn" onclick="flipTheme()" title="Ganti tema" aria-label="Ganti tema">
@@ -40,12 +37,12 @@
     </header>
 
     <main class="err-wrap">
-        <div class="card err-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" style="color:var(--muted);" aria-hidden="true"><use href="#i-search"/></svg>
-            <p class="err-code">404</p>
-            <h1 style="font-size:16px; font-weight:700; margin:0;">Route tidak ditemukan</h1>
-            <p style="font-size:14px; color:var(--ink-soft); line-height:1.65; margin:8px 0 0;">
-                Endpoint yang kamu tuju nggak ada di daftar. Mungkin salah ketik,
+        <section class="container">
+            <p class="kick">// rute nggak ada</p>
+            <div class="err-code">404</div>
+            <h1 class="err-title">Yang kamu tuju beda alamat.</h1>
+            <p class="err-p">
+                Endpoint yang kamu cari nggak ada di daftar. Mungkin salah ketik,
                 atau sudah dipindah ke path lain.
             </p>
 
@@ -53,9 +50,9 @@
 
             <div class="err-actions">
                 <a href="/" class="btn btn-primary btn-sm">Kembali ke beranda</a>
-                <a href="/docs" class="btn btn-sm">Cek dokumentasi</a>
+                <a href="/docs" class="btn btn-ghost btn-sm">Cek dokumentasi</a>
             </div>
-        </div>
+        </section>
     </main>
 
     <script>
