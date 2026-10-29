@@ -1,26 +1,20 @@
-/*
-  LǐRénXīn API — theme bootstrap
-  Danzz For You 💌
-
-  Dijalankan sebelum body render (script biasa di <head>, bukan defer),
-  supaya class dark sudah nempel sebelum paint pertama. Kalau ditaruh di
-  bawah, halaman sempat kelihatan putih dulu baru gelap.
-*/
 (function () {
     var KEY = 'lirenxin-theme';
 
     function preferred() {
         try {
+            var qs = new URLSearchParams(window.location.search).get('theme');
+            if (qs === 'dark' || qs === 'light') return qs;
             var saved = localStorage.getItem(KEY);
             if (saved === 'dark' || saved === 'light') return saved;
         } catch (e) {}
-        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light';
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+            ? 'light'
+            : 'dark';
     }
 
     function apply(mode) {
-        document.documentElement.classList.toggle('dark', mode === 'dark');
+        document.documentElement.classList.toggle('light', mode === 'light');
         document.documentElement.style.colorScheme = mode;
     }
 
@@ -28,7 +22,7 @@
 
     window.LirenxinTheme = {
         current: function () {
-            return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            return document.documentElement.classList.contains('light') ? 'light' : 'dark';
         },
         toggle: function () {
             var next = this.current() === 'dark' ? 'light' : 'dark';
@@ -37,13 +31,12 @@
             window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
             return next;
         },
-        /* Ikut OS selama user belum pernah milih manual. */
         watchSystem: function () {
             if (!window.matchMedia) return;
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
                 var saved = null;
                 try { saved = localStorage.getItem(KEY); } catch (err) {}
-                if (!saved) apply(e.matches ? 'dark' : 'light');
+                if (!saved) apply(e.matches ? 'light' : 'dark');
             });
         }
     };

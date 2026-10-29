@@ -7,348 +7,287 @@
     <title>Donasi | LǐRénXīn API</title>
 
     <meta name="description" content="Dukung LǐRénXīn API lewat QRIS. Scan, bayar, selesai — biaya server jalan terus.">
-    <meta name="theme-color" content="#8b5cf6">
+    <meta name="theme-color" content="#0b0d10">
     <meta name="robots" content="noindex, follow">
 
     <link rel="canonical" href="https://lirenxin-api.my.id/donasi">
     <link rel="icon" href="/src/danzz.jpg">
 
     <script src="theme.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="motion.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                        display: ['"Space Mono"', 'monospace']
-                    },
-                    colors: {
-                        brand: 'var(--brand)',
-                        'brand-strong': 'var(--brand-strong)',
-                        ink: 'var(--ink)',
-                        'ink-soft': 'var(--ink-soft)',
-                        'ink-faint': 'var(--ink-faint)',
-                        surface: 'var(--surface)',
-                        'surface-sunk': 'var(--surface-sunk)',
-                        line: 'var(--line)',
-                        'line-soft': 'var(--line-soft)'
-                    }
-                }
-            }
-        }
-    </script>
+    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5 22 20H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.2"/></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.3 3.8 13a5.5 5.5 0 1 1 7.8-7.8l.4.4.4-.4a5.5 5.5 0 1 1 7.8 7.8z"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 19l-7-7 7-7"/></symbol>
+        <symbol id="i-qr" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3zM5 5v3h3V5zM14 3h7v7h-7zM16 5v3h3V5zM3 14h7v7H3zM5 16v3h3v-3zM14 14h2v2h-2zM17 14h3v3h-3zM14 19h2v2h-2zM18 19h3v2h-3z"/></symbol>
+    </svg>
 </head>
-<body class="grid-bg min-h-screen flex items-center justify-center font-mono p-4 text-ink">
+<body>
 
-    <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4" role="alertdialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="panel w-full max-w-xs animate-pop overflow-hidden">
-            <div class="px-3 py-2 border-b-2 flex items-center gap-2 text-white" style="border-color: var(--line); background: #ef4444;">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <h2 id="modal-title" class="font-display font-bold text-base">PERHATIAN</h2>
-            </div>
-            <div class="p-5 text-center">
-                <p id="modal-message" class="font-bold text-sm mb-5 leading-relaxed text-ink-soft">Pesan error di sini.</p>
-                <button onclick="closeModal()"
-                    class="press w-full text-white py-2 font-bold text-sm border-2 rounded"
-                    style="border-color: var(--line); background: var(--brand); box-shadow: var(--shadow-sm);">
-                    MENGERTI
+    <header class="nav">
+        <div class="container nav-in">
+            <a class="logo" href="/" aria-label="LǐRénXīn API — beranda">
+                <span class="logo-mark" aria-hidden="true">李</span>
+                <span class="logo-name">Lirexin <span>API</span></span>
+            </a>
+            <div style="display:flex; gap:2px; align-items:center;">
+                <a class="nav-link" href="/">Beranda</a>
+                <a class="nav-link" href="/docs">Dokumentasi</a>
+                <button class="icon-btn" onclick="flipTheme(this)" title="Ganti tema" aria-label="Ganti tema">
+                    <svg class="icon-sun"><use href="#i-sun"/></svg>
+                    <svg class="icon-moon"><use href="#i-moon"/></svg>
                 </button>
             </div>
         </div>
-    </div>
+    </header>
 
-    <main class="panel w-full max-w-[360px] md:max-w-2xl overflow-hidden flex flex-col animate-rise">
+    <main class="donate-wrap">
 
-        <header class="px-4 py-3 flex justify-between items-center border-b-2"
-                style="border-color: var(--line); background: linear-gradient(90deg, var(--brand), var(--sky));">
-            <h1 class="font-display font-bold text-xl tracking-tighter italic text-white">DONASI</h1>
-            <div class="flex items-center gap-2">
-                <button onclick="flipTheme(this)" title="Ganti tema" aria-label="Ganti tema"
-                    class="w-8 h-8 rounded border border-white/40 bg-white/15 text-white hover:bg-white/30 transition-colors flex items-center justify-center">
-                    <i class="fa-solid fa-moon text-[11px]"></i>
-                </button>
-                <a href="/" class="press text-[10px] font-bold border-2 px-3 py-1.5 rounded no-underline"
-                   style="border-color: var(--line); background: var(--surface); color: var(--brand); box-shadow: var(--shadow-sm);">
-                    HOME
-                </a>
+        <div id="custom-modal" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="card modal-card">
+                <div class="modal-icon" id="modal-icon"><svg><use href="#i-alert"/></svg></div>
+                <h2 class="modal-title" id="modal-title">Perhatian</h2>
+                <p class="modal-msg" id="modal-message">Pesan error di sini.</p>
+                <button onclick="closeModal()" class="btn btn-primary btn-block">Mengerti</button>
             </div>
-        </header>
-
-        <div class="p-4 md:p-6 flex-grow flex flex-col justify-center">
-
-            <div id="input-section" class="w-full flex flex-col md:flex-row md:items-stretch gap-4 md:gap-6">
-
-                <div class="w-full md:w-5/12 flex">
-                    <div class="relative w-full aspect-square md:aspect-auto border-2 rounded-lg overflow-hidden group min-h-[200px]"
-                         style="border-color: var(--line-soft); background: var(--surface-sunk);">
-                        <img src="https://c.termai.cc/i111/TJHiBPf.jpg" alt="Zhao Lusi"
-                             loading="lazy"
-                             class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105">
-                    </div>
-                </div>
-
-                <div class="w-full md:w-7/12 flex flex-col justify-between gap-3">
-                    <div class="space-y-3">
-                        <div>
-                            <label for="input-name" class="block font-bold text-[10px] uppercase tracking-wider mb-1.5 text-ink-faint">
-                                Nama Pengirim
-                            </label>
-                            <input type="text" id="input-name" placeholder="Hamba Allah" autocomplete="name" class="field">
-                        </div>
-
-                        <div>
-                            <span class="block font-bold text-[10px] uppercase tracking-wider mb-1.5 text-ink-faint">
-                                Nominal Donasi
-                            </span>
-                            <div class="grid grid-cols-3 gap-2 mb-2">
-                                <button type="button" onclick="setVal(5000)" class="press border-2 py-1.5 text-[10px] font-bold rounded"
-                                    style="border-color: var(--line-soft); background: var(--surface-sunk); color: var(--brand);">5k</button>
-                                <button type="button" onclick="setVal(10000)" class="press border-2 py-1.5 text-[10px] font-bold rounded"
-                                    style="border-color: var(--line-soft); background: var(--surface-sunk); color: var(--brand);">10k</button>
-                                <button type="button" onclick="setVal(25000)" class="press border-2 py-1.5 text-[10px] font-bold rounded"
-                                    style="border-color: var(--line-soft); background: var(--surface-sunk); color: var(--brand);">25k</button>
-                            </div>
-                            <div class="relative">
-                                <span class="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center text-white font-bold z-10 text-sm rounded-l"
-                                      style="background: var(--brand);" aria-hidden="true">Rp</span>
-                                <label for="input-amount" class="sr-only">Nominal donasi dalam rupiah</label>
-                                <input type="number" id="input-amount" inputmode="numeric" min="1000" step="1000"
-                                       placeholder="1.000" class="field pl-12 text-base font-bold">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="createTransaction()" id="btn-pay"
-                        class="press w-full text-white py-3.5 font-bold text-sm border-2 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
-                        style="border-color: var(--line); background: linear-gradient(90deg, var(--brand), var(--sky)); box-shadow: var(--shadow);">
-                        <span id="btn-text">LANJUT BAYAR <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        <span id="btn-loader" class="hidden"><i class="fa-solid fa-circle-notch fa-spin"></i> LOADING...</span>
-                    </button>
-                </div>
-            </div>
-
-            <div id="result-section" class="hidden w-full flex-col md:flex-row gap-4 md:gap-6">
-
-                <div class="w-full md:w-5/12 flex flex-col gap-2">
-                    <p class="w-full border-2 border-dashed rounded p-1.5 text-[10px] font-bold text-center"
-                       style="border-color: var(--line-soft); background: var(--brand-wash); color: var(--brand);">
-                        SCAN QRIS INI
-                    </p>
-                    <div class="p-2 border-2 rounded-lg aspect-square flex items-center justify-center bg-white"
-                         style="border-color: var(--line); box-shadow: var(--shadow-sm);">
-                        <div id="qrcode" class="flex justify-center items-center w-full h-full"></div>
-                    </div>
-                </div>
-
-                <div class="w-full md:w-7/12 flex flex-col gap-3 justify-center">
-                    <div class="w-full border-2 rounded-lg p-4 flex flex-col gap-2"
-                         style="border-color: var(--line-soft); background: var(--surface-sunk); box-shadow: var(--shadow-sm);">
-                        <div class="flex justify-between items-center">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-ink-faint">Total Tagihan</span>
-                            <span class="text-xl font-display font-bold" id="display-amount" style="color: var(--brand);">Rp 0</span>
-                        </div>
-                        <div class="flex justify-between items-center border-t-2 border-dashed pt-2" style="border-color: var(--line-soft);">
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-ink-faint">Berlaku Sampai</span>
-                            <span class="text-xs font-bold text-ink" id="display-expire">--:--</span>
-                        </div>
-                    </div>
-
-                    <button onclick="resetForm()"
-                        class="press w-full py-3 font-bold border-2 rounded-lg text-xs flex items-center justify-center gap-2"
-                        style="border-color: var(--line-soft); background: var(--surface); color: #ef4444; box-shadow: var(--shadow-sm);">
-                        <i class="fa-solid fa-xmark"></i> BATALKAN TRANSAKSI
-                    </button>
-                </div>
-            </div>
-
-            <div id="success-section" class="hidden flex-col items-center justify-center text-center w-full py-6 md:py-10">
-                <div class="text-white rounded-full w-24 h-24 flex items-center justify-center border-2 mb-6"
-                     style="border-color: var(--line); background: #22c55e; box-shadow: var(--shadow);">
-                    <i class="fa-solid fa-check text-5xl"></i>
-                </div>
-
-                <h2 class="font-display font-bold text-3xl mb-2 tracking-tight italic text-ink">ARIGATO!</h2>
-                <p class="text-sm font-bold mb-8 max-w-xs mx-auto text-ink-faint">Terima kasih orang baik, donasi kamu sudah berhasil diterima.</p>
-
-                <button onclick="resetForm()"
-                    class="press w-full max-w-xs text-white py-3 font-bold text-sm border-2 rounded-lg"
-                    style="border-color: var(--line); background: var(--brand); box-shadow: var(--shadow-sm);">
-                    KEMBALI DONASI
-                </button>
-            </div>
-
         </div>
 
-        <footer class="px-4 py-2 border-t-2 text-center" style="border-color: var(--line-soft); background: var(--surface-sunk);">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-ink-faint">Powered by LǐRénXīn API</span>
-        </footer>
+        <div class="card donate-card" id="donate-card">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px;">
+                <span class="logo-mark" style="width:38px;height:38px" aria-hidden="true"><svg width="16" height="16"><use href="#i-qr"/></svg></span>
+                <div>
+                    <h1 style="font-size:17px; font-weight:600; letter-spacing:-.01em; margin:0;">Donasi via QRIS</h1>
+                    <p style="font-size:12.5px; margin:1px 0 0; color:var(--ink-faint);">Scan, bayar, selesai — biaya server jalan terus.</p>
+                </div>
+            </div>
+
+            <div id="input-section" class="donate-view">
+                <div style="margin-bottom:14px;">
+                    <label for="input-name" class="field-label"><span>Nama pengirim</span><span class="opt">optional</span></label>
+                    <input type="text" id="input-name" placeholder="Hamba Allah" autocomplete="name" class="field">
+                </div>
+
+                <div>
+                    <span class="field-label"><span>Nominal donasi</span></span>
+                    <div class="preset-row">
+                        <button type="button" class="preset" data-val="5000">5.000</button>
+                        <button type="button" class="preset" data-val="10000">10.000</button>
+                        <button type="button" class="preset" data-val="25000">25.000</button>
+                    </div>
+                    <div class="amount-wrap">
+                        <span class="amount-currency" aria-hidden="true">Rp</span>
+                        <label for="input-amount" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Nominal donasi dalam rupiah</label>
+                        <input type="number" id="input-amount" inputmode="numeric" min="1000" step="1000" placeholder="1.000" class="field">
+                    </div>
+                    <p style="font-size:12px; color:var(--ink-faint); margin:10px 0 0;">Minimum Rp 1.000. Donasi diproses lewat QRIS dinamis, hangus dalam 5 menit.</p>
+                </div>
+
+                <button onclick="createTransaction()" id="btn-pay" class="btn btn-primary btn-block" style="margin-top:22px;">
+                        <span id="btn-text">
+                        Lanjut bayar
+                        <svg width="15" height="15"><use href="#i-arrow"/></svg>
+                    </span>
+                    <span id="btn-loader" style="display:none; align-items:center; gap:9px;">
+                        <svg class="spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-9-9"/></svg>
+                        Menukar QRIS...
+                    </span>
+                </button>
+            </div>
+
+            <div id="result-section" class="donate-view" style="display:none;">
+                <p style="font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); margin:0 0 10px; text-align:center;">Scan dengan aplikasi e-wallet atau m-banking</p>
+                <div class="qr-box" id="qrcode"></div>
+                <div style="margin-top:16px;">
+                    <div class="pay-meter">
+                        <span class="lbl">Total tagihan</span>
+                        <span class="val" id="display-amount" style="color:var(--brand);">Rp 0</span>
+                    </div>
+                    <div class="pay-meter">
+                        <span class="lbl">Berlaku sampai</span>
+                        <span class="val expire" id="display-expire">--:--</span>
+                    </div>
+                </div>
+                <button onclick="resetForm()" class="btn btn-ghost btn-block" style="margin-top:16px;">Batalkan transaksi</button>
+            </div>
+
+            <div id="success-section" class="donate-view" style="display:none; text-align:center; padding:18px 6px;">
+                <div class="success-icon"><svg><use href="#i-check"/></svg></div>
+                <h2 style="font-size:22px; letter-spacing:-.02em; font-weight:600; margin:0 0 8px;">Arigato!</h2>
+                <p style="font-size:14px; color:var(--ink-soft); margin:0 0 24px;">Terima kasih orang baik — donasi kamu sudah diterima,
+                    dan server bakal tetap hangat.</p>
+                <button onclick="resetForm()" class="btn btn-primary btn-block" style="max-width:260px; margin:0 auto;">Donasi lagi</button>
+            </div>
+        </div>
+
+        <p style="margin:18px 0 0; font-size:12.5px; color:var(--ink-faint); display:flex; align-items:center; gap:7px;">
+            <svg class="heart" width="12" height="12" aria-hidden="true"><use href="#i-heart"/></svg>
+            Powered by LǐRénXīn API — didedikasi untuk Zhao Lusi
+        </p>
     </main>
 
     <script>
-        function flipTheme(btn) {
-            const mode = window.LirenxinTheme.toggle();
-            btn.querySelector('i').className = mode === 'dark'
-                ? 'fa-solid fa-sun text-[11px]'
-                : 'fa-solid fa-moon text-[11px]';
+    (function () {
+        var btn = document.querySelector('.nav .icon-btn');
+        if (btn && window.LirenxinTheme.current() === 'light') {
+            var sun = btn.querySelector('.icon-sun');
+            var moon = btn.querySelector('.icon-moon');
+            if (sun && moon) { sun.style.display = 'none'; moon.style.display = ''; }
         }
+        window.flipTheme = window.LirenxinTheme.toggle;
+        document.body.classList.add('fade-in');
+    })();
 
-        (function syncThemeIcon() {
-            const icon = document.querySelector('header button i');
-            if (icon && window.LirenxinTheme.current() === 'dark') {
-                icon.className = 'fa-solid fa-sun text-[11px]';
-            }
-        })();
+    let timerInterval, expireTime;
+    const LS_KEY = 'lirenxin-donation-session';
 
-        let timerInterval, expireTime;
-        const LS_KEY = 'lirenxin-donation-session';
-
-        function setVal(n) {
-            document.getElementById('input-amount').value = n;
-        }
-
-        function showModal(message) {
-            const modal = document.getElementById('custom-modal');
-            document.getElementById('modal-message').innerText = message;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('custom-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeModal();
+    function setVal(n) {
+        document.getElementById('input-amount').value = n;
+        document.querySelectorAll('.preset').forEach(b => {
+            b.classList.toggle('active', Number(b.dataset.val) === Number(n));
         });
+    }
 
-        function switchView(id) {
-            ['input-section', 'result-section', 'success-section'].forEach(v => {
-                const el = document.getElementById(v);
-                const active = v === id;
-                el.classList.toggle('hidden', !active);
-                el.classList.toggle('flex', active);
-                el.classList.toggle('animate-pop', active);
-            });
-        }
+    function showModal(message) {
+        const modal = document.getElementById('custom-modal');
+        document.getElementById('modal-message').textContent = message;
+        modal.classList.add('show');
+    }
 
-        function toggleLoading(isLoading) {
-            document.getElementById('btn-pay').disabled = isLoading;
-            document.getElementById('btn-text').classList.toggle('hidden', isLoading);
-            document.getElementById('btn-loader').classList.toggle('hidden', !isLoading);
-        }
+    function closeModal() {
+        document.getElementById('custom-modal').classList.remove('show');
+    }
 
-        function checkSession() {
-            const saved = localStorage.getItem(LS_KEY);
-            if (!saved) return false;
-            try {
-                const data = JSON.parse(saved);
-                if (Date.now() > data.expireTime) {
-                    localStorage.removeItem(LS_KEY);
-                    return false;
-                }
-                expireTime = data.expireTime;
-                renderQR(data.qr_string, data.amount);
-                startTimer();
-                switchView('result-section');
-                return true;
-            } catch (e) {
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    function switchView(id) {
+        ['input-section', 'result-section', 'success-section'].forEach(v => {
+            const el = document.getElementById(v);
+            const active = v === id;
+            el.style.display = active ? '' : 'none';
+            if (active) el.classList.add('fade-in');
+        });
+    }
+
+    function toggleLoading(isLoading) {
+        document.getElementById('btn-pay').disabled = isLoading;
+        document.getElementById('btn-text').style.display = isLoading ? 'none' : '';
+        document.getElementById('btn-loader').style.display = isLoading ? 'flex' : 'none';
+    }
+
+    function checkSession() {
+        const saved = localStorage.getItem(LS_KEY);
+        if (!saved) return false;
+        try {
+            const data = JSON.parse(saved);
+            if (Date.now() > data.expireTime) {
                 localStorage.removeItem(LS_KEY);
                 return false;
             }
+            expireTime = data.expireTime;
+            renderQR(data.qr_string, data.amount);
+            startTimer();
+            switchView('result-section');
+            return true;
+        } catch (e) {
+            localStorage.removeItem(LS_KEY);
+            return false;
+        }
+    }
+
+    function renderQR(qrString, amount) {
+        const qrContainer = document.getElementById('qrcode');
+        qrContainer.innerHTML = '';
+        new QRCode(qrContainer, {
+            text: qrString,
+            width: 200, height: 200,
+            colorDark: '#111111',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.L
+        });
+        document.getElementById('display-amount').textContent = 'Rp ' + parseInt(amount).toLocaleString('id-ID');
+    }
+
+    async function createTransaction() {
+        const amount = document.getElementById('input-amount').value;
+        const name = document.getElementById('input-name').value || 'Hamba Allah';
+
+        if (!amount || parseInt(amount) < 1000) {
+            showModal('Minimal donasi Rp 1.000 ya kak!');
+            return;
         }
 
-        function renderQR(qrString, amount) {
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-            new QRCode(qrContainer, {
-                text: qrString,
-                width: 180, height: 180,
-                colorDark: '#000000',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.L
+        toggleLoading(true);
+
+        try {
+            const response = await fetch('/api/create-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount, name })
             });
-            document.getElementById('display-amount').innerText = 'Rp ' + parseInt(amount).toLocaleString('id-ID');
+
+            const data = await response.json();
+            toggleLoading(false);
+
+            if (data.status === 'success') {
+                expireTime = data.expired_at;
+                localStorage.setItem(LS_KEY, JSON.stringify({
+                    order_id: data.order_id,
+                    amount: data.amount,
+                    qr_string: data.qr_string,
+                    expireTime
+                }));
+                renderQR(data.qr_string, data.amount);
+                startTimer();
+                switchView('result-section');
+            } else {
+                showModal(data.message || 'Terjadi kesalahan pada server.');
+            }
+        } catch (error) {
+            toggleLoading(false);
+            showModal('Gagal menghubungi server. Cek koneksi internet.');
         }
+    }
 
-        async function createTransaction() {
-            const amount = document.getElementById('input-amount').value;
-            const name = document.getElementById('input-name').value || 'Hamba Allah';
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        const display = document.getElementById('display-expire');
 
-            if (!amount || parseInt(amount) < 1000) {
-                showModal('Minimal donasi Rp 1.000 ya kak!');
+        const tick = () => {
+            const left = Math.ceil((expireTime - Date.now()) / 1000);
+            if (left <= 0) {
+                resetForm();
+                showModal('Waktu habis, silakan buat transaksi baru.');
                 return;
             }
+            const m = String(Math.floor(left / 60)).padStart(2, '0');
+            const s = String(left % 60).padStart(2, '0');
+            display.textContent = m + ':' + s;
+        };
 
-            toggleLoading(true);
+        tick();
+        timerInterval = setInterval(tick, 1000);
+    }
 
-            try {
-                const response = await fetch('/api/create-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount, name })
-                });
+    function resetForm() {
+        clearInterval(timerInterval);
+        localStorage.removeItem(LS_KEY);
+        document.getElementById('input-amount').value = '';
+        document.getElementById('qrcode').innerHTML = '';
+        document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+        switchView('input-section');
+    }
 
-                const data = await response.json();
-                toggleLoading(false);
-
-                if (data.status === 'success') {
-                    expireTime = data.expired_at;
-                    localStorage.setItem(LS_KEY, JSON.stringify({
-                        order_id: data.order_id,
-                        amount: data.amount,
-                        qr_string: data.qr_string,
-                        expireTime
-                    }));
-                    renderQR(data.qr_string, data.amount);
-                    startTimer();
-                    switchView('result-section');
-                } else {
-                    showModal(data.message || 'Terjadi kesalahan pada server.');
-                }
-            } catch (error) {
-                toggleLoading(false);
-                showModal('Gagal menghubungi server. Cek koneksi internet.');
-            }
-        }
-
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            const display = document.getElementById('display-expire');
-
-            const tick = () => {
-                const left = Math.ceil((expireTime - Date.now()) / 1000);
-                if (left <= 0) {
-                    resetForm();
-                    showModal('Waktu habis, silakan buat transaksi baru.');
-                    return;
-                }
-                const m = String(Math.floor(left / 60)).padStart(2, '0');
-                const s = String(left % 60).padStart(2, '0');
-                display.innerText = `${m}:${s}`;
-            };
-
-            tick();
-            timerInterval = setInterval(tick, 1000);
-        }
-
-        function resetForm() {
-            clearInterval(timerInterval);
-            localStorage.removeItem(LS_KEY);
-            document.getElementById('input-amount').value = '';
-            document.getElementById('qrcode').innerHTML = '';
-            switchView('input-section');
-        }
-
-        if (!checkSession()) switchView('input-section');
+    if (!checkSession()) switchView('input-section');
     </script>
 </body>
 </html>

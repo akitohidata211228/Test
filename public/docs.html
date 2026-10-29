@@ -8,7 +8,7 @@
 
     <meta name="description" content="Dokumentasi LǐRénXīn API. Coba semua endpoint langsung dari browser: downloader, games, info cuaca & gempa, search, dan tools.">
     <meta name="author" content="Akito Hidata">
-    <meta name="theme-color" content="#8b5cf6">
+    <meta name="theme-color" content="#0b0d10">
 
     <link rel="canonical" href="https://lirenxin-api.my.id/docs">
 
@@ -25,157 +25,131 @@
     <meta name="twitter:image" content="https://lirenxin-api.my.id/src/thumbnail.jpg">
 
     <link rel="icon" href="/src/danzz.jpg">
+
     <script src="theme.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700;800&display=swap">
+    <script src="motion.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                        display: ['"Space Mono"', 'monospace']
-                    },
-                    colors: {
-                        brand: 'var(--brand)',
-                        'brand-strong': 'var(--brand-strong)',
-                        ink: 'var(--ink)',
-                        'ink-soft': 'var(--ink-soft)',
-                        'ink-faint': 'var(--ink-faint)',
-                        surface: 'var(--surface)',
-                        'surface-sunk': 'var(--surface-sunk)',
-                        line: 'var(--line)',
-                        'line-soft': 'var(--line-soft)'
-                    }
-                }
-            }
-        }
-    </script>
+    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    </svg>
 </head>
-<body class="grid-bg min-h-screen flex flex-col font-mono text-ink">
+<body>
 
-    <nav class="border-b-2 sticky top-0 z-50 backdrop-blur"
-         style="border-color: var(--line); background: color-mix(in srgb, var(--surface) 88%, transparent);">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4 justify-between">
-
-            <div class="flex items-center gap-3 shrink-0">
-                <a href="/" aria-label="Kembali ke beranda"
-                   class="press w-10 h-10 text-white flex items-center justify-center border-2 rounded"
-                   style="border-color: var(--line); background: var(--brand); box-shadow: var(--shadow-sm);">
-                    <i class="fa-solid fa-arrow-left"></i>
+    <header class="nav">
+        <div class="container nav-in">
+            <a class="logo" href="/" aria-label="LǐRénXīn API — kembali ke beranda">
+                <span class="logo-mark" aria-hidden="true">李</span>
+                <span class="logo-name" id="nav-title">Lirexin <span>API</span></span>
+            </a>
+            <div style="display:flex; gap:2px; align-items:center;">
+                <span class="chip chip-brand nav-hide-sm" aria-label="dokumentasi interaktif">
+                    <svg width="11" height="11" style="color:var(--brand)"><use href="#i-book"/></svg>
+                    interactive docs
+                </span>
+                <a class="nav-link" href="/donasi">Donasi</a>
+                <a class="icon-btn" href="/donasi" title="Donasi QRIS" aria-label="Donasi QRIS"
+                    style="display:none">
+                    <svg><use href="#i-heart"/></svg>
                 </a>
-                <h1 id="nav-title" class="font-display font-bold text-xl tracking-tighter uppercase italic" style="color: var(--brand);">LǐRénXīn API</h1>
-            </div>
-
-            <div class="hidden md:flex flex-1 max-w-xl mx-4 h-9 border-2 items-center overflow-hidden rounded"
-                 style="border-color: var(--line); background: var(--term-bg);">
-                <div id="running-text" class="text-white text-xs font-bold uppercase tracking-widest px-4 whitespace-nowrap animate-marquee inline-block min-w-full"></div>
-            </div>
-
-            <div class="flex items-center gap-2 shrink-0">
-                <button onclick="flipTheme(this)" title="Ganti tema" aria-label="Ganti tema"
-                    class="press w-10 h-10 border-2 rounded flex items-center justify-center"
-                    style="border-color: var(--line); background: var(--surface); box-shadow: var(--shadow-sm); color: var(--brand);">
-                    <i class="fa-solid fa-moon"></i>
+                <a class="icon-btn" id="nav-github" href="https://github.com/akitohidata211228" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                    <svg><use href="#i-github"/></svg>
+                </a>
+                <button class="icon-btn" onclick="flipTheme()" title="Ganti tema" aria-label="Ganti tema">
+                    <svg class="icon-sun"><use href="#i-sun"/></svg>
+                    <svg class="icon-moon"><use href="#i-moon"/></svg>
                 </button>
-                <a href="https://github.com/akitohidata211228" target="_blank" rel="noopener" aria-label="GitHub"
-                   class="press w-10 h-10 border-2 rounded flex items-center justify-center"
-                   style="border-color: var(--line); background: var(--surface); box-shadow: var(--shadow-sm); color: var(--brand);">
-                    <i class="fa-brands fa-github text-xl"></i>
-                </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-8 grid lg:grid-cols-12 gap-8 items-start">
+    <main class="container docs-layout">
 
-        <aside class="lg:col-span-4 lg:sticky lg:top-24 flex flex-col gap-6 h-fit">
+        <aside class="docs-side">
 
-            <div class="panel term overflow-hidden flex flex-col h-[340px]">
-                <div class="term-head px-3 py-2 flex items-center gap-2 border-b border-white/10">
-                    <span class="flex gap-1.5" aria-hidden="true">
-                        <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                    </span>
-                    <span class="text-[10px] text-gray-400 font-bold ml-2">index.ts</span>
-                </div>
-
-                <div id="term-logs" class="p-3 text-[11px] overflow-y-auto flex-1 space-y-0.5 crt-text" style="color: var(--term-text);"></div>
-
-                <div id="term-input-line" class="hidden px-3 pb-2 pt-1 border-t border-white/10">
-                    <span class="text-green-500 font-bold mr-1 text-[10px]">root@LǐRénXīn~$</span>
-                    <span class="inline-block w-2.5 h-4 bg-gray-500 align-middle ml-1 animate-blink"></span>
-                </div>
+            <div class="search-wrap card" style="padding:0; border-radius:10px;">
+                <svg aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" id="search-input" placeholder="Cari endpoint..." aria-label="Cari endpoint"
+                    class="field" style="border:none; border-radius:10px;">
             </div>
 
-            <div class="relative">
-                <input type="search" id="search-input" placeholder="CARI ENDPOINT..." aria-label="Cari endpoint"
-                    class="field h-12 pl-10 font-bold text-sm uppercase" style="border-color: var(--line); box-shadow: var(--shadow);">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--brand);"></i>
-            </div>
-
-            <div class="panel p-5">
-                <h2 class="font-bold text-lg italic mb-4 border-b-2 border-dashed pb-2" style="color: var(--brand); border-color: var(--line-soft);">
-                    SERVER STATUS
-                </h2>
-                <dl class="space-y-3 text-xs font-bold">
-                    <div class="flex justify-between">
-                        <dt class="text-ink-faint">TIME (WIB)</dt>
-                        <dd id="server-time" class="text-ink">--:--:--</dd>
+            <div class="card side-panel">
+                <p class="side-title">server status</p>
+                <dl style="margin:0">
+                    <div class="status-row">
+                        <dt>WIB</dt>
+                        <dd id="server-time">--:--:--</dd>
                     </div>
-                    <div class="flex justify-between">
-                        <dt class="text-ink-faint">DATE</dt>
-                        <dd id="server-date" class="text-ink">--/--/----</dd>
+                    <div class="status-row">
+                        <dt>DATE</dt>
+                        <dd id="server-date">--/--/----</dd>
                     </div>
-                    <div class="flex justify-between">
-                        <dt class="text-ink-faint">ENDPOINT</dt>
-                        <dd id="stat-endpoints" style="color: var(--brand);">–</dd>
+                    <div class="status-row">
+                        <dt>ENDPOINT</dt>
+                        <dd class="accent" id="stat-endpoints">–</dd>
                     </div>
-                    <div class="flex justify-between">
-                        <dt class="text-ink-faint">KATEGORI</dt>
-                        <dd id="stat-categories" style="color: var(--brand);">–</dd>
+                    <div class="status-row">
+                        <dt>KATEGORI</dt>
+                        <dd class="accent" id="stat-categories">–</dd>
                     </div>
-                    <div class="flex justify-between">
-                        <dt class="text-ink-faint">UPTIME</dt>
-                        <dd id="stat-uptime" style="color: var(--brand);">–</dd>
+                    <div class="status-row">
+                        <dt>UPTIME</dt>
+                        <dd class="accent" id="stat-uptime">–</dd>
                     </div>
                 </dl>
             </div>
+
+            <div class="console" style="display:flex; flex-direction:column; min-height:240px; max-height:320px;">
+                <div class="console-head">
+                    <span class="console-title"><span class="status-dot"></span> console</span>
+                    <span class="console-title" id="term-host">localhost</span>
+                </div>
+                <div id="term-logs" style="flex:1; overflow-y:auto;"></div>
+            </div>
+
+            <div class="card side-panel" id="side-nav-panel">
+                <p class="side-title">navigasi</p>
+                <div class="side-nav" id="side-nav"></div>
+            </div>
+
         </aside>
 
-        <section class="lg:col-span-8 min-h-[50vh]">
-            <div id="api-container" class="space-y-4 opacity-0 transition-opacity duration-500"></div>
+        <section aria-label="daftar endpoint">
+            <div id="api-container"></div>
 
-            <div id="no-results" class="hidden flex-col items-center justify-center py-20 text-center">
-                <i class="fa-solid fa-box-open text-4xl mb-3" style="color: var(--brand);"></i>
-                <p class="font-bold text-xl" style="color: var(--brand);">TIDAK ADA HASIL</p>
+            <div id="no-results" class="card" style="display:none; padding:56px 24px; text-align:center;">
+                <p style="font-size:15px; font-weight:600; margin:0 0 6px; color:var(--ink);">Tidak ada hasil</p>
+                <p style="font-size:13.5px; color:var(--ink-faint); margin:0;">Coba kata kunci lain — mis. nama layanan atau path-nya.</p>
             </div>
         </section>
 
     </main>
 
-    <div id="custom-toast" class="fixed bottom-5 right-5 z-[100] translate-y-32 opacity-0 transition-all duration-300" role="status" aria-live="polite">
-        <div class="px-4 py-3 font-bold text-xs rounded flex items-center gap-3 border-2 text-white"
-             style="border-color: var(--line); background: var(--brand); box-shadow: var(--shadow);">
-            <i class="fa-solid fa-check"></i>
-            <span id="toast-message">SUCCESS</span>
-        </div>
+    <div id="custom-toast" class="toast" role="status" aria-live="polite">
+        <svg aria-hidden="true"><use href="#i-check"/></svg>
+        <span id="toast-message">OK</span>
     </div>
 
     <script>
-        function flipTheme(btn) {
-            const mode = window.LirenxinTheme.toggle();
-            btn.querySelector('i').className = mode === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    (function () {
+        var btn = document.querySelector('.nav .icon-btn');
+        if (btn && window.LirenxinTheme.current() === 'light') {
+            var sun = btn.querySelector('.icon-sun');
+            var moon = btn.querySelector('.icon-moon');
+            if (sun && moon) { sun.style.display = 'none'; moon.style.display = ''; }
         }
-        (function () {
-            const icon = document.querySelector('nav button i');
-            if (icon && window.LirenxinTheme.current() === 'dark') icon.className = 'fa-solid fa-sun';
-        })();
+        window.flipTheme = function () { window.LirenxinTheme.toggle(); };
+    })();
     </script>
     <script src="script.js"></script>
 </body>
