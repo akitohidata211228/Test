@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentation | LiRénXin API</title>
+
+    <meta name="description" content="Dokumentasi LiRénXin API. Coba semua endpoint langsung dari browser: downloader, games, info cuaca & gempa, search, dan tools.">
+    <meta name="author" content="Akito Hidata">
+    <meta name="theme-color" content="#0F0E0C">
+
+    <link rel="canonical" href="https://lirenxin-api.my.id/docs">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LiRénXin API">
+    <meta property="og:title" content="LiRénXin API Documentation">
+    <meta property="og:description" content="Coba semua endpoint LiRénXin API langsung dari browser.">
+    <meta property="og:url" content="https://lirenxin-api.my.id/docs">
+    <meta property="og:image" content="https://lirenxin-api.my.id/src/thumbnail.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LiRénXin API Documentation">
+    <meta name="twitter:description" content="Coba semua endpoint LiRénXin API langsung dari browser.">
+    <meta name="twitter:image" content="https://lirenxin-api.my.id/src/thumbnail.jpg">
+
+    <link rel="icon" href="/src/danzz.jpg">
+
+    <script src="theme.js"></script>
+    <script src="motion.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    </svg>
+</head>
+<body>
+
+    <header class="nav">
+        <div class="container nav-in">
+            <a class="brand" id="nav-title" href="/" aria-label="LiRénXin API — kembali ke beranda">lirenxin<span class="dash">-</span>api</a>
+            <div>
+                <span class="chip chip-brand nav-hide-sm">
+                    <svg width="13" height="13" style="color:var(--brand)"><use href="#i-book"/></svg>
+                    interactive docs
+                </span>
+                <a class="nav-link" href="/donasi">Donasi</a>
+                <a class="icon-btn" id="nav-github" href="https://github.com/akitohidata211228" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><use href="#i-github"/></svg>
+                </a>
+                <button class="icon-btn" onclick="flipTheme()" title="Ganti tema" aria-label="Ganti tema">
+                    <svg class="icon-sun" viewBox="0 0 24 24"><use href="#i-sun"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24"><use href="#i-moon"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container docs-layout">
+
+        <aside class="docs-side">
+
+            <div class="card search-wrap">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" id="search-input" placeholder="Cari endpoint..." aria-label="Cari endpoint" class="field">
+            </div>
+
+            <div class="card side-panel">
+                <p class="side-title">server status</p>
+                <dl style="margin:0">
+                    <div class="status-row"><dt>WIB</dt><dd id="server-time">--:--:--</dd></div>
+                    <div class="status-row"><dt>tanggal</dt><dd id="server-date">--/--/----</dd></div>
+                    <div class="status-row"><dt>endpoint</dt><dd class="accent" id="stat-endpoints">–</dd></div>
+                    <div class="status-row"><dt>kategori</dt><dd class="accent" id="stat-categories">–</dd></div>
+                    <div class="status-row"><dt>uptime</dt><dd class="accent" id="stat-uptime">–</dd></div>
+                </dl>
+            </div>
+
+            <div class="console" style="min-height:240px; max-height:340px;">
+                <div class="console-head">
+                    <span class="console-title"><span class="status-dot"></span> console</span>
+                    <span class="console-title" id="term-host">localhost</span>
+                </div>
+                <div id="term-logs" style="flex:1; overflow-y:auto;"></div>
+            </div>
+
+            <div class="card side-panel">
+                <p class="side-title">navigasi</p>
+                <div class="side-nav" id="side-nav"></div>
+            </div>
+
+        </aside>
+
+        <section aria-label="daftar endpoint">
+            <div id="api-container"></div>
+
+            <div id="no-results" class="card" style="display:none;">
+                <p>Tidak ada hasil</p>
+                <p>Coba kata kunci lain — mis. nama layanan atau path-nya.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="custom-toast" class="toast" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>
+        <span id="toast-message">OK</span>
+    </div>
+
+    <script>
+    (function () {
+        window.flipTheme = window.LirenxinTheme.toggle;
+    })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

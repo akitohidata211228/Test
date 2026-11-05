@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /config
+Disallow: /health
+Disallow: /donasi
+
+Sitemap: https://lirenxin-api.my.id/sitemap.xml
