@@ -1,13 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 
-// Colors strictly matching user request:
-// "beda beda warna biru merah kuning pink hijau"
+// Tema biru: seluruh ripple cursor memakai biru LIRENXIN (#1E5CD9)
 const RIPPLE_COLORS = [
   { name: 'biru', hex: '#1E5CD9', rgb: '30, 92, 217' },
-  { name: 'merah', hex: '#FF2A55', rgb: '255, 42, 85' },
-  { name: 'kuning', hex: '#FFE600', rgb: '255, 230, 0' },
-  { name: 'pink', hex: '#FF2D95', rgb: '255, 45, 149' },
-  { name: 'hijau', hex: '#10B981', rgb: '16, 185, 129' },
 ];
 
 interface Ripple {
