@@ -7,7 +7,7 @@ import { Buffer } from "buffer";
 import { URL } from "url";
 import path from "path";
 
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 class GeminiAPI {
   config: {

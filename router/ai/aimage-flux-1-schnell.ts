@@ -5,7 +5,7 @@
 import axios from "axios"
 import { Buffer } from "buffer"
 
-import { CloudflareAi } from "../../src/cfai"
+import { CloudflareAi } from "../../server/cfai"
 
 const createImageResponse = (buffer: Buffer, filename: string | null = null) => {
   const headers: { [key: string]: string } = {

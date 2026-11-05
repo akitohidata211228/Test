@@ -5,7 +5,7 @@
 import axios from "axios"
 import fs from "fs"
 
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 class RobloxAPI {
   baseUrl: string

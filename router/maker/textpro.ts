@@ -11,7 +11,7 @@ import FormData from "form-data"
 import * as Uri from "uri-js"
 import * as cookie from "cookie"
 
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 const createImageResponse = (buffer: Buffer, filename: string | null = null) => {
   const headers: Record<string, string> = {

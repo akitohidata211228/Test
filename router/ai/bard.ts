@@ -3,7 +3,7 @@
   Kredit scraper: siputzx. Dipasang di sini lewat adapter descriptor src/autoload.ts.
 */
 import axios from "axios"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 async function bard(query: string) {
   const headers = {

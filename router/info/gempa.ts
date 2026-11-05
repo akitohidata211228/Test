@@ -1,5 +1,5 @@
 import axios from "axios"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 const urls = {
   auto: "https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json",

@@ -4,7 +4,7 @@
 */
 import axios from "axios"
 import * as cheerio from "cheerio"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 async function getAnimeDetail(url: string) {
   try {

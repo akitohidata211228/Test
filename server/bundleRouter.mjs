@@ -22,8 +22,8 @@ function collect(dir, out = []) {
 
 const entryPoints = [
   ...collect(path.join(root, 'router')),
-  path.join(root, 'src', 'proxy.ts'),
-  path.join(root, 'src', 'cfai.ts'),
+  path.join(root, 'server', 'proxy.ts'),
+  path.join(root, 'server', 'cfai.ts'),
 ];
 
 await build({

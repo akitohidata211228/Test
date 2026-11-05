@@ -18,7 +18,7 @@
 */
 import type { Request, Response } from "express"
 import axios from "axios"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 const QUALITY_MAP: Record<number, string> = {
   5: "144P",

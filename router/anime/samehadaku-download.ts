@@ -5,7 +5,7 @@
 import axios from "axios"
 import * as cheerio from "cheerio"
 import FormData from "form-data"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 async function getBaseUrl() {
   try {

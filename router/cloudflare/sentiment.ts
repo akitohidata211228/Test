@@ -4,7 +4,7 @@
 */
 import axios from "axios"
 
-import { CloudflareAi } from "../../src/cfai"
+import { CloudflareAi } from "../../server/cfai"
 
 const analyzeSentiment = async (text: string, model: string) => {
   try {

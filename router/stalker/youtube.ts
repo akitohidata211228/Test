@@ -5,7 +5,7 @@
 import needle from "needle"
 import * as cheerio from "cheerio"
 
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 async function youtubeStalk(username: string) {
   try {

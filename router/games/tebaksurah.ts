@@ -1,5 +1,5 @@
 import axios from "axios"
-import { proxy } from "../../src/proxy"
+import { proxy } from "../../server/proxy"
 
 async function scrape() {
   try {
