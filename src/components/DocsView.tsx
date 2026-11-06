@@ -1,5 +1,5 @@
-import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import React, { useRef } from 'react';
+import { generateCanvasCursorDataUrl } from './WaterRippleCanvas';
 
 interface DocsViewProps {
   initialEndpointId?: string;
@@ -7,37 +7,45 @@ interface DocsViewProps {
 }
 
 /**
- * Halaman dokumentasi memakai bentuk persis repo LiRénXin API
- * (public/docs.html: sidebar status server + console + daftar endpoint
- * accordion + JSON highlight + unduhan respons) — disajikan dari
- * gateway Express (/docs) di origin yang sama.
+ * Halaman /docs repo dirender UTUH di bawah navbar situs — tanpa strip
+ * tambahan dan tanpa header ganda di dalam iframe, supaya terasa satu
+ * website. Cursor pointer neo-brutalist biru yang sama disuntikkan ke
+ * dokumen iframe (same-origin) saat load.
  */
 export const DocsView: React.FC<DocsViewProps> = () => {
-  return (
-    <div className="flex flex-col bg-white dark:bg-[#0A0D14]">
-      {/* Strip info: docs statis membentuk pengalaman repo */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 pb-2 flex flex-wrap items-center justify-between gap-2">
-        <span className="font-mono text-[11px] font-black uppercase tracking-wider text-[#0A37BF] dark:text-[#FFE600]">
-          Interactive Docs • 287 Endpoint • Console Live
-        </span>
-        <a
-          href="/docs"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 font-mono text-[11px] font-black text-[#1E5CD9] dark:text-[#FFE600] hover:underline cursor-pointer"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-          BUKA MODE FULLSCREEN
-        </a>
-      </div>
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
 
-      {/* Halaman /docs repo asli — bentuk, warna, console, dan API-nya identik */}
-      <iframe
-        src="/docs"
-        title="LiRénXin API Documentation"
-        className="w-full border-0"
-        style={{ height: 'calc(100vh - 118px)', minHeight: 560 }}
-      />
-    </div>
+  const injectCursor = () => {
+    const doc = frameRef.current?.contentDocument;
+    if (!doc) return;
+    try {
+      doc.getElementById('lirenxin-custom-canvas-cursor')?.remove();
+      const cursorDataUrl = generateCanvasCursorDataUrl();
+      if (!cursorDataUrl) return;
+      const styleEl = doc.createElement('style');
+      styleEl.id = 'lirenxin-custom-canvas-cursor';
+      styleEl.innerHTML = `
+        *, *::before, *::after {
+          cursor: url(${cursorDataUrl}) 3 3, auto !important;
+        }
+        button, a, input, select, textarea, [role="button"], .cursor-pointer {
+          cursor: url(${cursorDataUrl}) 3 3, pointer !important;
+        }
+      `;
+      doc.head.appendChild(styleEl);
+    } catch {
+      /* same-origin guard: abaikan bila akses diblok */
+    }
+  };
+
+  return (
+    <iframe
+      ref={frameRef}
+      src="/docs"
+      title="LiRénXin API Documentation"
+      className="w-full block border-0"
+      style={{ height: 'calc(100vh - 68px)', minHeight: 560 }}
+      onLoad={injectCursor}
+    />
   );
 };

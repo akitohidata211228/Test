@@ -24,7 +24,7 @@ interface Ripple {
  * strictly via HTML5 Canvas (No static images used, exactly as instructed).
  * Symmetrically divided dual-tone blue with bold rounded black outline.
  */
-function generateCanvasCursorDataUrl(): string {
+export function generateCanvasCursorDataUrl(): string {
   if (typeof document === 'undefined') return '';
   const canvas = document.createElement('canvas');
   canvas.width = 44;
