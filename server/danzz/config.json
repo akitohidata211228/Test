@@ -100,34 +100,6 @@
         ]
       },
       {
-        "name": "Gemini [ BETA ]",
-        "endpoint": "/api/ai/gemini",
-        "filename": "gemini",
-        "method": "GET",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "The text content to process with Gemini"
-          },
-          {
-            "name": "cookie",
-            "required": true,
-            "description": "Authentication cookie for Gemini API"
-          },
-          {
-            "name": "promptSystem",
-            "required": false,
-            "description": "Optional system prompt for the AI to guide its behavior"
-          },
-          {
-            "name": "imageUrl",
-            "required": false,
-            "description": "Optional URL of an image to process with the text prompt"
-          }
-        ]
-      },
-      {
         "name": "Gemini Lite",
         "endpoint": "/api/ai/gemini-lite",
         "filename": "gemini-lite",
@@ -170,32 +142,6 @@
             "name": "imgUrl",
             "required": false,
             "description": "URL of an image to analyze"
-          }
-        ]
-      },
-      {
-        "name": "Gita",
-        "endpoint": "/api/ai/gita",
-        "filename": "gita",
-        "method": "GET",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "The query for Gita AI"
-          }
-        ]
-      },
-      {
-        "name": "Gita 2",
-        "endpoint": "/api/ai/gita",
-        "filename": "gita",
-        "method": "POST",
-        "params": [
-          {
-            "name": "q",
-            "required": true,
-            "description": "The query to ask gita"
           }
         ]
       },
@@ -263,52 +209,6 @@
             "name": "text",
             "required": true,
             "description": "Text"
-          }
-        ]
-      },
-      {
-        "name": "Textpro",
-        "endpoint": "/api/m/textpro",
-        "filename": "textpro",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "TextPro URL ending in .html"
-          },
-          {
-            "name": "text1",
-            "required": true,
-            "description": "First text input"
-          },
-          {
-            "name": "text2",
-            "required": false,
-            "description": "Second text input (optional)"
-          }
-        ]
-      },
-      {
-        "name": "Textpro 2",
-        "endpoint": "/api/m/textpro",
-        "filename": "textpro",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "TextPro URL ending in .html"
-          },
-          {
-            "name": "text1",
-            "required": true,
-            "description": "First text input"
-          },
-          {
-            "name": "text2",
-            "required": false,
-            "description": "Second text input (optional)"
           }
         ]
       }
@@ -540,13 +440,6 @@
         "name": "Random cecan korea",
         "endpoint": "/api/random/cecan_korea",
         "filename": "korea",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Random cecan Indonesia",
-        "endpoint": "/api/random/cecan_indo",
-        "filename": "Indonesia",
         "method": "GET",
         "params": []
       },
@@ -1024,162 +917,6 @@
         ]
       },
       {
-        "name": "Translate",
-        "endpoint": "/api/tools/translate",
-        "filename": "translate",
-        "method": "GET",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text to translate"
-          },
-          {
-            "name": "source",
-            "required": false,
-            "description": "Source language code"
-          },
-          {
-            "name": "target",
-            "required": false,
-            "description": "Target language code"
-          }
-        ]
-      },
-      {
-        "name": "Translate 2",
-        "endpoint": "/api/tools/translate",
-        "filename": "translate",
-        "method": "POST",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text to translate"
-          },
-          {
-            "name": "source",
-            "required": false,
-            "description": "Source language code"
-          },
-          {
-            "name": "target",
-            "required": false,
-            "description": "Target language code"
-          }
-        ]
-      },
-      {
-        "name": "TTS",
-        "endpoint": "/api/tools/tts",
-        "filename": "tts",
-        "method": "GET",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text to convert"
-          },
-          {
-            "name": "voice",
-            "required": true,
-            "description": "Voice for TTS"
-          },
-          {
-            "name": "rate",
-            "required": true,
-            "description": "Speech rate"
-          },
-          {
-            "name": "pitch",
-            "required": true,
-            "description": "Speech pitch"
-          },
-          {
-            "name": "volume",
-            "required": true,
-            "description": "Speech volume"
-          }
-        ]
-      },
-      {
-        "name": "TTS 2",
-        "endpoint": "/api/tools/tts",
-        "filename": "tts",
-        "method": "POST",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text to convert"
-          },
-          {
-            "name": "voice",
-            "required": true,
-            "description": "Voice for TTS"
-          },
-          {
-            "name": "rate",
-            "required": true,
-            "description": "Speech rate"
-          },
-          {
-            "name": "pitch",
-            "required": true,
-            "description": "Speech pitch"
-          },
-          {
-            "name": "volume",
-            "required": true,
-            "description": "Speech volume"
-          }
-        ]
-      },
-      {
-        "name": "TTS Google",
-        "endpoint": "/api/tools/ttsgoogle",
-        "filename": "ttsgoogle",
-        "method": "GET",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "Text to convert to speech"
-          }
-        ]
-      },
-      {
-        "name": "Ttsgoogle",
-        "endpoint": "/api/tools/ttsgoogle",
-        "filename": "ttsgoogle",
-        "method": "POST",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "The text to convert to speech"
-          }
-        ]
-      },
-      {
-        "name": "Upscale",
-        "endpoint": "/api/tools/upscale",
-        "filename": "upscale",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "The URL of the image to upscale."
-          },
-          {
-            "name": "scale",
-            "required": false,
-            "description": "The upscale factor (1-20). Higher values produce larger images."
-          }
-        ]
-      },
-      {
         "name": "VCC Generator",
         "endpoint": "/api/tools/vcc-generator",
         "filename": "vccgen",
@@ -1301,19 +1038,6 @@
             "name": "locale",
             "required": false,
             "description": "Locale bilibili.tv, default id_ID"
-          }
-        ]
-      },
-      {
-        "name": "TikTok Downloader",
-        "endpoint": "/api/download/tiktok",
-        "filename": "tiktok",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "TikTok URL"
           }
         ]
       },
@@ -1477,32 +1201,6 @@
             "description": "SoundCloud track URL"
           }
         ]
-      },
-      {
-        "name": "Twitter",
-        "endpoint": "/api/d/twitter",
-        "filename": "Twitter",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Twitter video URL"
-          }
-        ]
-      },
-      {
-        "name": "Twitter 2",
-        "endpoint": "/api/d/twitter",
-        "filename": "Twitter",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Twitter video URL"
-          }
-        ]
       }
     ],
     "search": [
@@ -1622,32 +1320,6 @@
             "name": "query",
             "required": true,
             "description": "Image search query"
-          }
-        ]
-      },
-      {
-        "name": "Brave",
-        "endpoint": "/api/s/brave",
-        "filename": "brave",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query"
-          }
-        ]
-      },
-      {
-        "name": "Brave 2",
-        "endpoint": "/api/s/brave",
-        "filename": "brave",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search query (e.g., \"apa itu nodejs\")"
           }
         ]
       },
@@ -1872,32 +1544,6 @@
         ]
       },
       {
-        "name": "Musixmatch",
-        "endpoint": "/api/s/musixmatch",
-        "filename": "musixmatch",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The track title or artist to search for on Musixmatch"
-          }
-        ]
-      },
-      {
-        "name": "Musixmatch 2",
-        "endpoint": "/api/s/musixmatch",
-        "filename": "musixmatch",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The track title or artist to search for on Musixmatch"
-          }
-        ]
-      },
-      {
         "name": "MY Instants",
         "endpoint": "/api/s/myinstants",
         "filename": "myinstant",
@@ -1946,19 +1592,6 @@
             "name": "query",
             "required": true,
             "description": "The search query for Otakotaku"
-          }
-        ]
-      },
-      {
-        "name": "Pinterest Lens Search",
-        "endpoint": "/api/s/pinterest-lens",
-        "filename": "pinterest-lens",
-        "method": "GET",
-        "params": [
-          {
-            "name": "imageUrl",
-            "required": true,
-            "description": "URL of the image to search on Pinterest"
           }
         ]
       },
@@ -2091,71 +1724,9 @@
             "description": "The search query for Wikipedia (e.g., 'prabowo', 'jakarta')."
           }
         ]
-      },
-      {
-        "name": "Google Search",
-        "endpoint": "/api/s/google",
-        "filename": "google",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Kata kunci pencarian (contoh: 'siapa akito hidata')."
-          },
-          {
-            "name": "limit",
-            "required": false,
-            "description": "Jumlah hasil maksimal (1-20, bawaan 10)."
-          }
-        ]
-      },
-      {
-        "name": "Google Search 2",
-        "endpoint": "/api/s/google",
-        "filename": "google",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Kata kunci pencarian (contoh: 'siapa akito hidata')."
-          },
-          {
-            "name": "limit",
-            "required": false,
-            "description": "Jumlah hasil maksimal (1-20, bawaan 10)."
-          }
-        ]
       }
     ],
     "anime": [
-      {
-        "name": "Anichin Search",
-        "endpoint": "/api/anime/anichin-search",
-        "filename": "anichin-search",
-        "method": "GET",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "Anime search query"
-          }
-        ]
-      },
-      {
-        "name": "Anichin Search 2",
-        "endpoint": "/api/anime/anichin-search",
-        "filename": "anichin-search",
-        "method": "POST",
-        "params": [
-          {
-            "name": "query",
-            "required": true,
-            "description": "The search term for anime"
-          }
-        ]
-      },
       {
         "name": "Auratail Detail",
         "endpoint": "/api/anime/auratail-detail",
@@ -2181,20 +1752,6 @@
             "description": "The URL of the anime detail page on Auratail"
           }
         ]
-      },
-      {
-        "name": "Auratail Latest",
-        "endpoint": "/api/anime/auratail-latest",
-        "filename": "auratail-latest",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Auratail Latest 2",
-        "endpoint": "/api/anime/auratail-latest",
-        "filename": "auratail-latest",
-        "method": "POST",
-        "params": []
       },
       {
         "name": "Auratail Popular",
@@ -2355,26 +1912,6 @@
         ]
       },
       {
-        "name": "Otakdesu Ongoing",
-        "endpoint": "/api/anime/otakudesu/ongoing",
-        "filename": "otakdesu-ongoing",
-        "method": "POST",
-        "params": []
-      },
-      {
-        "name": "Otakdesu Serach",
-        "endpoint": "/api/anime/otakudesu/search",
-        "filename": "otakdesu-serach",
-        "method": "POST",
-        "params": [
-          {
-            "name": "s",
-            "required": true,
-            "description": "Anime search query"
-          }
-        ]
-      },
-      {
         "name": "Otakudesu Detail",
         "endpoint": "/api/anime/otakudesu/detail",
         "filename": "otakdesu-detail",
@@ -2397,26 +1934,6 @@
             "name": "url",
             "required": true,
             "description": "Otakudesu anime download page URL"
-          }
-        ]
-      },
-      {
-        "name": "Otakudesu Ongoing",
-        "endpoint": "/api/anime/otakudesu/ongoing",
-        "filename": "otakdesu-ongoing",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Otakudesu Search",
-        "endpoint": "/api/anime/otakudesu/search",
-        "filename": "otakdesu-serach",
-        "method": "GET",
-        "params": [
-          {
-            "name": "s",
-            "required": true,
-            "description": "Anime search query"
           }
         ]
       },
@@ -2445,46 +1962,6 @@
             "description": "Anime detail URL"
           }
         ]
-      },
-      {
-        "name": "Samehadaku Download",
-        "endpoint": "/api/anime/samehadaku/download",
-        "filename": "samehadaku-download",
-        "method": "GET",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime episode URL"
-          }
-        ]
-      },
-      {
-        "name": "Samehadaku Download 2",
-        "endpoint": "/api/anime/samehadaku/download",
-        "filename": "samehadaku-download",
-        "method": "POST",
-        "params": [
-          {
-            "name": "url",
-            "required": true,
-            "description": "Anime episode URL"
-          }
-        ]
-      },
-      {
-        "name": "Samehadaku Latest",
-        "endpoint": "/api/anime/samehadaku/latest",
-        "filename": "samehadaku-latest",
-        "method": "GET",
-        "params": []
-      },
-      {
-        "name": "Samehadaku Latest 2",
-        "endpoint": "/api/anime/samehadaku/latest",
-        "filename": "samehadaku-latest",
-        "method": "POST",
-        "params": []
       }
     ],
     "apk": [
@@ -2812,42 +2289,6 @@
         ]
       },
       {
-        "name": "Image Classification",
-        "endpoint": "/api/cf/image-classification",
-        "filename": "image-classification",
-        "method": "GET",
-        "params": [
-          {
-            "name": "imageUrl",
-            "required": true,
-            "description": "The URL of the image to classify"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for classification"
-          }
-        ]
-      },
-      {
-        "name": "Image Classification 2",
-        "endpoint": "/api/cf/image-classification",
-        "filename": "image-classification",
-        "method": "POST",
-        "params": [
-          {
-            "name": "imageUrl",
-            "required": true,
-            "description": "The URL of the image to classify"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for classification"
-          }
-        ]
-      },
-      {
         "name": "Sentiment",
         "endpoint": "/api/cf/sentiment",
         "filename": "sentiment",
@@ -2880,62 +2321,6 @@
             "name": "model",
             "required": false,
             "description": "Custom AI model to use for sentiment analysis"
-          }
-        ]
-      },
-      {
-        "name": "Translate",
-        "endpoint": "/api/cf/translation",
-        "filename": "translate",
-        "method": "POST",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "The text to translate"
-          },
-          {
-            "name": "sourceLang",
-            "required": true,
-            "description": "The source language code (e.g., fr)"
-          },
-          {
-            "name": "targetLang",
-            "required": true,
-            "description": "The target language code (e.g., en)"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for translation"
-          }
-        ]
-      },
-      {
-        "name": "Translation",
-        "endpoint": "/api/cf/translation",
-        "filename": "translate",
-        "method": "GET",
-        "params": [
-          {
-            "name": "text",
-            "required": true,
-            "description": "The text to translate"
-          },
-          {
-            "name": "sourceLang",
-            "required": true,
-            "description": "The source language code (e.g., en, id)"
-          },
-          {
-            "name": "targetLang",
-            "required": true,
-            "description": "The target language code (e.g., id, es)"
-          },
-          {
-            "name": "model",
-            "required": false,
-            "description": "Custom AI model to use for translation"
           }
         ]
       }
@@ -3133,76 +2518,6 @@
             "name": "image",
             "required": true,
             "description": "Image URL"
-          }
-        ]
-      },
-      {
-        "name": "Compress",
-        "endpoint": "/api/iloveimg/compress",
-        "filename": "compress",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          }
-        ]
-      },
-      {
-        "name": "Image2jpg",
-        "endpoint": "/api/iloveimg/image2jpg",
-        "filename": "image2jpg",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          }
-        ]
-      },
-      {
-        "name": "Image2png",
-        "endpoint": "/api/iloveimg/image2png",
-        "filename": "image2png",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          }
-        ]
-      },
-      {
-        "name": "Removebg",
-        "endpoint": "/api/iloveimg/removebg",
-        "filename": "removebg",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          }
-        ]
-      },
-      {
-        "name": "Upscale",
-        "endpoint": "/api/iloveimg/upscale",
-        "filename": "upscale",
-        "method": "GET",
-        "params": [
-          {
-            "name": "image",
-            "required": true,
-            "description": "Image URL"
-          },
-          {
-            "name": "scale",
-            "required": false,
-            "description": "Upscale factor (2 or 4). Defaults to 2."
           }
         ]
       }
@@ -3772,32 +3087,6 @@
         ]
       },
       {
-        "name": "Tiktok",
-        "endpoint": "/api/stalk/tiktok",
-        "filename": "tiktok",
-        "method": "GET",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The TikTok username to stalk"
-          }
-        ]
-      },
-      {
-        "name": "Tiktok 2",
-        "endpoint": "/api/stalk/tiktok",
-        "filename": "tiktok",
-        "method": "POST",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The TikTok username to stalk"
-          }
-        ]
-      },
-      {
         "name": "Treads",
         "endpoint": "/api/stalk/threads",
         "filename": "treads",
@@ -3833,32 +3122,6 @@
             "name": "user",
             "required": true,
             "description": "The Twitter (X) username to stalk"
-          }
-        ]
-      },
-      {
-        "name": "Youtube",
-        "endpoint": "/api/stalk/youtube",
-        "filename": "youtube",
-        "method": "GET",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The YouTube channel username"
-          }
-        ]
-      },
-      {
-        "name": "Youtube 2",
-        "endpoint": "/api/stalk/youtube",
-        "filename": "youtube",
-        "method": "POST",
-        "params": [
-          {
-            "name": "username",
-            "required": true,
-            "description": "The YouTube channel username"
           }
         ]
       }
