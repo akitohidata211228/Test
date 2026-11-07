@@ -10,15 +10,8 @@ function AppContent() {
   const [activeTab, setActiveTab] = useState<'home' | 'docs' | 'terms'>('home');
   const [selectedEndpointId, setSelectedEndpointId] = useState<string>('health-check');
   const [selectedTermsSection, setSelectedTermsSection] = useState<TermsSection>('tos');
-  // Default theme is white/light mode
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    try {
-      const stored = localStorage.getItem('lirenxin_theme');
-      return stored === 'dark';
-    } catch {
-      return false;
-    }
-  });
+  // Default theme is ALWAYS white/light mode (setiap buka ulang kembali putih)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   // Sync dark class on document element
   useEffect(() => {
@@ -26,11 +19,6 @@ function AppContent() {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
-    }
-    try {
-      localStorage.setItem('lirenxin_theme', isDarkMode ? 'dark' : 'light');
-    } catch {
-      // ignore
     }
   }, [isDarkMode]);
 

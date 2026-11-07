@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  ArrowRight, Play, Zap, Film, Download, BarChart3, Layers, Globe2
+  ArrowRight, Zap, Film, Download, BarChart3, Layers, Globe2
 } from 'lucide-react';
 import { TerminalBootAnimation } from './TerminalBootAnimation';
 import { useGlobalScrollFadeIn } from '../utils/useScrollFadeIn';
@@ -10,32 +10,8 @@ interface HeroHomeProps {
   onGoToDocs: (endpointId?: string) => void;
 }
 
-const formatNumber = (n: number): string => (n || 0).toLocaleString('id-ID');
-
 export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
   useGlobalScrollFadeIn();
-
-  // Live gateway statistics — fitur asli Akito Downloader (/api/stats)
-  const [stats, setStats] = useState<{ total: number; topPlatform: string | null; daily: number } | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/api/stats', { headers: { Accept: 'application/json' } })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (cancelled || !data || !data.totalRequests) return;
-        const byPlatform: Record<string, number> = data.requestsByPlatform || {};
-        const top = Object.entries(byPlatform).sort((a, b) => b[1] - a[1])[0];
-        const dailyTotal = (data.dailyRequests || []).reduce(
-          (sum: number, d: any) => sum + (Number(d.count) || 0), 0
-        );
-        setStats({ total: data.totalRequests, topPlatform: top ? top[0] : null, daily: dailyTotal });
-      })
-      .catch(() => {
-        // server belum jalan — statistik lokal disembunyikan senyap
-      });
-    return () => { cancelled = true; };
-  }, []);
 
   // Ultra-smooth, soft human-like typing animation:
   // Starts with "HI, ", softly types "DEV", pauses comfortably,
@@ -115,35 +91,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
                 <span>Start Free</span>
                 <ArrowRight className="w-5 h-5 text-white dark:text-black" />
               </button>
-
-              <button
-                onClick={() => onGoToDocs('proxy-tiktok')}
-                className="brutal-btn bg-white dark:bg-[#121620] hover:bg-[#F8F9FA] dark:hover:bg-[#1A2234] text-black dark:text-white border-2 border-black dark:border-[#FFE600] px-6 py-3.5 text-base font-bold flex items-center gap-3 cursor-pointer shadow-brutal transition-transform"
-              >
-                <Play className="w-5 h-5 text-[#1E5CD9] dark:text-[#FFE600] fill-current" />
-                <span>Playground Downloader</span>
-              </button>
             </div>
-
-            {/* Live Gateway Stats Strip — data nyata dari /api/stats */}
-            {stats && (
-              <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
-                <span className="inline-flex items-center gap-1.5 border-2 border-black dark:border-[#FFE600] bg-[#5EADF2] dark:bg-[#121620] text-black dark:text-[#FFE600] px-2.5 py-1 font-black">
-                  <BarChart3 className="w-3.5 h-3.5" />
-                  <span>{formatNumber(stats.total)} REQUEST TOTAL</span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 border-2 border-black dark:border-[#FFE600] bg-white dark:bg-[#0F1420] text-black dark:text-white px-2.5 py-1 font-bold">
-                  <Zap className="w-3.5 h-3.5 text-[#1E5CD9] dark:text-[#FFE600]" />
-                  <span>7 HARI TERAKHIR: {formatNumber(stats.daily)}</span>
-                </span>
-                {stats.topPlatform && (
-                  <span className="inline-flex items-center gap-1.5 border-2 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0A0D14] text-black dark:text-[#FFE600] px-2.5 py-1 font-black uppercase">
-                    <Film className="w-3.5 h-3.5" />
-                    <span>TOP: {stats.topPlatform}</span>
-                  </span>
-                )}
-              </div>
-            )}
 
           </div>
 
@@ -226,7 +174,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
               </h3>
               <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-medium">
                 Setiap unduh otomatis tercatat: total request, breakdown 11 platform, dan grafik 7 hari
-                terakhir — dishare gratis lewat /api/stats (yang ditampilkan di beranda ini).
+                terakhir — dishare gratis lewat publik /api/stats.
               </p>
             </div>
 
