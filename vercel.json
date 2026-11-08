@@ -6,16 +6,7 @@
   "trailingSlash": false,
   "functions": {
     "api/index.mjs": {
-      "includeFiles": [
-        "dist/server.cjs",
-        "dist/router/**",
-        "dist/danzz/config.json",
-        "dist/src/**",
-        "../dist/server.cjs",
-        "../dist/router/**",
-        "../dist/danzz/config.json",
-        "../dist/src/**"
-      ]
+      "includeFiles": "dist/**"
     }
   },
   "rewrites": [
