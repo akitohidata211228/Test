@@ -52,12 +52,36 @@ async function startServer() {
   // di-handle via export default di bawah (tanpa vite & tanpa listen).
   if (isServerless) {
     const distPath = path.join(process.cwd(), "dist");
+    const safeList = (dir: string) => {
+      try {
+        return fs.readdirSync(dir).slice(0, 40);
+      } catch (e: any) {
+        return `ERROR: ${e?.message}`;
+      }
+    };
     if (fs.existsSync(distPath)) {
       app.use(express.static(distPath));
       app.get("*", (req, res) => {
         const index = path.join(distPath, "index.html");
         if (fs.existsSync(index)) return res.sendFile(index);
-        res.status(404).send("index.html tidak ditemukan - jalankan npm run build.");
+        res.status(404).json({
+          error: "index.html tidak ditemukan (diagnostik sementara)",
+          cwd: process.cwd(),
+          dirname: __dirname,
+          argv1: process.argv[1],
+          cwdEntries: safeList(process.cwd()),
+          distEntries: safeList(distPath),
+        });
+      });
+    } else {
+      app.get("*", (req, res) => {
+        res.status(404).json({
+          error: "folder dist tidak ada (diagnostik sementara)",
+          cwd: process.cwd(),
+          dirname: __dirname,
+          argv1: process.argv[1],
+          cwdEntries: safeList(process.cwd()),
+        });
       });
     }
     return;
