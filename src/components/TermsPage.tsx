@@ -41,7 +41,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={onGoHome}
-            className="brutal-btn bg-white dark:bg-[#121620] hover:bg-[#F3F4F6] text-black dark:text-white border-2 border-black dark:border-[#FFE600] px-3.5 py-1.5 text-xs font-mono font-bold flex items-center gap-2 cursor-pointer shadow-brutal-xs"
+            className="brutal-btn bg-white dark:bg-[#1B1726] hover:bg-[#F3F4F6] text-black dark:text-white border-2 border-black dark:border-[#FFE600] px-3.5 py-1.5 text-xs font-mono font-bold flex items-center gap-2 cursor-pointer shadow-brutal-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Beranda</span>
@@ -61,7 +61,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
 
         <button
           onClick={onGoToDocs}
-          className="brutal-btn bg-black dark:bg-[#FFE600] text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-[#FFEA00] px-4 py-1.5 text-xs font-mono font-black flex items-center gap-2 cursor-pointer shadow-brutal-xs"
+          className="brutal-btn bg-[#FF5D5D] dark:bg-[#FFE600] text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-[#FFEA00] px-4 py-1.5 text-xs font-mono font-black flex items-center gap-2 cursor-pointer shadow-brutal-xs"
         >
           <BookOpen className="w-3.5 h-3.5 text-white dark:text-black" />
           <span>Buka Dokumentasi API</span>
@@ -73,7 +73,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
         
         {/* Left Sidebar */}
         <aside className="lg:col-span-4 space-y-6">
-          <div className="border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#0C0E14] shadow-brutal overflow-hidden">
+          <div className="border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#151220] shadow-brutal overflow-hidden">
             <div className="bg-black text-white dark:text-[#FFE600] p-4 border-b-2 border-black dark:border-[#FFE600]">
               <h2 className="font-mono text-xs font-black uppercase tracking-wider flex items-center gap-2">
                 <FileText className="w-4 h-4 text-white dark:text-[#FFE600]" />
@@ -87,7 +87,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                 className={`w-full text-left px-3.5 py-3 text-xs font-mono font-bold flex items-center justify-between transition-colors cursor-pointer border ${
                   activeSection === 'tos'
                     ? 'bg-black text-white dark:bg-[#FFE600] dark:text-black border-black font-black shadow-brutal-xs'
-                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-[#1A2234]'
+                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-[#F1E8DB] dark:hover:bg-[#2A2440]'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -102,7 +102,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                 className={`w-full text-left px-3.5 py-3 text-xs font-mono font-bold flex items-center justify-between transition-colors cursor-pointer border ${
                   activeSection === 'usage'
                     ? 'bg-black text-white dark:bg-[#FFE600] dark:text-black border-black font-black shadow-brutal-xs'
-                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-[#1A2234]'
+                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-[#F1E8DB] dark:hover:bg-[#2A2440]'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -117,7 +117,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                 className={`w-full text-left px-3.5 py-3 text-xs font-mono font-bold flex items-center justify-between transition-colors cursor-pointer border ${
                   activeSection === 'privacy'
                     ? 'bg-black text-white dark:bg-[#FFE600] dark:text-black border-black font-black shadow-brutal-xs'
-                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-[#1A2234]'
+                    : 'border-transparent text-black dark:text-neutral-200 hover:bg-[#F1E8DB] dark:hover:bg-[#2A2440]'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -160,12 +160,12 @@ export const TermsPage: React.FC<TermsPageProps> = ({
           </div>
 
           {/* Official Domain Quick Card */}
-          <div className="border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#0C0E14] p-4 shadow-brutal space-y-2">
+          <div className="border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#151220] p-4 shadow-brutal space-y-2">
             <div className="text-[11px] font-mono font-black text-black dark:text-[#FFE600] uppercase tracking-wider flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-black dark:text-[#FFE600]" />
               <span>HOST RESMI ENDPOINT</span>
             </div>
-            <div className="flex items-center justify-between bg-neutral-100 dark:bg-[#1A2234] border border-black dark:border-[#FFE600]/40 px-3 py-2">
+            <div className="flex items-center justify-between bg-neutral-100 dark:bg-[#2A2440] border border-black dark:border-[#FFE600]/40 px-3 py-2">
               <code className="text-xs font-mono font-bold text-black dark:text-[#FFE600] truncate">
                 https://lirenxin-api.my.id
               </code>
@@ -181,7 +181,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
         </aside>
 
         {/* Right Article Body */}
-        <main className="lg:col-span-8 border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#0C0E14] p-6 sm:p-10 shadow-brutal">
+        <main className="lg:col-span-8 border-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#151220] p-6 sm:p-10 shadow-brutal">
           
           {/* ========================================================================= */}
           {/* TERMS OF SERVICE */}
@@ -352,7 +352,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                   </p>
 
                   {/* Akses Terbuka Box */}
-                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#121620] p-4 space-y-2">
+                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#1B1726] p-4 space-y-2">
                     <div className="font-mono text-xs font-black uppercase text-black dark:text-[#FFE600]">
                       Akses Terbuka (Tanpa API Key)
                     </div>
@@ -363,7 +363,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                   </div>
 
                   {/* Konten Publik Box */}
-                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#121620] p-4 space-y-2">
+                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#1B1726] p-4 space-y-2">
                     <div className="font-mono text-xs font-black uppercase text-black dark:text-[#FFE600]">
                       Batas Konten yang Didukung
                     </div>
@@ -393,7 +393,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({
                     Pengguna dilarang melakukan aktivitas yang dapat mengganggu keamanan, ketersediaan, atau integritas layanan, termasuk namun tidak terbatas pada:
                   </p>
                   
-                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#121620] p-4">
+                  <div className="border-2 border-black dark:border-[#FFE600] bg-neutral-50 dark:bg-[#1B1726] p-4">
                     <ul className="list-disc list-outside space-y-2 pl-5 text-xs font-mono text-black dark:text-neutral-200">
                       <li>Melakukan serangan DoS, DDoS, atau aktivitas yang bertujuan membebani infrastruktur secara berlebihan.</li>
                       <li>Menjalankan permintaan otomatis secara berulang tanpa jeda yang wajar sehingga mengganggu performa layanan.</li>

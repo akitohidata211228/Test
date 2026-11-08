@@ -66,12 +66,20 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
           {/* Left Column: Typing Headline & Action Buttons */}
           <div className="lg:col-span-6 space-y-6">
 
+            {/* Dot confetti ala panel komponen neo-brutal */}
+            <div className="flex items-center gap-2 pb-1" aria-hidden="true">
+              {['#FF5D5D', '#A78BFA', '#3ECFC0', '#FFD93D', '#FFB3C7', '#7AB8F5'].map((c) => (
+                <span key={c} className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border-2 border-black dark:border-[#171420] transition-colors" style={{ backgroundColor: c }} />
+              ))}
+              <span className="w-2.5 h-2.5 rotate-45 border-2 border-black dark:border-[#171420] bg-[#FFD93D] ml-1" />
+            </div>
+
             {/* Headline with Soft Live Typing Animation */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-black dark:text-white min-h-[90px] sm:min-h-[140px] flex flex-wrap items-center">
               <span>HI,&nbsp;</span>
-              <span className="text-[#1E5CD9] dark:text-[#FFE600] inline-flex items-center tracking-tight transition-all duration-150">
+              <span className="text-[#FF5D5D] dark:text-[#FFE600] inline-flex items-center tracking-tight transition-all duration-150">
                 {typedSuffix}
-                <span className="inline-block w-2.5 sm:w-3.5 h-9 sm:h-14 bg-[#1E5CD9] dark:bg-[#FFE600] animate-cursor-blink ml-1.5 opacity-90" />
+                <span className="inline-block w-2.5 sm:w-3.5 h-9 sm:h-14 bg-[#FF5D5D] dark:bg-[#FFE600] animate-cursor-blink ml-1.5 opacity-90" />
               </span>
             </h1>
 
@@ -86,7 +94,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             <div className="pt-2 flex flex-wrap items-center gap-3.5">
               <button
                 onClick={() => onGoToDocs()}
-                className="brutal-btn bg-[#1E5CD9] dark:bg-[#FFE600] text-white dark:text-black hover:bg-[#0A37BF] dark:hover:bg-[#FFEA00] px-7 py-3.5 text-base sm:text-lg font-black flex items-center gap-2.5 cursor-pointer shadow-brutal transition-transform"
+                className="brutal-btn bg-[#FF5D5D] dark:bg-[#FFE600] text-white dark:text-black hover:bg-[#F04646] dark:hover:bg-[#FFEA00] px-7 py-3.5 text-base sm:text-lg font-black flex items-center gap-2.5 cursor-pointer shadow-brutal transition-transform"
               >
                 <span>Start Free</span>
                 <ArrowRight className="w-5 h-5 text-white dark:text-black" />
@@ -107,7 +115,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
       </section>
 
       {/* Keunggulan & Dirancang untuk Developer Section */}
-      <section className="border-t-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#0A0D14] py-16 transition-colors">
+      <section className="border-t-3 border-black dark:border-[#FFE600] bg-white dark:bg-[#171420] py-16 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
@@ -123,8 +131,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* Card 1 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#1E5CD9] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#FF5D5D] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <Film className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -137,8 +145,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             </div>
 
             {/* Card 2 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#5EADF2] dark:bg-[#FFE600] text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#FFD93D] dark:bg-[#FFE600] text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <Layers className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -151,8 +159,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             </div>
 
             {/* Card 3 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#0A37BF] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#FFD93D] dark:bg-[#FFE600] text-black dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <Download className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -165,8 +173,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             </div>
 
             {/* Card 4 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#1E5CD9] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#A78BFA] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <BarChart3 className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -179,8 +187,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             </div>
 
             {/* Card 5 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#5EADF2] dark:bg-[#FFE600] text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#FFB3C7] dark:bg-[#FFE600] text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -193,8 +201,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
             </div>
 
             {/* Card 6 */}
-            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#F8FAFC] dark:bg-[#0F1420] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
-              <div className="w-12 h-12 bg-[#0A37BF] dark:bg-[#FFE600] text-white dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
+            <div className="fade-in-scroll border-3 border-black dark:border-[#FFE600] bg-[#FFFBF4] dark:bg-[#211D2E] p-6 brutal-shadow hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 bg-[#3ECFC0] dark:bg-[#FFE600] text-black dark:text-black border-2 border-black dark:border-[#FFE600] flex items-center justify-center font-black text-xl mb-4 shadow-[2px_2px_0px_#000]">
                 <Globe2 className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black text-black dark:text-white mb-2">
@@ -214,7 +222,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onGoToDocs }) => {
               <button
                 key={p}
                 onClick={() => onGoToDocs(`proxy-${p}`)}
-                className="border-2 border-black dark:border-[#FFE600] bg-white dark:bg-[#0F1420] text-black dark:text-white px-3 py-1.5 font-black uppercase hover:bg-[#1E5CD9] hover:text-white dark:hover:bg-[#FFE600] dark:hover:text-black transition-colors cursor-pointer"
+                className="border-2 border-black dark:border-[#FFE600] bg-white dark:bg-[#211D2E] text-black dark:text-white px-3 py-1.5 font-black uppercase hover:bg-[#FF5D5D] hover:text-white dark:hover:bg-[#FFE600] dark:hover:text-black transition-colors cursor-pointer"
               >
                 {p}
               </button>

@@ -13,15 +13,15 @@
 
 /* Background Geometric Grid Pattern with Bright Neon Yellow dots in Dark Mode */
 .bg-grid-pattern {
-  background-color: #F8F9FA;
+  background-color: #F6EFE7;
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(31, 26, 23, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 26, 23, 0.09) 1px, transparent 1px);
 }
 
 .dark .bg-grid-pattern {
-  background-color: #0A0D14;
+  background-color: #171420;
   background-size: 32px 32px;
   background-image: 
     linear-gradient(to right, rgba(255, 230, 0, 0.12) 1px, transparent 1px),
@@ -37,7 +37,7 @@
 }
 
 .brutal-shadow-blue {
-  box-shadow: 4px 4px 0px #0A37BF;
+  box-shadow: 4px 4px 0px #A78BFA;
 }
 .dark .brutal-shadow-blue {
   box-shadow: 4px 4px 0px #FFE600;

@@ -28,7 +28,7 @@
         document.documentElement.classList.toggle('light', mode === 'light');
         document.documentElement.style.colorScheme = mode;
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', mode === 'light' ? '#FFFFFF' : '#0A0D14');
+        if (meta) meta.setAttribute('content', mode === 'light' ? '#F6EFE7' : '#171420');
     }
 
     apply(preferred());
