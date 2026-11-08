@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": [
+        "dist/server.cjs",
+        "dist/router/**",
+        "dist/danzz/config.json",
+        "dist/src/**",
+        "../dist/server.cjs",
+        "../dist/router/**",
+        "../dist/danzz/config.json",
+        "../dist/src/**"
+      ]
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/config", "destination": "/api/index" },
+    { "source": "/health", "destination": "/api/index" }
+  ]
+}

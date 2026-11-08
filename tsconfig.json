@@ -23,5 +23,5 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "exclude": ["dist", "router", "server", "server.ts", "api", ".aistudio"]
+  "exclude": ["dist", "router", "server", "server.ts", "apisrc", ".aistudio"]
 }

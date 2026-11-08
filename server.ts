@@ -1,15 +1,18 @@
-import app from "./api/app";
+import app from "./apisrc/app";
 import { mountDanzzApi } from "./server/danzz/integrate";
 import express from "express";
-import { createServer as createViteServer } from "vite";
 import path from "path";
 import fs from "fs";
 
 const PORT = Number(process.env.PORT) || 3000;
 
+// Serverless Vercel (api/index.mjs): tanpa listen, tanpa vite, tanpa static.
+const isServerless = !!process.env.VERCEL;
+
 // Production saat dijalankan dari bundle dist/ meski NODE_ENV tidak diset
 const isRunningFromDist = /dist[\\/]server\.cjs$/.test(process.argv[1] || "");
-const isProduction = process.env.NODE_ENV === "production" || isRunningFromDist;
+const isProduction =
+  process.env.NODE_ENV === "production" || isRunningFromDist || isServerless;
 
 // Halaman statis proyek repo "Test" (docs/donasi/console) hidup di folder public/
 // dan ikut otomatis tersalin vite ke dist/ saat build.
@@ -26,7 +29,7 @@ const serveStaticPage = (route: string, file: string) => {
 
 async function startServer() {
   // Gateway Danzz/Lirenxin: /config, /health, /api/create-payment + seluruh
-  // route autoload dari folder router/ (169 file, 287 endpoint config).
+  // route autoload dari folder router/ (169 file, 259 endpoint config).
   mountDanzzApi(app);
 
   // Halaman statis repo — docs.html, donasi.html, dsb.
@@ -34,19 +37,24 @@ async function startServer() {
   serveStaticPage("/donasi", "donasi.html");
 
   // Catch-all 404 khusus /api/* (didaftarkan PALING AKHIR supaya route
-  // core 16 + gateway 287 endpoint punya prioritas lebih dulu).
+  // core 16 + gateway 259 endpoint punya prioritas lebih dulu).
   app.use((req, res, next) => {
     if (req.path.startsWith("/api")) {
       return res.status(404).json({
         error: `Rute API tidak ditemukan: ${req.method} ${req.path}`,
-        hint: "Lihat /docs untuk daftar seluruh endpoint aktif (287 endpoint, 19 kategori)."
+        hint: "Lihat /docs untuk daftar seluruh endpoint aktif (259 endpoint, 19 kategori)."
       });
     }
     next();
   });
 
+  // Serverless: mounts sudah terpasang, request di-handle via export default di bawah.
+  if (isServerless) return;
+
   // Vite middleware for development — frontend & REST API satu origin (http://localhost:3000)
   if (!isProduction) {
+    // Import lazy: bundle prod tidak boleh require('vite') (dep dev, tidak ikut di lambda).
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -60,7 +68,9 @@ async function startServer() {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: `Rute API tidak ditemukan: ${req.method} ${req.path}` });
       }
-      res.sendFile(path.join(distPath, "index.html"));
+      const index = path.join(distPath, "index.html");
+      if (fs.existsSync(index)) return res.sendFile(index);
+      res.status(500).json({ error: "dist/index.html tidak ada - jalankan npm run build." });
     });
   }
 
@@ -71,3 +81,6 @@ async function startServer() {
 }
 
 startServer();
+
+// Handler serverless: Express app dipanggil langsung sebagai (req, res).
+export default app;

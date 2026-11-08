@@ -28,38 +28,47 @@ export const initAutoLoad = (app: Application, config: any, configPath: string, 
     console.log('[✓] Auto Load Activated');
 
     if (fs.existsSync(configPath)) {
-        fs.watch(configPath, (eventType, filename) => {
-            if (filename && eventType === 'change') {
-                console.log(`Config file changed: ${filename}`);
-                try {
-                    const newConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-                    currentConfig = newConfig;
-                    console.log('[✓] Config reloaded successfully');
-                    reloadRouter();
-                } catch (error) {
-                    console.error('[ㄨ] Failed to reload config:', error);
+        try {
+            // Serverless FS read-only bisa melempar error di fs.watch; hapus hot-reload daripada crash.
+            fs.watch(configPath, (eventType, filename) => {
+                if (filename && eventType === 'change') {
+                    console.log(`Config file changed: ${filename}`);
+                    try {
+                        const newConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+                        currentConfig = newConfig;
+                        console.log('[?] Config reloaded successfully');
+                        reloadRouter();
+                    } catch (error) {
+                        console.error('[?] Failed to reload config:', error);
+                    }
                 }
-            }
-        });
+            });
+        } catch (watchError: any) {
+            console.warn('[i] fs.watch(config) dilewati:', watchError?.message || watchError);
+        }
     }
 
     const routerDir = path.join(process.cwd(), 'router');
     if (fs.existsSync(routerDir)) {
         console.log(`[i] Watching router directory: ${routerDir}`);
-        fs.watch(routerDir, { recursive: true }, (eventType, filename) => {
-            if (filename && (filename.endsWith('.ts') || filename.endsWith('.js'))) {
-                console.log(`[✓] Route file changed: ${filename}`);
+        try {
+            fs.watch(routerDir, { recursive: true }, (eventType, filename) => {
+                if (filename && (filename.endsWith('.ts') || filename.endsWith('.js'))) {
+                    console.log(`[?] Route file changed: ${filename}`);
 
-                const fullPath = path.join(routerDir, filename);
+                    const fullPath = path.join(routerDir, filename);
 
-                if (require.cache[fullPath]) {
-                    delete require.cache[fullPath];
+                    if (require.cache[fullPath]) {
+                        delete require.cache[fullPath];
+                    }
+
+                    console.log(`Route cache cleared for: ${filename}`);
+                    reloadSingleRoute(filename);
                 }
-
-                console.log(`Route cache cleared for: ${filename}`);
-                reloadSingleRoute(filename);
-            }
-        });
+            });
+        } catch (watchError: any) {
+            console.warn('[i] fs.watch(router) dilewati:', watchError?.message || watchError);
+        }
     } else {
         console.warn(`[!] Router directory not found at: ${routerDir}`);
     }
@@ -232,6 +241,7 @@ const registerRoute = (route: any, category: string, creatorName?: string, app?:
     // Dev (tsx): pakai source root router/*.ts biar editan langsung jalan.
     const isProductionRuntime =
         process.env.NODE_ENV === 'production' ||
+        process.env.LIRENXIN_DIST === '1' ||
         /dist[\\/]server\.cjs$/.test(process.argv[1] || '');
 
     const possibleBaseDirs = isProductionRuntime ? [
