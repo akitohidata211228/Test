@@ -951,6 +951,264 @@
             "description": "Number of VCCs"
           }
         ]
+      },
+      {
+        "name": "Watermark Remover",
+        "endpoint": "/api/tools/wmremove",
+        "filename": "wmremove",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link gambar (png/jpg)"
+          },
+          {
+            "name": "apikey",
+            "required": true,
+            "description": "API key captcha solver"
+          },
+          {
+            "name": "remText",
+            "required": false,
+            "description": "Hapus teks (true/false)"
+          },
+          {
+            "name": "remLogo",
+            "required": false,
+            "description": "Hapus logo (true/false)"
+          }
+        ]
+      },
+      {
+        "name": "Watermark Remover",
+        "endpoint": "/api/tools/wmremove",
+        "filename": "wmremove",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link gambar (png/jpg)"
+          },
+          {
+            "name": "apikey",
+            "required": true,
+            "description": "API key captcha solver"
+          },
+          {
+            "name": "remText",
+            "required": false,
+            "description": "Hapus teks (true/false)"
+          },
+          {
+            "name": "remLogo",
+            "required": false,
+            "description": "Hapus logo (true/false)"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Generate",
+        "endpoint": "/api/tools/emailnator/generate",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "ids",
+            "required": false,
+            "description": "domain|plusGmail|dotGmail|googleMail"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Generate",
+        "endpoint": "/api/tools/emailnator/generate",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "ids",
+            "required": false,
+            "description": "domain|plusGmail|dotGmail|googleMail"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Bulk",
+        "endpoint": "/api/tools/emailnator/bulk",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "count",
+            "required": false,
+            "description": "Jumlah (max 500)"
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "description": "Jenis email"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Bulk",
+        "endpoint": "/api/tools/emailnator/bulk",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "count",
+            "required": false,
+            "description": "Jumlah (max 500)"
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "description": "Jenis email"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Inbox",
+        "endpoint": "/api/tools/emailnator/inbox",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "email",
+            "required": true,
+            "description": "Alamat email"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "Maks pesan"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Inbox",
+        "endpoint": "/api/tools/emailnator/inbox",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "email",
+            "required": true,
+            "description": "Alamat email"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "Maks pesan"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Message",
+        "endpoint": "/api/tools/emailnator/message",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "description": "Message id"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Message",
+        "endpoint": "/api/tools/emailnator/message",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "description": "Message id"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Delete",
+        "endpoint": "/api/tools/emailnator/delete",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "description": "Message id"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Delete",
+        "endpoint": "/api/tools/emailnator/delete",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "description": "Message id"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Extend",
+        "endpoint": "/api/tools/emailnator/extend",
+        "filename": "emailnator",
+        "method": "GET",
+        "params": [
+          {
+            "name": "email",
+            "required": true,
+            "description": "Alamat email"
+          }
+        ]
+      },
+      {
+        "name": "Emailnator Extend",
+        "endpoint": "/api/tools/emailnator/extend",
+        "filename": "emailnator",
+        "method": "POST",
+        "params": [
+          {
+            "name": "email",
+            "required": true,
+            "description": "Alamat email"
+          }
+        ]
+      },
+      {
+        "name": "YouTube Transcript",
+        "endpoint": "/api/tools/yt-transcript",
+        "filename": "yt-transcript",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Video ID / link YouTube"
+          }
+        ]
+      },
+      {
+        "name": "YouTube Transcript",
+        "endpoint": "/api/tools/yt-transcript",
+        "filename": "yt-transcript",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Video ID / link YouTube"
+          }
+        ]
       }
     ],
     "download": [
@@ -1199,6 +1457,32 @@
             "name": "url",
             "required": true,
             "description": "SoundCloud track URL"
+          }
+        ]
+      },
+      {
+        "name": "VidDrop All-In-One",
+        "endpoint": "/api/download/viddrop",
+        "filename": "viddrop",
+        "method": "GET",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link post/reel/video"
+          }
+        ]
+      },
+      {
+        "name": "VidDrop All-In-One",
+        "endpoint": "/api/download/viddrop",
+        "filename": "viddrop",
+        "method": "POST",
+        "params": [
+          {
+            "name": "url",
+            "required": true,
+            "description": "Link post/reel/video"
           }
         ]
       }
@@ -1722,6 +2006,42 @@
             "name": "query",
             "required": true,
             "description": "The search query for Wikipedia (e.g., 'prabowo', 'jakarta')."
+          }
+        ]
+      },
+      {
+        "name": "Joox Search",
+        "endpoint": "/api/s/joox",
+        "filename": "joox",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Judul lagu / ID"
+          },
+          {
+            "name": "region",
+            "required": false,
+            "description": "id|hk|my|th"
+          }
+        ]
+      },
+      {
+        "name": "Joox Lyric",
+        "endpoint": "/api/s/joox-lyric",
+        "filename": "joox",
+        "method": "GET",
+        "params": [
+          {
+            "name": "q",
+            "required": true,
+            "description": "Judul lagu / ID"
+          },
+          {
+            "name": "region",
+            "required": false,
+            "description": "id|hk|my|th"
           }
         ]
       }
