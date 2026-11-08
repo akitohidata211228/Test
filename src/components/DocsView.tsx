@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { generateCanvasCursorDataUrl } from './WaterRippleCanvas';
 
 interface DocsViewProps {
@@ -73,6 +73,17 @@ const RIPPLE_INJECTOR = `
  */
 export const DocsView: React.FC<DocsViewProps> = () => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    return () => {
+      html.style.overflow = '';
+      body.style.overflow = '';
+    };
+  }, []);
 
   const injectEffects = () => {
     const doc = frameRef.current?.contentDocument;

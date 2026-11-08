@@ -49,14 +49,14 @@ export const Navbar: React.FC<NavbarPropsWithDocs> = ({
 
           <button
             onClick={toggleDarkMode}
-            className="w-10 h-10 border-2 border-black dark:border-[#FFE600] bg-[#A78BFA] dark:bg-[#1B1726] text-black dark:text-[#FFE600] flex items-center justify-center brutal-shadow-sm hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all cursor-pointer"
+            className="w-10 h-10 border-2 border-black dark:border-[#E9E2D6] bg-[#FFD93D] dark:bg-[#201C2B] text-black dark:text-[#FFE600] flex items-center justify-center brutal-shadow-sm hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all cursor-pointer"
             aria-label={isDarkMode ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
             title={isDarkMode ? 'Mode Terang' : 'Mode Gelap'}
           >
             {isDarkMode ? (
-              <Sun className="w-5 h-5 text-[#FFE600]" />
+              <Sun className="w-5 h-5 text-[#FFD93D]" />
             ) : (
-              <Moon className="w-5 h-5 text-[#A78BFA]" />
+              <Moon className="w-5 h-5 text-black" />
             )}
           </button>
 
