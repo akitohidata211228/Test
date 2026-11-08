@@ -48,8 +48,20 @@ async function startServer() {
     next();
   });
 
-  // Serverless: mounts sudah terpasang, request di-handle via export default di bawah.
-  if (isServerless) return;
+  // Serverless: tetap layani static dist/ + SPA fallback, lalu request
+  // di-handle via export default di bawah (tanpa vite & tanpa listen).
+  if (isServerless) {
+    const distPath = path.join(process.cwd(), "dist");
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+      app.get("*", (req, res) => {
+        const index = path.join(distPath, "index.html");
+        if (fs.existsSync(index)) return res.sendFile(index);
+        res.status(404).send("index.html tidak ditemukan - jalankan npm run build.");
+      });
+    }
+    return;
+  }
 
   // Vite middleware for development — frontend & REST API satu origin (http://localhost:3000)
   if (!isProduction) {

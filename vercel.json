@@ -5,13 +5,13 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
-    "api/index.mjs": {
+    "api/gateway.mjs": {
       "includeFiles": "dist/**"
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" },
-    { "source": "/config", "destination": "/api/index" },
-    { "source": "/health", "destination": "/api/index" }
+    { "source": "/api/(.*)", "destination": "/api/gateway" },
+    { "source": "/config", "destination": "/api/gateway" },
+    { "source": "/health", "destination": "/api/gateway" }
   ]
 }
