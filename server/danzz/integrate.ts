@@ -33,7 +33,9 @@ const buildStats = (config: any) => {
 
 const findConfigPath = (): string => {
   const candidates = [
+    ...(process.env.LIRENXIN_CONFIG ? [process.env.LIRENXIN_CONFIG] : []),
     path.join(process.cwd(), 'server', 'danzz', 'config.json'),
+    path.join(process.cwd(), 'runtime', 'danzz', 'config.json'),
     path.join(process.cwd(), 'dist', 'danzz', 'config.json'),
     path.join(process.cwd(), 'src', 'config.json'),
     path.join('/var/task/src/config.json'),

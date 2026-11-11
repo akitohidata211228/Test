@@ -6,18 +6,29 @@ import fs from "fs";
 
 const PORT = Number(process.env.PORT) || 3000;
 
-// Serverless Vercel (api/index.mjs): tanpa listen, tanpa vite, tanpa static.
+// Serverless Vercel (api/gateway.mjs): tanpa listen, tanpa vite.
 const isServerless = !!process.env.VERCEL;
 
-// Production saat dijalankan dari bundle dist/ meski NODE_ENV tidak diset
-const isRunningFromDist = /dist[\\/]server\.cjs$/.test(process.argv[1] || "");
+// Production saat dijalankan dari bundle runtime/server.cjs (atau dist/server.cjs lama)
+const isRunningFromBundle = /(dist|runtime)[\\/]server\.cjs$/.test(process.argv[1] || "");
 const isProduction =
-  process.env.NODE_ENV === "production" || isRunningFromDist || isServerless;
+  process.env.NODE_ENV === "production" || isRunningFromBundle || isServerless;
 
-// Halaman statis proyek repo "Test" (docs/donasi/console) hidup di folder public/
-// dan ikut otomatis tersalin vite ke dist/ saat build.
-const publicFile = (name: string) =>
-  isProduction ? path.join(process.cwd(), "dist", name) : path.join(process.cwd(), "public", name);
+// Beri tahu autoload/integrate bahwa kita jalan dari bundle runtime.
+if (/runtime[\\/]server\.cjs$/.test(process.argv[1] || "")) {
+  process.env.LIRENXIN_DIST = "1";
+  process.env.LIRENXIN_RUNTIME_DIR = "runtime";
+}
+
+// Root file statis: serverless -> runtime/static (ikut di-include ke lambda),
+// prod lokal -> dist (hasil vite), dev -> public.
+const staticRoot = isServerless
+  ? path.join(process.cwd(), "runtime", "static")
+  : isProduction
+    ? path.join(process.cwd(), "dist")
+    : path.join(process.cwd(), "public");
+
+const publicFile = (name: string) => path.join(staticRoot, name);
 
 const serveStaticPage = (route: string, file: string) => {
   app.get(route, (req, res) => {
@@ -29,7 +40,7 @@ const serveStaticPage = (route: string, file: string) => {
 
 async function startServer() {
   // Gateway Danzz/Lirenxin: /config, /health, /api/create-payment + seluruh
-  // route autoload dari folder router/ (169 file, 259 endpoint config).
+  // route autoload dari folder router/ (176 file, 259 endpoint config).
   mountDanzzApi(app);
 
   // Halaman statis repo — docs.html, donasi.html, dsb.
@@ -48,10 +59,9 @@ async function startServer() {
     next();
   });
 
-  // Serverless: tetap layani static dist/ + SPA fallback, lalu request
+  // Serverless: layani static (runtime/static) + SPA fallback, lalu request
   // di-handle via export default di bawah (tanpa vite & tanpa listen).
   if (isServerless) {
-    const distPath = path.join(process.cwd(), "dist");
     const safeList = (dir: string) => {
       try {
         return fs.readdirSync(dir).slice(0, 40);
@@ -59,24 +69,22 @@ async function startServer() {
         return `ERROR: ${e?.message}`;
       }
     };
-    if (fs.existsSync(distPath)) {
-      app.use(express.static(distPath));
+    if (fs.existsSync(staticRoot)) {
+      app.use(express.static(staticRoot));
       app.get("*", (req, res) => {
-        const index = path.join(distPath, "index.html");
+        const index = path.join(staticRoot, "index.html");
         if (fs.existsSync(index)) return res.sendFile(index);
         res.status(404).json({
-          error: "index.html tidak ditemukan (diagnostik sementara)",
+          error: "index.html tidak ditemukan di runtime/static (diagnostik)",
           cwd: process.cwd(),
           dirname: __dirname,
-          argv1: process.argv[1],
-          cwdEntries: safeList(process.cwd()),
-          distEntries: safeList(distPath),
+          staticEntries: safeList(staticRoot),
         });
       });
     } else {
       app.get("*", (req, res) => {
         res.status(404).json({
-          error: "folder dist tidak ada (diagnostik sementara)",
+          error: "folder runtime/static tidak ada (diagnostik)",
           cwd: process.cwd(),
           dirname: __dirname,
           argv1: process.argv[1],
@@ -98,13 +106,12 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     // Serve static files in production (dist berisi React build + aset public/ repo)
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    app.use(express.static(staticRoot));
     app.get("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: `Rute API tidak ditemukan: ${req.method} ${req.path}` });
       }
-      const index = path.join(distPath, "index.html");
+      const index = path.join(staticRoot, "index.html");
       if (fs.existsSync(index)) return res.sendFile(index);
       res.status(500).json({ error: "dist/index.html tidak ada - jalankan npm run build." });
     });

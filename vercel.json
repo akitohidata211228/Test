@@ -6,7 +6,7 @@
   "trailingSlash": false,
   "functions": {
     "api/gateway.mjs": {
-      "includeFiles": "dist/**"
+      "includeFiles": "runtime/**"
     }
   },
   "rewrites": [

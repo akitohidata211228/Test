@@ -242,15 +242,20 @@ const registerRoute = (route: any, category: string, creatorName?: string, app?:
     const isProductionRuntime =
         process.env.NODE_ENV === 'production' ||
         process.env.LIRENXIN_DIST === '1' ||
-        /dist[\\/]server\.cjs$/.test(process.argv[1] || '');
+        /(dist|runtime)[\\/]server\.cjs$/.test(process.argv[1] || '');
+
+    const runtimeBase = process.env.LIRENXIN_RUNTIME_DIR || 'dist';
 
     const possibleBaseDirs = isProductionRuntime ? [
+        path.join(process.cwd(), runtimeBase, 'router', category),
+        path.join(process.cwd(), 'runtime', 'router', category),
         path.join(process.cwd(), 'dist', 'router', category),
         path.join(process.cwd(), 'router', category),
         path.join(__dirname, '..', 'router', category)
     ] : [
         path.join(process.cwd(), 'router', category),
         path.join(__dirname, '..', 'router', category),
+        path.join(process.cwd(), 'runtime', 'router', category),
         path.join(process.cwd(), 'dist', 'router', category)
     ];
 
